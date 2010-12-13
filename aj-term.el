@@ -73,13 +73,12 @@
 (push '("C-c C-j" . aj-term-toggle-line-char) term-bind-key-alist)
 
 ;; From http://atomized.org/2008/07/emacs-open-a-shell-in-the-current-directory/
-;; Added cd
+;; Edited, cd and point max
 (defun shell-here ()
   "Open a shell in `default-directory'."
   (interactive)
   (let ((dir (expand-file-name default-directory))
         (buf (or (get-buffer "*shell*") (shell))))
-    (goto-char (point-max))
     (if (not (string= (buffer-name) "*shell*"))
         (switch-to-buffer-other-window buf))
     (message list-buffers-directory)
@@ -87,7 +86,8 @@
         (progn (comint-send-string (get-buffer-process buf)
                                    (concat "cd \"" dir "\"\r"))
                (cd dir) ;; Added
-               (setq list-buffers-directory dir)))))
+               (setq list-buffers-directory dir))))
+      (goto-char (point-max)))
 
 (global-set-key (kbd "C-c !") 'shell-here)
 
