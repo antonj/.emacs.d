@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2010-11-26 18:42:49 anton"
+;; Time-stamp: "2010-12-15 23:45:47 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -11,7 +11,6 @@
 
 ;;;; Auto-install start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (progn
-
   ;; (auto-install-from-url "http://www.emacswiki.org/emacs/download/auto-install.el")
   (require 'auto-install)
   (setq auto-install-directory (expand-file-name "~/.emacs.d/lisp/auto-install/"))
@@ -22,21 +21,23 @@
   (require 'doremi)
   (require 'doremi-frm)
 
-  ;;(auto-install-from-url "http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el")
+  ;; (auto-install-from-url "http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el")
   (autoload 'espresso-mode "espresso" nil t)
 
-  ;;(auto-install-from-url "http://autopair.googlecode.com/svn/tags/REL_0_3/autopair.el")
+  ;; (auto-install-from-url "http://autopair.googlecode.com/svn/tags/REL_0_3/autopair.el") ;; Stable
+  ;; (auto-install-from-url "http://autopair.googlecode.com/svn/trunk/autopair.el")
   (require 'autopair)
   (autopair-global-mode t)
-
-  ;;(auto-install-from-url "http://www.dr-qubit.org/undo-tree/undo-tree.el")
+  (setq autopair-autowrap t)
+  
+  ;; (auto-install-from-url "http://www.dr-qubit.org/undo-tree/undo-tree.el")
   (require 'undo-tree)
 
-  ;;(auto-install-from-url "http://jblevins.org/git/markdown-mode.git/plain/markdown-mode.el")
+  ;; (auto-install-from-url "http://jblevins.org/git/markdown-mode.git/plain/markdown-mode.el")
   (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
   (setq auto-mode-alist (cons '("\\.text$\\|\\.markdown$" . markdown-mode) auto-mode-alist))
 
-  ;;(auto-install-from-url "http://www.xsteve.at/prg/emacs/psvn.el")
+  ;; (auto-install-from-url "http://www.xsteve.at/prg/emacs/psvn.el")
   (require 'psvn)
 
   ;; (auto-install-from-url "http://www.emacswiki.org/emacs/download/php-mode-improved.el")
@@ -59,6 +60,9 @@
   ;;(autoload 'scss-mode "scss-mode")
   (require 'scss-mode)
   ;;(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
+  (require 'highlight-indentation)
 
   ;; Modes
   (require 'flymake)
@@ -94,7 +98,6 @@
   ;;;; ELPA end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )
 
-
 ;; Anyting
 (require 'anything-config)
 ;; (require 'magit)
@@ -116,6 +119,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/git-emacs"))
 (require 'git-emacs)
 (require 'git-status)
+(autoload 'git-blame-mode "git-blame"
+  "Minor mode for incremental blame for Git." t)
 
 ;; YAML
 (require 'yaml-mode)
@@ -148,10 +153,7 @@
 (require 'aj-python)
 ;; (requiraje 'anything-match-plugin)
 ;; (set-variable 'anything-mp-highlight-delay nil)
-;;(require 'fuzzy-match)
-
-(autoload 'git-blame-mode "git-blame"
-  "Minor mode for incremental blame for Git." t)
+;; (require 'fuzzy-match)
 
 ;; Javascript
 (autoload 'js2-mode "js2" nil t)

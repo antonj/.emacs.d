@@ -1,11 +1,10 @@
 ;; Color and style
-;; Time-stamp: "2010-09-18 23:32:38 anton"
+;; Time-stamp: "2010-12-19 00:35:05 anton"
 
 (when window-system
-  (require 'highlight-current-line)
-  (highlight-current-line-on t)
-  (set-variable 'default-indicate-empty-lines t)
-  
+  (global-hl-line-mode t)
+  (setq indicate-empty-lines t)
+
   (require 'color-theme)
   (color-theme-initialize)
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
@@ -18,15 +17,13 @@
   ;;(color-theme-goldenrod) ;;nice and dark
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
   (set-frame-font "-apple-monaco-medium-r-normal--10-0-72-72-m-0-iso10646-1" nil)
-  
-  
-  ;; (progn (color-theme-jsc-light2) ;;nice and bright
-  ;;        (highlight-current-line-set-bg-color "light yellow"))
+
   (zenburn)
-  (custom-set-faces
-   '(cursor ((t (:background "red"))))))
-;;   (progn (color-theme-rlx) ;;dark and fine
-;;          (highlight-current-line-set-bg-color "black")))
+  (face-spec-reset-face 'highlight)
+  (set-face-background 'highlight "grey17")
+  (set-face-background 'cursor "red"))
+  ;;  (progn (color-theme-rlx) ;;dark and fine
+  ;;         (set-face-background 'highlight "black"))
 
 (defun aj-color-org-levels()
   (interactive)
@@ -57,11 +54,10 @@
   ;;(set-frame-font "-apple-menlo-medium-r-normal--10-0-72-72-m-0-iso10646-1")
   ;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
   (color-theme-wombat)
-  (custom-set-faces
-   '(cursor ((t (:background "red")))))
+  (set-face-background 'cursor "red")
 
   (setq truncate-lines t)
-  (highlight-current-line-set-bg-color "black"))
+  (set-face-background 'highlight "#000"))
 
 (defun aj-code-mode-light()
   (interactive)
@@ -71,8 +67,7 @@
   (color-theme-jsc-light2)
   
   ;; Some changes
-  (highlight-current-line-on t)
-  (highlight-current-line-set-bg-color "#ddddcc")
+  (set-face-background 'highlight "#ddddcc")
   
   (setq-default mode-line-buffer-identification
               (list (propertize "%12b" 'face
@@ -97,9 +92,10 @@
   (interactive)
   ;;  (set-frame-font "-apple-adobe caslon pro-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
   (set-frame-font "-apple-baskerville-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
-  (highlight-current-line-set-bg-color "grey88")
+  (set-face-background 'highlight "grey88")
   (progn (color-theme-jsc-light2) ;;dark and fine
-         (highlight-current-line-set-bg-color "grey93"))
+         (set-face-background 'highlight "grey93"))
+  
   (custom-set-faces
    '(minibuffer-prompt ((t (:foreground "black"))))
    '(dired-directory ((t (:inherit font-lock-function-name-face))))
