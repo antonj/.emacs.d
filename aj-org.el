@@ -16,8 +16,11 @@
 (setq org-log-done nil)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "DONE(d)")
-        (sequence "QUESTION(q)" "|" "ANSWER(s)")))
+      '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")
+        (sequence "QUESTION(q)" "|" "ANSWERED(s)")))
+
+(setq org-todo-keyword-faces
+      '(("STARTED" . org-upcoming-deadline)))
 
 ;; Hide leading stars face
 (setq org-hide-leading-stars t)
