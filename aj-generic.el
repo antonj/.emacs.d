@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2010-11-27 14:44:54 anton"
+;; Time-stamp: "2011-01-11 12:59:01 anton"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -21,6 +21,13 @@
 (put 'narrow-to-region 'disabled nil)
 (setq sentence-end-double-space nil)
 (setq dabbrev-abbrev-skip-leading-regexp "[^ ]*[<>=*]") ;; skip <tags> when expanding
+
+;; Spelling
+;; $ brew install aspell --lang=sv,en
+;; TODO: is `ispell-program-name' used? Not defined and documented
+(setq-default ispell-program-name "aspell")
+(setq ispell-list-command "list")
+(setq ispell-extra-args '("--sug-mode=ultra"))
 
 ;; Coding system
 (setq locale-coding-system 'utf-8)
@@ -97,12 +104,14 @@
 (global-set-key "\M-y" 'anything-show-kill-ring) ;; replace standard yank-pop
 (global-set-key (kbd "C-x C-b") (lambda() (interactive) (ibuffer nil))) ;; removes standard list-buffers
 (global-set-key "\C-co" 'ffap)
+(global-set-key "\C-cp" 'mac-open-current-visited-file)
 ;; Open file with osx open shell command
 (global-set-key "\C-cO" (lambda() (interactive)
                           (shell-command
                            (concat "open " (buffer-file-name)))))
 (global-set-key "\C-x\C-m" 'execute-extended-command) ;; M-x
 (global-set-key "\C-c\C-m" 'execute-extended-command) ;; M-x
+(global-set-key "\C-xF" 'ido-find-file-other-window)
 (global-set-key "\C-xO" (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-<tab>") 'other-window)
 (global-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))
@@ -169,7 +178,8 @@
   (interactive)
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max))
-  (delete-trailing-whitespace))
+  ;;(delete-trailing-whitespace)
+  )
 (defalias 'iwb 'indent-whole-buffer)
 
 (defun rename-file-and-buffer (new-name)
