@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-01-11 12:59:01 anton"
+;; Time-stamp: "2011-02-07 13:28:06 anton"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -40,6 +40,7 @@
 
 (let ((aj-path (mapcar 'expand-file-name '("~/bin" ;; Mine
                                            "/usr/local/bin" ;; Brew
+                                           ":/usr/texbin" ;; MacTex
                                            "/opt/local/bin" ;; Macport
                                            "/opt/local/sbin"
                                            "~/.gem/ruby/1.8/bin" ;; Gems

@@ -1,5 +1,5 @@
 ;; Html, xml
-;; Time-stamp: "2009-10-17 19:03:20 anton"
+;; Time-stamp: "2011-02-08 11:41:29 anton"
 
 (add-to-list 'auto-mode-alist
              (cons (concat "\\." (regexp-opt '("html" "xhtml" "xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
@@ -34,6 +34,29 @@
            <meta name=\"author\" content=\""
            (user-full-name)
            "\" />
+           <title></title>
+           </head>
+           <body>
+           </body>
+           </html>"))
+  (mark-whole-buffer)
+  (indent-region (region-beginning) (region-end) nil)
+  (search-forward "title>"))
+
+
+(defun insert-html5-template ()
+  "inserts html5 template"
+  (interactive)
+  (nxml-mode)
+  (goto-line 1)
+  (insert
+   (concat
+    "<!DOCTYPE html>
+           <html xmlns=\"http://www.w3.org/1999/xhtml\">
+           <head>
+           <!-- Time-stamp: \"" (format-time-string "%c") "\" -->
+           <meta charset=\"UTF-8\" /> 
+           <meta name=\"author\" content=\""(user-full-name)"\" />
            <title></title>
            </head>
            <body>

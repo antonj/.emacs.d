@@ -21,6 +21,12 @@
      (default ((t (nil))))
 
      ;; AJ modified
+     ;; "#07c"
+     ;; "#70c"
+     ;; "#0c7"
+     ;; "#c07"
+     ;; "#c70"
+     ;; "#7c0"
      (highlight ((t (:background "#e3e3d3"))))
      (highlight-indent-face ((t (:inherit highlight))))
      (fringe ((t (:inherit highlight))))
@@ -30,17 +36,22 @@
      (bold-italic ((t (:italic t :bold t))))
      (italic ((t (:italic t))))
      (underline ((t (:underline t))))
-     
+
+     ;; Error warning
+     (flyspell-incorrect ((t (:inherit default :underline "OrangeRed"))))
+     (flyspell-duplicate ((t (:inherit default :underline "Gold3"))))
+
      ;; Font-lock
      (font-lock-builtin-face ((t (:foreground "Orchid"))))
      (font-lock-comment-face ((t (:italic t :bold t :foreground "#999988"))))
+     (font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :bold t :background "#ddddcc"))))
      (font-lock-constant-face ((t (:foreground "navy"))))
      (font-lock-function-name-face ((t (:bold t :foreground "Blue"))))
      (font-lock-keyword-face ((t (:bold t :foreground "Purple"))))
      (font-lock-string-face ((t (:foreground "Green4"))))
      (font-lock-type-face ((t (:foreground "Navy"))))
      (font-lock-variable-name-face ((t (:foreground "Tan4"))))
-     (font-lock-warning-face ((t (:bold t :foreground "Red"))))
+     (font-lock-warning-face ((t (:foreground "OrangeRed"))))
 
      ;; LaTeX
      (font-latex-sedate ((t (:inherit font-lock-keyword-face))))
@@ -51,6 +62,8 @@
      (org-date ((t (:foreground "#7700cc"))))
      (org-todo ((t (:foreground "#cc0077" :weight bold))))
      (org-done ((t (:foreground "#77cc00" :weight bold))))
+     (org-upcoming-deadline ((t (:foreground "chocolate" :weight bold))))
+     
      (org-level-1 ((t (:inherit font-lock-constant-face
                                 :height 1.3
                                 :weight bold))))
@@ -60,12 +73,6 @@
      
      (org-level-3 ((t (:inherit font-lock-variable-name-face
                                 :weight bold))))
-     ;; "#07c"
-     ;; "#70c"
-     ;; "#0c7"
-     ;; "#c07"
-     ;; "#c70"
-     ;; "#7c0"
 
      ;; mode-line-inactive
      (modeline ((t (:background "plum" :foreground "black" :box nil))))

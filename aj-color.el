@@ -1,6 +1,5 @@
 ;; Color and style
-;; Time-stamp: "2010-12-19 00:35:05 anton"
-
+;; Time-stamp: "2011-02-23 17:31:47 anton"
 (when window-system
   (global-hl-line-mode t)
   (setq indicate-empty-lines t)
@@ -8,23 +7,27 @@
   (require 'color-theme)
   (color-theme-initialize)
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
+  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-cl-frame.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-tango.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-inkport.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-wombat.el")
-  (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
+  ;;(autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
   ;;(color-theme-goldenrod) ;;nice and dark
+  (aj-color-theme-jsc-light)
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
   (set-frame-font "-apple-monaco-medium-r-normal--10-0-72-72-m-0-iso10646-1" nil)
+  ;; (set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
 
-  (zenburn)
-  (face-spec-reset-face 'highlight)
-  (set-face-background 'highlight "grey17")
-  (set-face-background 'cursor "red"))
+  ;; (zenburn)
+  ;; (face-spec-reset-face 'highlight)
+  ;; (set-face-background 'highlight "grey17")
+  ;;(set-face-background 'cursor "red"))
   ;;  (progn (color-theme-rlx) ;;dark and fine
   ;;         (set-face-background 'highlight "black"))
-
+  )
+  
 (defun aj-color-org-levels()
   (interactive)
   (let ((i 0)
@@ -61,39 +64,22 @@
 
 (defun aj-code-mode-light()
   (interactive)
-  (set-frame-font "-apple-monaco-medium-r-normal--10-0-72-72-m-0-iso10646-1" nil)
-  ;;(set-frame-font "-apple-menlo-medium-r-normal--10-0-72-72-m-0-iso10646-1")
+  (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
+  ;;(set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
   (setq truncate-lines t)
-  (color-theme-jsc-light2)
-  
-  ;; Some changes
-  (set-face-background 'highlight "#ddddcc")
-  
+  (aj-color-theme-jsc-light)
   (setq-default mode-line-buffer-identification
               (list (propertize "%12b" 'face
                                 (list :weight 'bold
-                                      :foreground "Orchid"))))
-    
-  (custom-set-faces
-   ;;'(dired-directory ((t (:foreground "#008800"))))
-   '(dired-directory ((t (:inherit font-lock-function-name-face))))
-   '(ido-subdir ((t (:inherit font-lock-function-name-face))))
-   '(ido-only-match ((t (:inherit font-lock-string-face :weight bold))))
-   '(ido-first-match ((t (:inherit font-lock-string-face))))
-   '(ido-first-match-face ((t (:inherit font-lock-string-face))))
-   '(minibuffer-prompt ((t (:foreground "black"))))
-   '(nxml-element-local-name ((t (:foreground "#07C" ))))
-   '(nxml-tag-delimiter ((t (:inherit nxml-element-local-name))))
-   '(nxml-attribute-local-name ((t (:foreground "#7C0" ))))
-   '(nxml-attribute-value ((t (:inherit font-lock-string-face))))
-   '(default ((t (:background "#eeeedd" :foreground "#333344"))))))
+                                      :foreground "Orchid")))))
 
 (defun aj-text-mode()
   (interactive)
   ;;  (set-frame-font "-apple-adobe caslon pro-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
   (set-frame-font "-apple-baskerville-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
-  (set-face-background 'highlight "grey88")
+  ;; (set-face-background 'highlight "grey88")
   (progn (color-theme-jsc-light2) ;;dark and fine
+         (face-spec-reset-face 'highlight)
          (set-face-background 'highlight "grey93"))
   
   (custom-set-faces

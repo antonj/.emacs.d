@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2010-12-15 23:45:47 anton"
+;; Time-stamp: "2011-02-23 20:02:13 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -21,6 +21,10 @@
   (require 'doremi)
   (require 'doremi-frm)
 
+  ;;(auto-install-from-url "http://gnuplot.cvs.sourceforge.net/viewvc/gnuplot/gnuplot/lisp/gnuplot.el")
+  (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+  (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode))
+  
   ;; (auto-install-from-url "http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el")
   (autoload 'espresso-mode "espresso" nil t)
 
@@ -144,6 +148,7 @@
 (require 'aj-flymake-c)
 (require 'aj-flymake-css)
 (require 'flymake-scss)
+(require 'aj-flymake-js)
 (require 'aj-anything)
 (require 'aj-compilation)
 (require 'aj-ido)
@@ -171,10 +176,18 @@
 (require 'rst)
 (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
 
+;; Auto-complete
+;; https://github.com/m2ym/auto-complete.git
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/auto-complete/"))
+(require 'auto-complete-config)
+(ac-config-default)
+
 ;; Yasnippet
 ;; http://yasnippet.googlecode.com/files/yasnippet-0.6.1c.tar.bz2
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/yasnippet-0.6.1c/"))
 (require 'yasnippet)
+
+
 
 (setq yas/root-directory '("~/.emacs.d/aj-snippets"
                            "~/.emacs.d/lisp/yasnippet-0.6.1c/snippets"))
@@ -200,7 +213,7 @@
 (yas/initialize)
 
 ;; Find-file-not-found-hooks
-(setq major-mode 'org-mode)
+(set-default  major-mode 'org-mode)
 
 ;; Default to read-only open files
 (require 'aj-read-only-keymap-hooks)
@@ -217,7 +230,7 @@
              (if (equal (file-name-extension (buffer-file-name)) "html")
                  (progn
                    (nxml-mode)
-                   (insert-xhtml-template)
+                   (insert-html5-template)
                    (message "Inserted xhtml template")))))
 
 (setq custom-file "~/.emacs.d/init-custom.el")
