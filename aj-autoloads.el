@@ -1,0 +1,16 @@
+;; Load/Install auto-install packages
+(mapc (lambda (mode-list)
+        (let* ((mode (car mode-list))
+              (mode-url (cdr mode-list))
+              (mode-file-name (car (last (split-string mode-url "/")))))
+          (print (format "Loading %s, %s from %s" mode mode-file-name mode-url))
+          (when (not (require mode nil t))
+            (print (format "Mode %s is not installed" mode))
+            (auto-install-from-url mode-url))))
+      '((auto-install . "http://www.emacswiki.org/emacs/download/auto-install.el")
+        (autopair . "http://autopair.googlecode.com/svn/tags/REL_0_3/autopair.el")
+        (babel . "https://github.com/juergenhoetzel/babel/raw/STABLE/babel.el")))
+
+;; (functionp 'js2-mode)
+;; (find-library 'js2-mode)
+;; (locate-library "babel.el")
