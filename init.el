@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-02-23 20:02:13 anton"
+;; Time-stamp: "2011-03-16 22:28:35 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -21,6 +21,11 @@
   (require 'doremi)
   (require 'doremi-frm)
 
+  ;; Javascript
+  ;; (auto-install-from-url "http://js2-mode.googlecode.com/files/js2-20090723b.el")
+  (autoload 'js2-mode "js2" nil t)
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  
   ;;(auto-install-from-url "http://gnuplot.cvs.sourceforge.net/viewvc/gnuplot/gnuplot/lisp/gnuplot.el")
   (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
   (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode))
@@ -61,9 +66,10 @@
   (autoload 'less-mode "less-mode")
   (add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))
 
-  ;;(autoload 'scss-mode "scss-mode")
-  (require 'scss-mode)
-  ;;(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
+  (autoload 'scss-mode "scss-mode")
+  (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+  ;; (require 'scss-mode)
 
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
   (require 'highlight-indentation)
@@ -75,7 +81,7 @@
   (require 'rainbow-mode)
 
   ;; (auto-install-from-url "http://github.com/juergenhoetzel/babel/raw/STABLE/babel.el")
-  (require 'babel) ;; Translate with eg Google
+  ;; (require 'babel) ;; Translate with eg Google
 
   ;;
   ;;;; Auto-install end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -108,14 +114,14 @@
 ;; (require 'git)
 
 ;; JDE ;; CEDET needs to be loaded first
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/jde/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/cedet-1.0pre6/common"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/elib-1.0"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/ecb-2.40"))
-(require 'aj-cedet)
-(require 'ecb-autoloads)
-(require 'jde)
-(require 'aj-java)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/jde/lisp"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/cedet-1.0pre6/common"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/elib-1.0"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/ecb-2.40"))
+;; (require 'aj-cedet)
+;; (require 'ecb-autoloads)
+;; (require 'jde)
+;; (require 'aj-java)
 
 ;; Git emacs
 ;; From https://github.com/tsgates/git-emacs/tree/master
@@ -147,7 +153,6 @@
 (require 'aj-flymake)
 (require 'aj-flymake-c)
 (require 'aj-flymake-css)
-(require 'flymake-scss)
 (require 'aj-flymake-js)
 (require 'aj-anything)
 (require 'aj-compilation)
@@ -156,15 +161,7 @@
 (require 'aj-js)
 (require 'aj-dired)
 (require 'aj-python)
-;; (requiraje 'anything-match-plugin)
-;; (set-variable 'anything-mp-highlight-delay nil)
-;; (require 'fuzzy-match)
 
-;; Javascript
-(autoload 'js2-mode "js2" nil t)
-
-;; File association
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;; Other customizations
@@ -186,8 +183,6 @@
 ;; http://yasnippet.googlecode.com/files/yasnippet-0.6.1c.tar.bz2
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/yasnippet-0.6.1c/"))
 (require 'yasnippet)
-
-
 
 (setq yas/root-directory '("~/.emacs.d/aj-snippets"
                            "~/.emacs.d/lisp/yasnippet-0.6.1c/snippets"))
@@ -212,11 +207,8 @@
 (set-variable 'yas/wrap-around-region nil)
 (yas/initialize)
 
-;; Find-file-not-found-hooks
-(set-default  major-mode 'org-mode)
-
 ;; Default to read-only open files
-(require 'aj-read-only-keymap-hooks)
+;; (require 'aj-read-only-keymap-hooks)
 
 ;; Insert snippets to bufferts with certain extensions
 (add-hook 'find-file-not-found-hooks

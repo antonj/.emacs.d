@@ -1,9 +1,8 @@
 ;; Color and style
-;; Time-stamp: "2011-02-23 17:31:47 anton"
+;; Time-stamp: "2011-03-14 12:32:00 anton"
 (when window-system
   (global-hl-line-mode t)
   (setq indicate-empty-lines t)
-
   (require 'color-theme)
   (color-theme-initialize)
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
@@ -13,11 +12,12 @@
   (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-inkport.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-wombat.el")
-  ;;(autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
+  (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
   ;;(color-theme-goldenrod) ;;nice and dark
+  ;;(set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
+  (set-frame-font "-apple-InconsolataDZ-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1" nil)
   (aj-color-theme-jsc-light)
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
-  (set-frame-font "-apple-monaco-medium-r-normal--10-0-72-72-m-0-iso10646-1" nil)
   ;; (set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
 
   ;; (zenburn)
@@ -49,7 +49,7 @@
 ;; Font
 ;;(set-frame-font "-apple-monaco-medium-r-normal--10-0-72-72-m-0-iso10646-1" nil)
 ;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
-(setq Man-overstrike-face 'woman-bold)
+;; (setq Man-overstrike-face 'woman-bold)
 
 (defun aj-code-mode()
   (interactive)

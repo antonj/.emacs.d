@@ -3,7 +3,7 @@
 ;; Choose from ./lisp/anything-config.el
 (setq anything-sources
       '(anything-c-source-ffap-guesser
-        ;;anything-c-source-imenu ;;(Imenu)
+        anything-c-source-imenu ;;(Imenu)
         anything-c-source-ctags ;;(Exuberant ctags)
         anything-c-source-semantic ;;(Semantic Tags)
         anything-c-source-simple-call-tree-functions-callers ;;(Function is called by)

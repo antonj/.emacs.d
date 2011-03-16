@@ -28,7 +28,7 @@
      ;; "#c70"
      ;; "#7c0"
      (highlight ((t (:background "#e3e3d3"))))
-     (highlight-indent-face ((t (:inherit highlight))))
+     ;; (highlight-indent-face ((t (:inherit highlight))))
      (fringe ((t (:inherit highlight))))
      
      ;; Typography
@@ -44,6 +44,7 @@
      ;; Font-lock
      (font-lock-builtin-face ((t (:foreground "Orchid"))))
      (font-lock-comment-face ((t (:italic t :bold t :foreground "#999988"))))
+     (font-lock-doc-face ((t (:inherit font-lock-comment-face))))
      (font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :bold t :background "#ddddcc"))))
      (font-lock-constant-face ((t (:foreground "navy"))))
      (font-lock-function-name-face ((t (:bold t :foreground "Blue"))))
@@ -93,6 +94,8 @@
      (nxml-attribute-local-name ((t (:foreground "#7C0" ))))
      (nxml-attribute-value ((t (:inherit font-lock-string-face))))
 
+     (woman-bold ((t (:foreground "#07C"))))
+     
      ;; Old
      
      (custom-button-face ((t (nil))))

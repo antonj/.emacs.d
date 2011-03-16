@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-02-07 13:28:06 anton"
+;; Time-stamp: "2011-03-04 10:14:08 anton"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -179,8 +179,7 @@
   (interactive)
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max))
-  ;;(delete-trailing-whitespace)
-  )
+  (delete-trailing-whitespace))
 (defalias 'iwb 'indent-whole-buffer)
 
 (defun rename-file-and-buffer (new-name)
