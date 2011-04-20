@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-04-20 16:10:58 anton"
+;; Time-stamp: "2011-04-20 16:48:33 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -190,8 +190,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/yasnippet-0.6.1c/"))
 (require 'yasnippet)
 
-(setq yas/root-directory '("~/.emacs.d/aj-snippets"
-                           "~/.emacs.d/lisp/yasnippet-0.6.1c/snippets"))
+
+(add-to-list 'yas/root-directory "~/.emacs.d/aj-snippets")
 
 ;; Map `yas/load-directory' to every element
 (mapc 'yas/load-directory yas/root-directory)
