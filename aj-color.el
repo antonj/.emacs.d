@@ -1,25 +1,40 @@
 ;; Color and style
-;; Time-stamp: "2011-03-14 12:32:00 anton"
+;; Time-stamp: "2011-04-20 13:02:24 anton"
+
+(defun aj-font-mono ()
+  (interactive)
+  ;; (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
+  ;;(set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
+  ;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
+  (set-frame-font "-apple-InconsolataDZ-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1" nil))
+
+(defun aj-font-serif ()
+  (interactive)
+  ;; (set-frame-font "-apple-adobe caslon pro-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
+  ;; (set-frame-font "-apple-baskerville-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
+  ;; (set-frame-font "-apple-baskerville-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
+  ;; (set-frame-font "-apple-Minion_Pro-medium-normal-normal-*-18-*-*-*-p-0-iso10646-1" nil)
+  (set-frame-font "-apple-Georgia-medium-normal-normal-*-16-*-*-*-p-0-iso10646-1" nil))
+
 (when window-system
   (global-hl-line-mode t)
   (setq indicate-empty-lines t)
-  (require 'color-theme)
-  (color-theme-initialize)
+  ;; (require 'color-theme)
+  ;; (color-theme-initialize)
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
   (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-cl-frame.el")
-  (load "~/.emacs.d/lisp/color-themes/color-theme-tango.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-inkport.el")
   (load "~/.emacs.d/lisp/color-themes/color-theme-wombat.el")
-  (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
-  ;;(color-theme-goldenrod) ;;nice and dark
-  ;;(set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
-  (set-frame-font "-apple-InconsolataDZ-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1" nil)
+  ;; https://github.com/sellout/solarized/raw/master/emacs-color-theme-solarized/color-theme-solarized.el
+  ;; (load "~/.emacs.d/lisp/color-themes/color-theme-solarized.el")
+  ;; (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
+  
+  (aj-font-mono)
   (aj-color-theme-jsc-light)
+  
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
-  ;; (set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
-
   ;; (zenburn)
   ;; (face-spec-reset-face 'highlight)
   ;; (set-face-background 'highlight "grey17")
@@ -44,28 +59,17 @@
       (set-face-foreground level (face-foreground (nth i faces)))
       (setq i (% (+ i 1) (length faces)))
       )))
-;; (aj-color-org-levels)
-
-;; Font
-;;(set-frame-font "-apple-monaco-medium-r-normal--10-0-72-72-m-0-iso10646-1" nil)
-;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
-;; (setq Man-overstrike-face 'woman-bold)
 
 (defun aj-code-mode()
   (interactive)
-  (set-frame-font "-apple-monaco-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
-  ;;(set-frame-font "-apple-menlo-medium-r-normal--10-0-72-72-m-0-iso10646-1")
-  ;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
+  (aj-font-mono)
   (color-theme-wombat)
-  (set-face-background 'cursor "red")
-
   (setq truncate-lines t)
   (set-face-background 'highlight "#000"))
 
 (defun aj-code-mode-light()
   (interactive)
-  (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
-  ;;(set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
+  (aj-font-mono)
   (setq truncate-lines t)
   (aj-color-theme-jsc-light)
   (setq-default mode-line-buffer-identification
@@ -75,8 +79,7 @@
 
 (defun aj-text-mode()
   (interactive)
-  ;;  (set-frame-font "-apple-adobe caslon pro-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
-  (set-frame-font "-apple-baskerville-medium-r-normal--16-0-72-72-m-0-iso10646-1" nil)
+  (aj-font-serif)
   ;; (set-face-background 'highlight "grey88")
   (progn (color-theme-jsc-light2) ;;dark and fine
          (face-spec-reset-face 'highlight)
