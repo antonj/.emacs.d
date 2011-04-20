@@ -75,6 +75,10 @@
      (org-level-3 ((t (:inherit font-lock-variable-name-face
                                 :weight bold))))
 
+     ;; Jabber
+     (jabber-chat-prompt-foreign ((t (:inherit font-lock-constant-face))))
+     (jabber-chat-prompt-local ((t (:inherit font-lock-comment-face))))
+
      ;; mode-line-inactive
      (modeline ((t (:background "plum" :foreground "black" :box nil))))
      (mode-line-inactive ((t (:background "thistle" :foreground "black" :box nil))))
@@ -84,6 +88,7 @@
      (region ((t (:background "plum"))))
 
      (dired-directory ((t (:inherit font-lock-function-name-face))))
+     (dired-header ((t (:inherit font-lock-keyword-face :height 1.2))))
      (ido-subdir ((t (:inherit font-lock-function-name-face))))
      (ido-only-match ((t (:inherit font-lock-string-face :weight bold))))
      (ido-first-match ((t (:inherit font-lock-string-face))))

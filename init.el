@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-04-20 14:01:33 anton"
+;; Time-stamp: "2011-04-20 16:10:58 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -115,8 +115,8 @@
   ;; (defcustom package-enable-at-startup t ...) maybe in emacs24 only?
 
   ;; Use official emacs 24 repository with ELPA
-  (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-                           ("gnu" . "http://elpa.gnu.org/packages/")))
+  ;; (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+  ;;                          ("gnu" . "http://elpa.gnu.org/packages/")))
 
   ;;;; Auctex elpa from gnu repo
   ;; (package-install 'auctex)

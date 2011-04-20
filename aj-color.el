@@ -1,5 +1,5 @@
 ;; Color and style
-;; Time-stamp: "2011-04-20 13:02:24 anton"
+;; Time-stamp: "2011-04-20 16:20:19 anton"
 
 (defun aj-font-mono ()
   (interactive)
@@ -21,12 +21,12 @@
   (setq indicate-empty-lines t)
   ;; (require 'color-theme)
   ;; (color-theme-initialize)
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
+  ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
   (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
-  (load "~/.emacs.d/lisp/color-themes/color-theme-cl-frame.el")
-  (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
-  (load "~/.emacs.d/lisp/color-themes/color-theme-inkport.el")
-  (load "~/.emacs.d/lisp/color-themes/color-theme-wombat.el")
+  ;; (load "~/.emacs.d/lisp/color-themes/color-theme-cl-frame.el")
+  ;; (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
+  ;; (load "~/.emacs.d/lisp/color-themes/color-theme-inkport.el")
+  ;; (load "~/.emacs.d/lisp/color-themes/color-theme-wombat.el")
   ;; https://github.com/sellout/solarized/raw/master/emacs-color-theme-solarized/color-theme-solarized.el
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-solarized.el")
   ;; (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
