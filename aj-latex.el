@@ -1,5 +1,5 @@
 ;; Tex (auctex)
-;; Time-stamp: "2011-02-23 10:26:30 anton"
+;; Time-stamp: "2011-03-17 11:44:38 anton"
 
 ;;;  Auctex (non-elpa install)
 ;; From http://ftp.gnu.org/pub/gnu/auctex/auctex-11.86.zip
@@ -19,7 +19,8 @@
   (flyspell-mode 1)
   (reftex-mode t)
   ;;(ispell-change-dictionary "svenska" nil)
-  (auto-fill-mode 1)
+  ;; (auto-fill-mode 1)
+  (visual-line-mode)
   (local-set-key (kbd "C-c C-f") 'LaTeX-close-environment) ;; Nxml style close
   (local-set-key (kbd "C-c C-n") 'TeX-next-error)
   (local-set-key (kbd "C-c C-o") 'ffap)

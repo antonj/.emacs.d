@@ -15,10 +15,10 @@
           '(lambda () (eldoc-mode 1)) t)
 
 ;; Ipython
-(setq ipython-command "/usr/local/bin/ipython")
-(require 'ipython)
+;; (setq ipython-command "/usr/local/bin/ipython")
+;; (require 'ipython)
 
-(require 'anything-ipython)
+;; (require 'anything-ipython)
 ;; (add-hook 'python-mode-hook #'(lambda ()
 ;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 ;; (add-hook 'ipython-shell-hook #'(lambda ()

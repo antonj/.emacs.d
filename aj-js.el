@@ -3,7 +3,7 @@
 (add-to-list 'speedbar-fetch-etags-parse-list
              '("\\.js" . speedbar-parse-c-or-c++tag))
 
-
+(setq js2-mirror-mode nil)
 
 (defun aj-js-compr-buffer()
   (interactive)
@@ -48,6 +48,7 @@
       (when (> offset 0) (forward-char offset)))))
 
 (defun my-js2-mode-hook ()
+  ;; (js2-leave-mirror-mode)
   (require 'espresso)
 
   ;; fix bug with my-indent-sexp

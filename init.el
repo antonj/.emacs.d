@@ -1,66 +1,87 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-03-16 22:28:35 anton"
+;; Time-stamp: "2011-04-20 14:01:33 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal"))
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme-6.6.0"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/org-mode/lisp"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme-6.6.0"))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/org-mode/lisp"))
+
+;; El-get
+;; (load-file "~/.emacs.d/lisp/el-get-install.el")
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(require 'el-get)
+
+(setq el-get-sources
+      '(;; cssh
+        el-get
+        ;; scss-mode
+        org-mode
+        ;; (:name org-mode
+        ;;        :after (require 'aj-org))
+        psvn
+        yaml-mode
+        markdown-mode
+        auctex
+        php-mode-improved
+        js2-mode
+        gnuplot-mode
+        undo-tree
+        rainbow-mode
+        ;; (:name emacs-jabber
+        ;;        :after (lambda ()
+        ;;                 (require 'aj-jabber)))
+        color-theme
+        color-theme-solarized
+        color-theme-tango
+        color-theme-tango-2
+        color-theme-zenburn
+        django-mode
+        ;; switch-window
+        ;; vkill
+        ;; google-maps
+        ;; nxhtml
+        ;; xcscope
+        ;; yasnippet
+        ;; (:name anything
+        ;;        :after (lambda() (require 'anything-config)))
+        (:name multi-term
+               :after (lambda() (require 'aj-term)))
+        (:name package24
+               :after (lambda()
+                        (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+                                                 ("gnu" . "http://elpa.gnu.org/packages/")))))
+        (:name git-emacs
+               :features git-status)
+        (:name espresso-mode
+               :type http
+               :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
+        (:name autopair
+               :after (lambda()
+                        (autopair-global-mode t)
+                        (setq autopair-autowrap t)))
+        (:name magit
+               :after (lambda () (message "magit after")))
+        (:name asciidoc
+               :type elpa
+               :after (lambda ()
+                        (autoload 'doc-mode "doc-mode" nil t)
+                        (add-to-list 'auto-mode-alist '("\\.adoc$" . doc-mode))
+                        (add-hook 'doc-mode-hook
+                                  '(lambda ()
+                                     (turn-on-auto-fill)
+                                     (require 'asciidoc)))))
+        ))
+(el-get)
 
 ;;;; Auto-install start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (progn
   ;; (auto-install-from-url "http://www.emacswiki.org/emacs/download/auto-install.el")
-  (require 'auto-install)
-  (setq auto-install-directory (expand-file-name "~/.emacs.d/lisp/auto-install/"))
-  (add-to-list 'load-path auto-install-directory)
-
-  ;; TODO: Autoinstalled from where?
-  (require 'ring+)
-  (require 'doremi)
-  (require 'doremi-frm)
-
-  ;; Javascript
-  ;; (auto-install-from-url "http://js2-mode.googlecode.com/files/js2-20090723b.el")
-  (autoload 'js2-mode "js2" nil t)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-  
-  ;;(auto-install-from-url "http://gnuplot.cvs.sourceforge.net/viewvc/gnuplot/gnuplot/lisp/gnuplot.el")
-  (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
-  (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode))
-  
-  ;; (auto-install-from-url "http://download.savannah.gnu.org/releases-noredirect/espresso/espresso.el")
-  (autoload 'espresso-mode "espresso" nil t)
-
-  ;; (auto-install-from-url "http://autopair.googlecode.com/svn/tags/REL_0_3/autopair.el") ;; Stable
-  ;; (auto-install-from-url "http://autopair.googlecode.com/svn/trunk/autopair.el")
-  (require 'autopair)
-  (autopair-global-mode t)
-  (setq autopair-autowrap t)
-  
-  ;; (auto-install-from-url "http://www.dr-qubit.org/undo-tree/undo-tree.el")
-  (require 'undo-tree)
-
-  ;; (auto-install-from-url "http://jblevins.org/git/markdown-mode.git/plain/markdown-mode.el")
-  (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-  (setq auto-mode-alist (cons '("\\.text$\\|\\.markdown$" . markdown-mode) auto-mode-alist))
-
-  ;; (auto-install-from-url "http://www.xsteve.at/prg/emacs/psvn.el")
-  (require 'psvn)
-
-  ;; (auto-install-from-url "http://www.emacswiki.org/emacs/download/php-mode-improved.el")
-  (require 'php-mode-improved)
-
-  ;;;; (auto-install-from-url "http://github.com/nex3/haml/raw/master/extra/haml-mode.el")
-  ;;;; (auto-install-from-url "http://github.com/nex3/haml/raw/master/extra/sass-mode.el")
-  ;;(require 'sass-mode)
-
-  ;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
-  ;; TODO: (auto-install-from-url ???)
-  (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
-  (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
-  (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+  ;; (require 'auto-install)
+  ;; (setq auto-install-directory (expand-file-name "~/.emacs.d/lisp/auto-install/"))
+  ;; (add-to-list 'load-path auto-install-directory)
 
   ;; Personal
   (autoload 'less-mode "less-mode")
@@ -77,12 +98,6 @@
   ;; Modes
   (require 'flymake)
 
-  ;; (auto-install-from-url "http://git.naquadah.org/?p=rainbow.git;a=blob_plain;f=rainbow-mode.el")
-  (require 'rainbow-mode)
-
-  ;; (auto-install-from-url "http://github.com/juergenhoetzel/babel/raw/STABLE/babel.el")
-  ;; (require 'babel) ;; Translate with eg Google
-
   ;;
   ;;;; Auto-install end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )
@@ -95,8 +110,8 @@
   ;; (auto-install-from-url "http://tromey.com/elpa/package.el")
   ;; NEW Builtin emacs pull from git repo HEAD
   ;;(auto-install-from-url "http://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;f=lisp/emacs-lisp/package.el;hb=HEAD")
-  (require 'package)
-  (package-initialize) ;; TODO: should be done within package.el?
+  ;;(require 'package)
+  ;;(package-initialize) ;; TODO: should be done within package.el?
   ;; (defcustom package-enable-at-startup t ...) maybe in emacs24 only?
 
   ;; Use official emacs 24 repository with ELPA
@@ -109,7 +124,8 @@
   )
 
 ;; Anyting
-(require 'anything-config)
+;; (require 'anything-config)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/magit-1.0.0"))
 ;; (require 'magit)
 ;; (require 'git)
 
@@ -123,15 +139,6 @@
 ;; (require 'jde)
 ;; (require 'aj-java)
 
-;; Git emacs
-;; From https://github.com/tsgates/git-emacs/tree/master
-;; $ git clone git://github.com/tsgates/git-emacs.git
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/git-emacs"))
-(require 'git-emacs)
-(require 'git-status)
-(autoload 'git-blame-mode "git-blame"
-  "Minor mode for incremental blame for Git." t)
-
 ;; YAML
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$\\|\\.yaml$" . yaml-mode))
@@ -140,13 +147,13 @@
 (require 'aj-ibuffer)
 (require 'aj-macros)
 (require 'aj-generic)
+(require 'aj-org)
 (require 'aj-elisp)
 (require 'aj-ediff)
 (require 'aj-color)
 (require 'aj-html)
 (require 'aj-latex)
 (require 'aj-irc)
-(require 'aj-org)
 (require 'aj-octave)
 (require 'aj-mac)
 (require 'aj-c)
@@ -157,12 +164,11 @@
 (require 'aj-anything)
 (require 'aj-compilation)
 (require 'aj-ido)
-(require 'aj-term)
 (require 'aj-js)
 (require 'aj-dired)
 (require 'aj-python)
 
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+;; (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;; Other customizations
 ;; (load "/Applications/Emacs.app/Contents/Resources/site-lisp/nxml-mode/rng-auto.el")
@@ -175,9 +181,9 @@
 
 ;; Auto-complete
 ;; https://github.com/m2ym/auto-complete.git
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/auto-complete/"))
-(require 'auto-complete-config)
-(ac-config-default)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/auto-complete/"))
+;; (require 'auto-complete-config)
+;; (ac-config-default)
 
 ;; Yasnippet
 ;; http://yasnippet.googlecode.com/files/yasnippet-0.6.1c.tar.bz2
@@ -206,6 +212,14 @@
 (set-variable 'yas/trigger-key "")
 (set-variable 'yas/wrap-around-region nil)
 (yas/initialize)
+
+;; Buffers/files identical names
+;; TODO : move
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "|")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
 
 ;; Default to read-only open files
 ;; (require 'aj-read-only-keymap-hooks)

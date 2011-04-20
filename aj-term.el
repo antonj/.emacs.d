@@ -1,6 +1,5 @@
 ;; From http://www.enigmacurry.com/2008/12/26/emacs-ansi-term-tricks/
 (require 'term)
-(require 'multi-term)
 
 (setq multi-term-program "/bin/bash")
 ;;(setq ansi-color-context nil)
