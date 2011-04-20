@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-03-04 10:14:08 anton"
+;; Time-stamp: "2011-04-06 20:15:33 anton"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -236,14 +236,6 @@
 ;;   (toggle-read-only t))
 ;; (add-hook 'find-file-hook 'aj-find-file-hook)
 
-;; Buffers/files identical names
-;; TODO : move
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-(setq uniquify-separator "|")
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
-
 (defun unfill-paragraph ()
   (interactive)
   (let ((fill-column (point-max)))
@@ -285,8 +277,18 @@
           (lambda()
             (local-set-key [(M C i)] 'aj-toggle-fold)))
 
+;; From http://www.reddit.com/r/emacs/comments/gjqki/is_there_any_way_to_tell_emacs_to_not/
+(defun toggle-sticky-buffer-window ()
+  "Toggle whether this window is dedicated to this buffer."
+  (interactive)
+  (set-window-dedicated-p
+   (selected-window)
+   (not (window-dedicated-p (selected-window))))
+  (if (window-dedicated-p (selected-window))
+      (message "Window is now dedicated.")
+    (message "Window is no longer dedicated.")))
 
-;; Logview mode from http://stackoverflow.com/questions/133821/the-best-tail-gui
+;; logview mode from http://stackoverflow.com/questions/133821/the-best-tail-gui
 (defvar angry-fruit-salad-log-view-mode-map
   (make-sparse-keymap))
 
@@ -295,7 +297,7 @@
 
 Angry colors."
   nil " AngryLog" nil
-
+  
   (cond (angry-fruit-salad-log-view-mode
          (auto-revert-tail-mode 1)
          (highlight-changes-mode 1)
