@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-04-20 16:48:33 anton"
+;; Time-stamp: "2011-04-20 22:06:29 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -24,7 +24,7 @@
         psvn
         yaml-mode
         markdown-mode
-        auctex
+        ;; auctex
         php-mode-improved
         js2-mode
         gnuplot-mode
@@ -44,15 +44,51 @@
         ;; google-maps
         ;; nxhtml
         ;; xcscope
-        ;; yasnippet
+        (:name aj-yasnippet
+               :type svn
+               :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
+               :features "yasnippet"
+               :after (lambda ()
+                        (yas/initialize)
+                        (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
+                        (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
+
+                        ;; Map `yas/load-directory' to every element
+                        ;; (mapc 'yas/load-directory yas/root-directory)
+
+                        (setq yas/prompt-functions '(yas/dropdown-prompt
+                                                     yas/ido-prompt
+                                                     yas/completing-prompt
+                                                     yas/x-prompt
+                                                     yas/no-prompt))
+
+                        ;; (add-to-list 'yas/extra-mode-hooks
+                        ;;              'nxml-mode-hook)
+                        (set-variable 'yas/trigger-key "")
+                        (add-hook 'yas/after-exit-snippet-hook
+                                  '(lambda ()
+                                     (indent-region yas/snippet-beg
+                                                    yas/snippet-end)))
+                        (set-variable 'yas/wrap-around-region nil)
+                        (yas/reload-all)))
+
         ;; (:name anything
         ;;        :after (lambda() (require 'anything-config)))
         (:name multi-term
                :after (lambda() (require 'aj-term)))
-        (:name package24
-               :after (lambda()
-                        (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-                                                 ("gnu" . "http://elpa.gnu.org/packages/")))))
+        (:name aj-package
+               :type http
+               :url "http://repo.or.cz/w/emacs.git/blob_plain/HEAD:/lisp/emacs-lisp/package.el"
+               :features package
+               :post-init (lambda ()
+                            (defconst package-subdirectory-regexp
+                              "^\\([^.].*\\)-\\([0-9]+\\(?:[.][0-9]+\\)*\\)$"
+                              "Regular expression matching the name of a package subdirectory.
+The first subexpression is the package name.
+The second subexpression is the version string.")
+                            (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+                                                     ("gnu" . "http://elpa.gnu.org/packages/")))
+                            (package-initialize)))
         (:name git-emacs
                :features git-status)
         (:name espresso-mode
@@ -64,17 +100,11 @@
                         (setq autopair-autowrap t)))
         (:name magit
                :after (lambda () (message "magit after")))
-        (:name asciidoc
-               :type elpa
-               :after (lambda ()
-                        (autoload 'doc-mode "doc-mode" nil t)
-                        (add-to-list 'auto-mode-alist '("\\.adoc$" . doc-mode))
-                        (add-hook 'doc-mode-hook
-                                  '(lambda ()
-                                     (turn-on-auto-fill)
-                                     (require 'asciidoc)))))
+        (:name auctex
+               :type elpa)
         ))
 (el-get)
+;; 'sync)
 
 ;;;; Auto-install start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (progn
@@ -187,31 +217,8 @@
 
 ;; Yasnippet
 ;; http://yasnippet.googlecode.com/files/yasnippet-0.6.1c.tar.bz2
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/yasnippet-0.6.1c/"))
-(require 'yasnippet)
-
-
-(add-to-list 'yas/root-directory "~/.emacs.d/aj-snippets")
-
-;; Map `yas/load-directory' to every element
-(mapc 'yas/load-directory yas/root-directory)
-
-(setq yas/prompt-functions '(yas/dropdown-prompt
-                             yas/ido-prompt
-                             yas/completing-prompt
-                             yas/x-prompt
-                             yas/no-prompt))
-
-;; (add-to-list 'yas/extra-mode-hooks
-;;              'nxml-mode-hook)
-
-(add-hook 'yas/after-exit-snippet-hook
-          '(lambda ()
-             (indent-region yas/snippet-beg
-                            yas/snippet-end)))
-(set-variable 'yas/trigger-key "")
-(set-variable 'yas/wrap-around-region nil)
-(yas/initialize)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/yasnippet-0.6.1c/"))
+;; (require 'yasnippet)
 
 ;; Buffers/files identical names
 ;; TODO : move
