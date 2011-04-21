@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-04-21 11:02:33 anton"
+;; Time-stamp: "2011-04-21 13:33:05 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -9,21 +9,21 @@
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/org-mode/lisp"))
 
 ;; El-get
-;; (load-file "~/.emacs.d/lisp/el-get-install.el")
+;; (url-retrieve
+;;  "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+;;  (lambda (s)
+;;    (end-of-buffer)
+;;    (eval-print-last-sexp)))
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
 
 (setq el-get-sources
-      '(;; cssh
-        el-get
-        ;; scss-mode
-        org-mode
-        ;; (:name org-mode
-        ;;        :after (require 'aj-org))
+      '(el-get
+        (:name org-mode
+               :after (require 'aj-org))
         psvn
         yaml-mode
         markdown-mode
-        ;; auctex
         php-mode-improved
         js2-mode
         gnuplot-mode
@@ -80,17 +80,15 @@
                :url "http://repo.or.cz/w/emacs.git/blob_plain/HEAD:/lisp/emacs-lisp/package.el"
                :features package
                :post-init (lambda ()
-                            (defconst package-subdirectory-regexp
-                              "^\\([^.].*\\)-\\([0-9]+\\(?:[.][0-9]+\\)*\\)$"
-                              "Regular expression matching the name of a package subdirectory.
-The first subexpression is the package name.
-The second subexpression is the version string.")
+                            (unless (boundp 'package-subdirectory-regexp)
+                              (defconst package-subdirectory-regexp
+                                "^\\([^.].*\\)-\\([0-9]+\\(?:[.][0-9]+\\)*\\)$"
+                                "Regular expression matching the name of a package subdirectory. The first subexpression is the package name. The second subexpression is the version string."))
                             (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                                                      ("gnu" . "http://elpa.gnu.org/packages/")))
                             ;; Don't init, elpa packages installed by el-get is initialized from loaddefs
                             ;;(package-initialize)
-                            )
-               )
+                            ))
         (:name git-emacs
                :features git-status)
         (:name espresso-mode
@@ -106,8 +104,8 @@ The second subexpression is the version string.")
                :repo ("ELPA" . "http://tromey.com/elpa/")
                :type elpa
                :post-init (lambda()
-                            (add-to-list 'load-path (expand-file-name (concat el-get-dir "auctex")))
-                            ))
+                            (add-to-list 'load-path
+                                         (expand-file-name (concat el-get-dir "auctex")))))
         ))
 (el-get)
 ;; 'sync)
@@ -183,7 +181,7 @@ The second subexpression is the version string.")
 (require 'aj-ibuffer)
 (require 'aj-macros)
 (require 'aj-generic)
-(require 'aj-org)
+;; (require 'aj-org)
 (require 'aj-elisp)
 (require 'aj-ediff)
 (require 'aj-color)
