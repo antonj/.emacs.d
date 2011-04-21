@@ -1,11 +1,10 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-04-20 22:06:29 anton"
+;; Time-stamp: "2011-04-21 11:02:33 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal"))
-
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal"))
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme-6.6.0"))
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/org-mode/lisp"))
 
@@ -88,7 +87,10 @@ The first subexpression is the package name.
 The second subexpression is the version string.")
                             (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                                                      ("gnu" . "http://elpa.gnu.org/packages/")))
-                            (package-initialize)))
+                            ;; Don't init, elpa packages installed by el-get is initialized from loaddefs
+                            ;;(package-initialize)
+                            )
+               )
         (:name git-emacs
                :features git-status)
         (:name espresso-mode
@@ -101,7 +103,11 @@ The second subexpression is the version string.")
         (:name magit
                :after (lambda () (message "magit after")))
         (:name auctex
-               :type elpa)
+               :repo ("ELPA" . "http://tromey.com/elpa/")
+               :type elpa
+               :post-init (lambda()
+                            (add-to-list 'load-path (expand-file-name (concat el-get-dir "auctex")))
+                            ))
         ))
 (el-get)
 ;; 'sync)
@@ -169,9 +175,9 @@ The second subexpression is the version string.")
 ;; (require 'jde)
 ;; (require 'aj-java)
 
-;; YAML
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$\\|\\.yaml$" . yaml-mode))
+;; ;; YAML
+;; (require 'yaml-mode)
+;; (add-to-list 'auto-mode-alist '("\\.yml$\\|\\.yaml$" . yaml-mode))
 
 ;; Personal customizations
 (require 'aj-ibuffer)
