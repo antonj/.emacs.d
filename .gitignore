@@ -6,6 +6,8 @@ semanticCache
 anything-c-adaptive-history
 tramp
 .org-id-locations
+ac-comphist.dat
+el-get
 elpa
 lisp
 !lisp/org-mode
