@@ -1,8 +1,10 @@
 (setq nxml-child-indent 3)
 (setq nxml-slash-auto-complete-flag t)
 
+;; svn co http://whattf.svn.cvsdude.com/syntax/trunk/relaxng/ ~/.emacs.d/resources/schemas/html5
 (eval-after-load "rng-loc"
-  '(add-to-list 'rng-schema-locating-files "~/.emacs.d/resources/schemas/html5/schemas.xml"))
+  '(add-to-list 'rng-schema-locating-files
+                "~/.emacs.d/resources/schemas/schemas.xml"))
 
 (put 'http://whattf.org/datatype-draft
      'rng-dt-compile

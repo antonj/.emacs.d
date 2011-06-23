@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-06-23 14:44:14 anton"
+;; Time-stamp: "2011-06-23 15:03:57 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -115,9 +115,7 @@
                             (add-to-list 'load-path
                                          (expand-file-name (concat el-get-dir "auctex")))))
         ))
-
-(el-get 'wait)
-;; 'sync)
+(el-get 'wait) ;; 'sync)
 
 ;; Personal
 (autoload 'less-mode "less-mode")
