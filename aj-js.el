@@ -49,6 +49,8 @@
 
 (defun my-js2-mode-hook ()
   ;; (js2-leave-mirror-mode)
+  ;; (set (make-local-variable 'forward-sexp-function) #'js2-mode-forward-sexp)
+  (kill-local-variable 'forward-sexp-function)
   (require 'espresso)
 
   ;; fix bug with my-indent-sexp

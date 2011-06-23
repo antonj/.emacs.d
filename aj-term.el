@@ -63,6 +63,7 @@
           (lambda ()
             (local-set-key "\C-c\C-j" 'aj-term-toggle-line-char)
             (message "loading term-hook-aj")
+            (setq autopair-dont-activate t)
             ;; Terminal color
             (set-variable 'term-default-bg-color (face-background 'default))
             (set-variable 'term-default-fg-color (face-foreground 'default))

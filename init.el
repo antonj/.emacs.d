@@ -1,12 +1,8 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-04-21 13:33:05 anton"
+;; Time-stamp: "2011-06-23 14:44:14 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal"))
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-theme-6.6.0"))
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/org-mode/lisp"))
 
 ;; El-get
 ;; (url-retrieve
@@ -14,39 +10,59 @@
 ;;  (lambda (s)
 ;;    (end-of-buffer)
 ;;    (eval-print-last-sexp)))
+
+
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
 
+(setq el-get-default-process-sync t)
+
 (setq el-get-sources
       '(el-get
+        (:name aj-package-23-compat
+               :type http
+               :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el"
+               :post-init (lambda() (setq package-archives
+                                          '(("ELPA" . "http://tromey.com/elpa/")
+                                            ("gnu" . "http://elpa.gnu.org/packages/")
+                                            ("marmalade" . "http://marmalade-repo.org/packages")))))
         (:name org-mode
-               :after (require 'aj-org))
+               :after (lambda () (require 'aj-org)))
+        slime
+        ruby-mode
+        auto-complete
         psvn
         yaml-mode
         markdown-mode
         php-mode-improved
-        js2-mode
-        gnuplot-mode
+        coffee-mode
+        python-mode
         undo-tree
         rainbow-mode
-        ;; (:name emacs-jabber
-        ;;        :after (lambda ()
-        ;;                 (require 'aj-jabber)))
-        color-theme
+        (:name color-theme
+               :after (lambda () (require 'aj-color)))
         color-theme-solarized
         color-theme-tango
         color-theme-tango-2
         color-theme-zenburn
         django-mode
-        ;; switch-window
+
+        ;;gnuplot-mode
+        ;; (:name emacs-jabber
+        ;;        :after (lambda ()
+        ;;                 (require 'aj-jabber)))        ;; switch-window
         ;; vkill
         ;; google-maps
         ;; nxhtml
         ;; xcscope
+        (:name rcirc-notify
+               :type git
+               :url "git@github.com:antonj/rcirc-notify-el.git"
+               :features rcirc-notify)
         (:name aj-yasnippet
                :type svn
                :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
-               :features "yasnippet"
+               :features yasnippet
                :after (lambda ()
                         (yas/initialize)
                         (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
@@ -75,25 +91,17 @@
         ;;        :after (lambda() (require 'anything-config)))
         (:name multi-term
                :after (lambda() (require 'aj-term)))
-        (:name aj-package
-               :type http
-               :url "http://repo.or.cz/w/emacs.git/blob_plain/HEAD:/lisp/emacs-lisp/package.el"
-               :features package
-               :post-init (lambda ()
-                            (unless (boundp 'package-subdirectory-regexp)
-                              (defconst package-subdirectory-regexp
-                                "^\\([^.].*\\)-\\([0-9]+\\(?:[.][0-9]+\\)*\\)$"
-                                "Regular expression matching the name of a package subdirectory. The first subexpression is the package name. The second subexpression is the version string."))
-                            (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-                                                     ("gnu" . "http://elpa.gnu.org/packages/")))
-                            ;; Don't init, elpa packages installed by el-get is initialized from loaddefs
-                            ;;(package-initialize)
-                            ))
+
         (:name git-emacs
-               :features git-status)
+               :type git
+               :url "https://github.com/tsgates/git-emacs.git"
+               :after (lambda()
+                        (require 'git-emacs)
+                        (require 'git-status)))
         (:name espresso-mode
                :type http
                :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
+        js2-mode
         (:name autopair
                :after (lambda()
                         (autopair-global-mode t)
@@ -107,61 +115,34 @@
                             (add-to-list 'load-path
                                          (expand-file-name (concat el-get-dir "auctex")))))
         ))
-(el-get)
+
+(el-get 'wait)
 ;; 'sync)
 
-;;;; Auto-install start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(progn
-  ;; (auto-install-from-url "http://www.emacswiki.org/emacs/download/auto-install.el")
-  ;; (require 'auto-install)
-  ;; (setq auto-install-directory (expand-file-name "~/.emacs.d/lisp/auto-install/"))
-  ;; (add-to-list 'load-path auto-install-directory)
+;; Personal
+(autoload 'less-mode "less-mode")
+(add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))
 
-  ;; Personal
-  (autoload 'less-mode "less-mode")
-  (add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+;; (require 'scss-mode)
 
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
-  (autoload 'scss-mode "scss-mode")
-  (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-  ;; (require 'scss-mode)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
+(require 'highlight-indentation)
 
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
-  (require 'highlight-indentation)
+;; Modes
 
-  ;; Modes
-  (require 'flymake)
+(require 'rst)
+(add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
 
-  ;;
-  ;;;; Auto-install end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  )
-
-;;;; ELPA start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(progn
-  ;;
-
-  ;; OLD package.el
-  ;; (auto-install-from-url "http://tromey.com/elpa/package.el")
-  ;; NEW Builtin emacs pull from git repo HEAD
-  ;;(auto-install-from-url "http://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob_plain;f=lisp/emacs-lisp/package.el;hb=HEAD")
-  ;;(require 'package)
-  ;;(package-initialize) ;; TODO: should be done within package.el?
-  ;; (defcustom package-enable-at-startup t ...) maybe in emacs24 only?
-
-  ;; Use official emacs 24 repository with ELPA
-  ;; (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-  ;;                          ("gnu" . "http://elpa.gnu.org/packages/")))
-
-  ;;;; Auctex elpa from gnu repo
-  ;; (package-install 'auctex)
-  ;;;; ELPA end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  )
-
-;; Anyting
-;; (require 'anything-config)
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/magit-1.0.0"))
-;; (require 'magit)
-;; (require 'git)
+(require 'flymake)
+;; Buffers/files identical names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "|")
+(setq uniquify-after-kill-buffer-p t)
+(setq uniquify-ignore-buffers-re "^\\*")
 
 ;; JDE ;; CEDET needs to be loaded first
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/jde/lisp"))
@@ -173,23 +154,17 @@
 ;; (require 'jde)
 ;; (require 'aj-java)
 
-;; ;; YAML
-;; (require 'yaml-mode)
-;; (add-to-list 'auto-mode-alist '("\\.yml$\\|\\.yaml$" . yaml-mode))
-
 ;; Personal customizations
+(require 'aj-generic)
+(require 'aj-mac)
 (require 'aj-ibuffer)
 (require 'aj-macros)
-(require 'aj-generic)
-;; (require 'aj-org)
 (require 'aj-elisp)
 (require 'aj-ediff)
-(require 'aj-color)
 (require 'aj-html)
 (require 'aj-latex)
 (require 'aj-irc)
 (require 'aj-octave)
-(require 'aj-mac)
 (require 'aj-c)
 (require 'aj-flymake)
 (require 'aj-flymake-c)
@@ -202,35 +177,11 @@
 (require 'aj-dired)
 (require 'aj-python)
 
-;; (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-
 ;; Other customizations
 ;; (load "/Applications/Emacs.app/Contents/Resources/site-lisp/nxml-mode/rng-auto.el")
 (require 'aj-nxml)
 ;; (load "~/.emacs.d/lisp/nxhtml/autostart.el")
 (setq mumamo-background-colors nil)
-
-(require 'rst)
-(add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
-
-;; Auto-complete
-;; https://github.com/m2ym/auto-complete.git
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/auto-complete/"))
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-
-;; Yasnippet
-;; http://yasnippet.googlecode.com/files/yasnippet-0.6.1c.tar.bz2
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/yasnippet-0.6.1c/"))
-;; (require 'yasnippet)
-
-;; Buffers/files identical names
-;; TODO : move
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse)
-(setq uniquify-separator "|")
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
 
 ;; Default to read-only open files
 ;; (require 'aj-read-only-keymap-hooks)

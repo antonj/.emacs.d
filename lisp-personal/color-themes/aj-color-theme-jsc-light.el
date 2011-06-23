@@ -86,7 +86,7 @@
      (modeline-mousable ((t (:background "plum" :foreground "black"))))
      (modeline-mousable-minor-mode ((t (:background "plum" :foreground "black"))))
      (region ((t (:background "plum"))))
-
+     
      (dired-directory ((t (:inherit font-lock-function-name-face))))
      (dired-header ((t (:inherit font-lock-keyword-face :height 1.2))))
      (ido-subdir ((t (:inherit font-lock-function-name-face))))

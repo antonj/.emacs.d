@@ -1,4 +1,4 @@
-(require 'flymake)
+;; (require 'flymake)
 
 (defun flymake-jslint-init ()
   (let* ((temp-file (flymake-init-create-temp-buffer-copy

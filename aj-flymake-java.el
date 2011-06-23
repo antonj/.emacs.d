@@ -1,4 +1,4 @@
-(require 'flymake)
+;; (require 'flymake)
 (defconst ecj-jar-path "/Users/anton/.emacs.d/java/ecj-3.5.1.jar")
 
 ;; TODO fix hardcoded 1.6, from jde-jdk

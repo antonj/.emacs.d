@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-04-06 20:15:33 anton"
+;; Time-stamp: "2011-05-16 11:41:39 anton"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -44,7 +44,9 @@
                                            "/opt/local/bin" ;; Macport
                                            "/opt/local/sbin"
                                            "~/.gem/ruby/1.8/bin" ;; Gems
-                                           "/usr/local/mysql/bin"))))
+                                           "/usr/local/mysql/bin"
+                                           "/usr/local/share/npm/bin" ;; NPM
+                                           ))))
 
   ;; Set PATH env
   (setenv "PATH"
@@ -102,7 +104,7 @@
 
 (global-set-key "\C-w" 'backward-kill-word) ;; erases standard kill-region
 (global-set-key "\C-x\C-k" 'kill-region) ;; replace standard kill-region
-(global-set-key "\M-y" 'anything-show-kill-ring) ;; replace standard yank-pop
+;; (global-set-key "\M-y" 'anything-show-kill-ring) ;; replace standard yank-pop
 (global-set-key (kbd "C-x C-b") (lambda() (interactive) (ibuffer nil))) ;; removes standard list-buffers
 (global-set-key "\C-co" 'ffap)
 (global-set-key "\C-cp" 'mac-open-current-visited-file)

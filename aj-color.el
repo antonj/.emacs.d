@@ -1,5 +1,5 @@
 ;; Color and style
-;; Time-stamp: "2011-04-20 16:20:19 anton"
+;; Time-stamp: "2011-04-21 18:03:27 anton"
 
 (defun aj-font-mono ()
   (interactive)
@@ -19,6 +19,7 @@
 (when window-system
   (global-hl-line-mode t)
   (setq indicate-empty-lines t)
+  (set-frame-height (selected-frame) 60)
   ;; (require 'color-theme)
   ;; (color-theme-initialize)
   ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
