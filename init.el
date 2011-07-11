@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-06-23 15:03:57 anton"
+;; Time-stamp: "2011-06-30 15:24:38 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -46,7 +46,8 @@
         color-theme-tango-2
         color-theme-zenburn
         django-mode
-
+        ;; (:name smex
+        ;;        :after (lambda() (global-set-key (kbd "M-x" ) 'smex)))
         ;;gnuplot-mode
         ;; (:name emacs-jabber
         ;;        :after (lambda ()
@@ -86,9 +87,10 @@
                                                     yas/snippet-end)))
                         (set-variable 'yas/wrap-around-region nil)
                         (yas/reload-all)))
-
         ;; (:name anything
-        ;;        :after (lambda() (require 'anything-config)))
+        ;;        :after (lambda()
+        ;;                 (require 'aj-anything)
+        ;;                 (require 'anything-config)))
         (:name multi-term
                :after (lambda() (require 'aj-term)))
 
@@ -168,7 +170,6 @@
 (require 'aj-flymake-c)
 (require 'aj-flymake-css)
 (require 'aj-flymake-js)
-(require 'aj-anything)
 (require 'aj-compilation)
 (require 'aj-ido)
 (require 'aj-js)

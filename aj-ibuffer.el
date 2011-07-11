@@ -4,6 +4,7 @@
                              (filename . "emacs-config")))
          ;; ("org-mode" (or (mode . org-mode)
          ;;                 (filename . "OrgMode")))
+         ("monterosa" (filename . "monterosa"))
          ("exjobb" (filename . "exjobb"))
          ("code" (filename . "code"))
          ("siine" (filename . "siine"))
