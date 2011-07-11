@@ -1,7 +1,7 @@
 ;; Add "support" for js files in speedbar, interpreted as c
-(speedbar-add-supported-extension ".js")
-(add-to-list 'speedbar-fetch-etags-parse-list
-             '("\\.js" . speedbar-parse-c-or-c++tag))
+;; (speedbar-add-supported-extension ".js")
+;; (add-to-list 'speedbar-fetch-etags-parse-list
+;;              '("\\.js" . speedbar-parse-c-or-c++tag))
 
 (setq js2-mirror-mode nil)
 

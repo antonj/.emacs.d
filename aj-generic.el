@@ -41,8 +41,6 @@
 (let ((aj-path (mapcar 'expand-file-name '("~/bin" ;; Mine
                                            "/usr/local/bin" ;; Brew
                                            ":/usr/texbin" ;; MacTex
-                                           "/opt/local/bin" ;; Macport
-                                           "/opt/local/sbin"
                                            "~/.gem/ruby/1.8/bin" ;; Gems
                                            "/usr/local/mysql/bin"
                                            "/usr/local/share/npm/bin" ;; NPM

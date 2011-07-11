@@ -1,8 +1,10 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-06-30 15:24:38 anton"
+;; Time-stamp: "2011-07-11 14:56:31 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+
+(require 'aj-generic)
 
 ;; El-get
 ;; (url-retrieve
@@ -155,7 +157,7 @@
 ;; (require 'aj-java)
 
 ;; Personal customizations
-(require 'aj-generic)
+
 (require 'aj-mac)
 (require 'aj-ibuffer)
 (require 'aj-macros)
