@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-07-11 14:56:31 antonj"
+;; Time-stamp: "2011-07-11 15:13:57 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -135,8 +135,8 @@
 
 ;; Modes
 
-(require 'rst)
-(add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
+;; (require 'rst)
+;; (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
 
 (require 'flymake)
 ;; Buffers/files identical names
