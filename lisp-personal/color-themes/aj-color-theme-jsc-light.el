@@ -30,6 +30,8 @@
      (highlight ((t (:background "#e3e3d3"))))
      ;; (highlight-indent-face ((t (:inherit highlight))))
      (fringe ((t (:inherit highlight))))
+     (hl-line-face ((t (:inherit highlight))))
+     (hl-line ((t (:inherit highlight))))
      
      ;; Typography
      (bold ((t (:bold t))))

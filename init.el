@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-07-11 15:13:57 antonj"
+;; Time-stamp: "2011-07-12 17:39:28 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -28,8 +28,8 @@
                                           '(("ELPA" . "http://tromey.com/elpa/")
                                             ("gnu" . "http://elpa.gnu.org/packages/")
                                             ("marmalade" . "http://marmalade-repo.org/packages")))))
-        (:name org-mode
-               :after (lambda () (require 'aj-org)))
+        ;; (:name org-mode
+        ;;        :after (lambda () (require 'aj-org)))
         slime
         ruby-mode
         auto-complete
@@ -158,6 +158,7 @@
 
 ;; Personal customizations
 
+(require 'aj-org)
 (require 'aj-mac)
 (require 'aj-ibuffer)
 (require 'aj-macros)

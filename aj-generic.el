@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-05-16 11:41:39 anton"
+;; Time-stamp: "2011-07-13 10:13:22 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -274,6 +274,10 @@
 (global-set-key [(M C i)] 'aj-toggle-fold)
 
 (add-hook 'emacs-lisp-mode-hook
+          (lambda()
+            (local-set-key [(M C i)] 'aj-toggle-fold)))
+
+(add-hook 'nxml-mode-hook
           (lambda()
             (local-set-key [(M C i)] 'aj-toggle-fold)))
 
