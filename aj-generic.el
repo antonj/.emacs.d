@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-05-16 11:41:39 anton"
+;; Time-stamp: "2011-07-24 23:07:37 anton"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -38,21 +38,16 @@
 (set-language-environment "UTF-8")
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(let ((aj-path (mapcar 'expand-file-name '("~/bin" ;; Mine
-                                           "/usr/local/bin" ;; Brew
-                                           ":/usr/texbin" ;; MacTex
-                                           "~/.gem/ruby/1.8/bin" ;; Gems
-                                           "/usr/local/mysql/bin"
-                                           "/usr/local/share/npm/bin" ;; NPM
-                                           ))))
-
-  ;; Set PATH env
-  (setenv "PATH"
-          (concat (mapconcat 'identity aj-path ":") ":" (getenv "PATH") ))
-  ;; Set exec-path
-  (setq exec-path
-        (append aj-path
-                exec-path)))
+;; Set PATH and exec-path from echo PATH
+(let* ((path-prefix "PATH{")
+         (echo-env (concat "$SHELL --login -i -c 'echo " path-prefix "$PATH'"))
+         (path-from-shell
+          (substring (shell-command-to-string echo-env)
+                     (+ (length path-prefix)
+                        (string-match path-prefix
+                                      (shell-command-to-string echo-env))))))
+         (setenv "PATH" path-from-shell)
+         (setq exec-path (split-string path-from-shell path-separator)))
 
 (set-variable 'vc-path '("/usr/local/bin"))
 
