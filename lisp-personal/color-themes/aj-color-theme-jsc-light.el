@@ -30,6 +30,8 @@
      (highlight ((t (:background "#e3e3d3"))))
      ;; (highlight-indent-face ((t (:inherit highlight))))
      (fringe ((t (:inherit highlight))))
+     (hl-line-face ((t (:inherit highlight))))
+     (hl-line ((t (:inherit highlight))))
      
      ;; Typography
      (bold ((t (:bold t))))
@@ -58,7 +60,27 @@
      (font-latex-sedate ((t (:inherit font-lock-keyword-face))))
      (font-latex-string-face ((t (:inherit font-lock-string-face))))
      
+     ;; Comint
+     (comint-highlight-input ((t (:inherit font-lock-keyword-face))))
+     (comint-highlight-prompt ((t (:inherit font-lock-function-name-face))))
+     
+     (compilation-info ((t (:inherit font-lock-function-name-face))))
+
+     ;; DIFF
+     (diff-header ((t (:inherit highlight))))
+     (diff-hunk-header ((t (:inherit diff-header))))
+     
+     (diff-removed ((t (:foreground "#cc0077" :weight bold))))
+     (diff-indicator-removed ((t (:inherit diff-removed))))
+     
+     (diff-added ((t (:foreground "#77cc00" :weight bold))))
+     (diff-indicator-added ((t (:inherit diff-added))))
+
+     (diff-refine-change ((t (:inherit highlight))))
+     
+     
      ;; Org-mode
+     (org-checkbox ((t (:inherit highlight))))
      (org-link ((t (:foreground "#0077CC" :underline nil))))
      (org-date ((t (:foreground "#7700cc"))))
      (org-todo ((t (:foreground "#cc0077" :weight bold))))
@@ -74,7 +96,10 @@
      
      (org-level-3 ((t (:inherit font-lock-variable-name-face
                                 :weight bold))))
-
+     
+     (org-level-4 ((t (:inherit font-lock-comment-face
+                                :weight bold))))
+     
      ;; Jabber
      (jabber-chat-prompt-foreign ((t (:inherit font-lock-constant-face))))
      (jabber-chat-prompt-local ((t (:inherit font-lock-comment-face))))
