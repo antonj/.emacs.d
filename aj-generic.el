@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-07-13 10:13:22 antonj"
+;; Time-stamp: "2011-08-09 19:54:09 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -118,6 +118,12 @@
 (global-set-key (kbd "C-8") 'comment-region)
 (global-set-key (kbd "C-9") 'uncomment-region)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(define-key isearch-mode-map (kbd "C-o")
+  (lambda ()
+    (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string
+               (regexp-quote isearch-string))))))
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key "\M-s" 'speedbar-get-focus)
 (global-set-key [f5]   'call-last-kbd-macro) ;; bind key for calling last macro
