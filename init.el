@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-07-11 15:13:57 antonj"
+;; Time-stamp: "2011-08-01 22:49:13 anton"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -98,7 +98,7 @@
 
         (:name git-emacs
                :type git
-               :url "https://github.com/tsgates/git-emacs.git"
+               :url "git@github.com:antonj/git-emacs.git"
                :after (lambda()
                         (require 'git-emacs)
                         (require 'git-status)))
