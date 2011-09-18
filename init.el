@@ -1,9 +1,10 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-07-12 17:39:28 antonj"
+;; Time-stamp: "2011-09-18 22:25:40 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 
+(require 'cl)
 (require 'aj-generic)
 
 ;; El-get
@@ -19,107 +20,119 @@
 
 (setq el-get-default-process-sync t)
 
-(setq el-get-sources
-      '(el-get
-        (:name aj-package-23-compat
-               :type http
-               :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el"
-               :post-init (lambda() (setq package-archives
-                                          '(("ELPA" . "http://tromey.com/elpa/")
-                                            ("gnu" . "http://elpa.gnu.org/packages/")
-                                            ("marmalade" . "http://marmalade-repo.org/packages")))))
-        ;; (:name org-mode
-        ;;        :after (lambda () (require 'aj-org)))
-        slime
-        ruby-mode
-        auto-complete
-        psvn
-        yaml-mode
-        markdown-mode
-        php-mode-improved
-        coffee-mode
-        python-mode
-        undo-tree
-        rainbow-mode
-        (:name color-theme
-               :after (lambda () (require 'aj-color)))
-        color-theme-solarized
-        color-theme-tango
-        color-theme-tango-2
-        color-theme-zenburn
-        django-mode
-        ;; (:name smex
-        ;;        :after (lambda() (global-set-key (kbd "M-x" ) 'smex)))
-        ;;gnuplot-mode
-        ;; (:name emacs-jabber
-        ;;        :after (lambda ()
-        ;;                 (require 'aj-jabber)))        ;; switch-window
-        ;; vkill
-        ;; google-maps
-        ;; nxhtml
-        ;; xcscope
-        (:name rcirc-notify
-               :type git
-               :url "git@github.com:antonj/rcirc-notify-el.git"
-               :features rcirc-notify)
-        (:name aj-yasnippet
-               :type svn
-               :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
-               :features yasnippet
-               :after (lambda ()
-                        (yas/initialize)
-                        (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
-                        (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
+(setq
+ el-get-sources
+ '((:name color-theme
+          :after (lambda () (require 'aj-color)))
+   ;; (:name aj-package-23-compat
+   ;;        :type http
+   ;;        :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el"
+   ;;        :post-init (lambda() (setq package-archives
+   ;;                                   '(("ELPA" . "http://tromey.com/elpa/")
+   ;;                                     ("gnu" . "http://elpa.gnu.org/packages/")
+   ;;                                     ("marmalade" . "http://marmalade-repo.org/packages")))))
+   ;; (:name org-mode
+   ;;        :after (lambda () (require 'aj-org)))
+   ;; (:name emacs-jabber
+   ;;        :after (lambda ()
+   ;;                 (require 'aj-jabber)))        ;; switch-window
+   (:name rcirc-notify
+          :type git
+          :url "git@github.com:antonj/rcirc-notify-el.git"
+          :features rcirc-notify)
+   (:name aj-yasnippet
+          :type svn
+          :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
+          :features yasnippet
+          :after (lambda ()
+                   (yas/initialize)
+                   (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
+                   (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
 
-                        ;; Map `yas/load-directory' to every element
-                        ;; (mapc 'yas/load-directory yas/root-directory)
+                   ;; Map `yas/load-directory' to every element
+                   ;; (mapc 'yas/load-directory yas/root-directory)
 
-                        (setq yas/prompt-functions '(yas/dropdown-prompt
-                                                     yas/ido-prompt
-                                                     yas/completing-prompt
-                                                     yas/x-prompt
-                                                     yas/no-prompt))
+                   (setq yas/prompt-functions '(yas/dropdown-prompt
+                                                yas/ido-prompt
+                                                yas/completing-prompt
+                                                yas/x-prompt
+                                                yas/no-prompt))
 
-                        ;; (add-to-list 'yas/extra-mode-hooks
-                        ;;              'nxml-mode-hook)
-                        (set-variable 'yas/trigger-key "")
-                        (add-hook 'yas/after-exit-snippet-hook
-                                  '(lambda ()
-                                     (indent-region yas/snippet-beg
-                                                    yas/snippet-end)))
-                        (set-variable 'yas/wrap-around-region nil)
-                        (yas/reload-all)))
-        ;; (:name anything
-        ;;        :after (lambda()
-        ;;                 (require 'aj-anything)
-        ;;                 (require 'anything-config)))
-        (:name multi-term
-               :after (lambda() (require 'aj-term)))
+                   ;; (add-to-list 'yas/extra-mode-hooks
+                   ;;              'nxml-mode-hook)
+                   (set-variable 'yas/trigger-key "")
+                   (add-hook 'yas/after-exit-snippet-hook
+                             '(lambda ()
+                                (indent-region yas/snippet-beg
+                                               yas/snippet-end)))
+                   (set-variable 'yas/wrap-around-region nil)
+                   (yas/reload-all)))
+   ;; (:name anything
+   ;;        :after (lambda()
+   ;;                 (require 'aj-anything)
+   ;;                 (require 'anything-config)))
+   (:name multi-term
+          :after (lambda() (require 'aj-term)))
 
-        (:name git-emacs
-               :type git
-               :url "git@github.com:antonj/git-emacs.git"
-               :after (lambda()
-                        (require 'git-emacs)
-                        (require 'git-status)))
-        (:name espresso-mode
-               :type http
-               :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
-        js2-mode
-        (:name autopair
-               :after (lambda()
-                        (autopair-global-mode t)
-                        (setq autopair-autowrap t)))
-        (:name magit
-               :after (lambda () (message "magit after")))
-        (:name auctex
-               :repo ("ELPA" . "http://tromey.com/elpa/")
-               :type elpa
-               :post-init (lambda()
-                            (add-to-list 'load-path
-                                         (expand-file-name (concat el-get-dir "auctex")))))
-        ))
-(el-get 'wait) ;; 'sync)
+   (:name git-emacs
+          :type git
+          :url "git@github.com:antonj/git-emacs.git"
+          :after (lambda()
+                   (require 'git-emacs)
+                   (require 'git-status)))
+   (:name eclim
+          :post-init (lambda()
+                       (require 'company-emacs-eclim)
+                       
+                       ))
+   (:name espresso-mode
+          :type http
+          :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
+   (:name autopair
+          :after (lambda()
+                   (autopair-global-mode t)
+                   (setq autopair-autowrap t)))
+   (:name magit
+          :after (lambda ()
+                   (message "magit after")
+                   (add-hook 'magit-mode-hook
+                             (lambda ()
+                               (local-set-key "\M-1" 'beginning-of-buffer)
+                               (local-set-key "\M-2" 'end-of-buffer)
+                               (local-set-key [(c)] 'git-commit)))))
+   (:name auctex
+          :repo ("ELPA" . "http://tromey.com/elpa/")
+          :type elpa
+          :post-init (lambda()
+                       (add-to-list 'load-path
+                                    (expand-file-name (concat el-get-dir "auctex")))))))
+
+(setq
+ aj:el-get-packages
+ '(el-get
+   js2-mode
+   ruby-mode
+   auto-complete
+   psvn
+   yaml-mode
+   markdown-mode
+   php-mode-improved
+   coffee-mode
+   python-mode
+   undo-tree
+   rainbow-mode
+   color-theme-solarized
+   color-theme-tango
+   color-theme-tango-2
+   color-theme-zenburn))
+
+(setq aj:el-get-packages
+      (append
+       aj:el-get-packages
+       (loop for src in el-get-sources collect (el-get-source-name src))))
+
+;; install new packages and init already installed packages
+(el-get 'sync aj:el-get-packages)
 
 ;; Personal
 (autoload 'less-mode "less-mode")
@@ -173,6 +186,7 @@
 (require 'aj-flymake-c)
 (require 'aj-flymake-css)
 (require 'aj-flymake-js)
+(require 'aj-flymake-java)
 (require 'aj-compilation)
 (require 'aj-ido)
 (require 'aj-js)
