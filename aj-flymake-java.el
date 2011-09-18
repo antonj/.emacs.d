@@ -1,14 +1,9 @@
 ;; (require 'flymake)
-(defconst ecj-jar-path "/Users/anton/.emacs.d/java/ecj-3.5.1.jar")
+(defvar flymake-eclipse-batch-compiler-path
+  "/Applications/eclipse/plugins/org.eclipse.jdt.core_3.7.0.v_B61.jar")
 
-;; TODO fix hardcoded 1.6, from jde-jdk
+;; TODO fix hardcoded 1.6
 (defvar flymake-java-version "1.6")
-
-;; To display current classpath from build.xml
-;; <target name="show-classpath">
-;;    <property name="classpath" refid="project.classpath"/>
-;;    <echo message="classpath= ${classpath}"/>
-;; </target>
 
 (defun flymake-java-ecj-init ()
   (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -16,11 +11,10 @@
          (local-file (file-relative-name
                       temp-file
                       (file-name-directory buffer-file-name))))
-    (list "java" (list "-jar" ecj-jar-path "-Xemacs" "-d" "none" 
-                       ;; "-warn:none"
+    (list "java" (list "-jar" flymake-eclipse-batch-compiler-path "-Xemacs" "-d" "none" 
                        "-warn:+over-ann,uselessTypeCheck";;,allJavadoc"
                        "-source" flymake-java-version "-target" flymake-java-version "-proceedOnError"
-                       "-classpath" (jde-build-classpath jde-global-classpath)
+                       "-classpath" (eclim/project-classpath)
                        ;; "-log" "c:/temp/foo.xml"
                        local-file))))
 
@@ -38,6 +32,12 @@
 (push '(".+\\.java$" flymake-java-ecj-init flymake-java-ecj-cleanup) flymake-allowed-file-name-masks)
 
 (provide 'aj-flymake-java)
+
+;; To display current classpath from build.xml
+;; <target name="show-classpath">
+;;    <property name="classpath" refid="project.classpath"/>
+;;    <echo message="classpath= ${classpath}"/>
+;; </target>
 
 ;; EOC
 
