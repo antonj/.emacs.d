@@ -6,6 +6,7 @@
   ;; Will mess up all prefix C-u in org-mode TODO: how to bind C-u keys?
   ;; (local-set-key (kbd "C-u C-<return>") 'org-export-as-html)
   (local-set-key (kbd "C-<tab>") 'other-window)
+  (local-set-key (kbd "C-<tab>") 'other-window)
   (local-set-key (kbd "C-S-<tab>") (lambda ()
                                      (interactive) (other-window -1))))
 (add-hook 'org-mode-hook 'aj-org-mode-hook)
@@ -24,7 +25,7 @@
       '(("STARTED" . org-upcoming-deadline)))
 
 ;; Hide leading stars face
-(setq org-hide-leading-stars t)
+(setq org-hide-leading-stars nil)
 (custom-set-faces
  '(org-hide ((((background light)) (:foreground "dim gray"))
              (((background dark)) (:foreground "dim gray")))))

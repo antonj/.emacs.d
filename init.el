@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-09-18 22:25:40 antonj"
+;; Time-stamp: "2011-09-19 18:18:13 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -82,9 +82,8 @@
                    (require 'git-status)))
    (:name eclim
           :post-init (lambda()
-                       (require 'company-emacs-eclim)
-                       
-                       ))
+                       ;;(require 'company-emacs-eclim)
+                       (require 'aj-eclim)))
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")

@@ -77,6 +77,7 @@ Example: \"String.val[point]\" <= del-backwards-match-beinnign
 ;;         ("v" "primaryIndexB" "primaryIndexB : int - ActiveDyad" "")
 ;;         ("v" "year" "year : int - ActiveDyad" "")
 ;;         ("v" "ywpForSideA" "ywpForSideA : List<se.uppsala.ucdp.model.YWP> - ActiveDyad" "")
+
 ;;         ("v" "ywpForSideB" "ywpForSideB : List<se.uppsala.ucdp.model.YWP> - ActiveDyad" "")
 ;;         ("f" "addYWPForSide(" "addYWPForSide(Side side, YWP ywp) : boolean - ActiveDyad" "")
 ;;         ("f" "clone()" "clone() : Object - Object" "")))

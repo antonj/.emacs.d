@@ -91,4 +91,7 @@
 
 (global-set-key (kbd "C-c !") 'shell-here)
 
+(add-hook 'org-mode-hook (lambda()
+                           (local-set-key (kbd "C-c !") 'shell-here)))
+
 (provide 'aj-term)
