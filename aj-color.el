@@ -1,5 +1,5 @@
 ;; Color and style
-;; Time-stamp: "2011-04-21 18:03:27 anton"
+;; Time-stamp: "2011-11-04 09:32:05 antonj"
 
 (defun aj-font-mono ()
   (interactive)
@@ -24,6 +24,7 @@
   ;; (color-theme-initialize)
   ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
   (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
+  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-tango.el")
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-cl-frame.el")
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-inkport.el")
