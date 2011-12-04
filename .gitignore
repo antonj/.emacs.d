@@ -11,5 +11,8 @@ ac-comphist.dat
 el-get
 elpa
 lisp
+resources/schemas/html5/
+.ido.last
+%backup%~
 !lisp/org-mode
 !lisp/git-emacs

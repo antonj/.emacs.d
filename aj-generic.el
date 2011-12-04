@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2011-08-09 19:54:09 antonj"
+;; Time-stamp: "2011-11-29 13:38:24 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -8,6 +8,7 @@
 (setq transient-mark-mode t)
 (global-font-lock-mode t)
 (show-paren-mode t)
+(setq-default indicate-empty-lines t)
 (setq fill-column 80)
 (column-number-mode t)
 (setq visible-bell t)                ;; disable audible bell
