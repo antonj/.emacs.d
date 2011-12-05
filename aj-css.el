@@ -1,5 +1,5 @@
 ;; CSS
-;; Time-stamp: "2011-12-02 13:28:40 antonj"
+;; Time-stamp: "2011-12-05 09:08:00 antonj"
 
 (defun aj-css-mode-hook()
   (setq css-indent-offset 2)

@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-09-19 18:18:13 antonj"
+;; Time-stamp: "2011-12-05 09:08:25 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -189,6 +189,7 @@
 (require 'aj-compilation)
 (require 'aj-ido)
 (require 'aj-js)
+(require 'aj-css)
 (require 'aj-dired)
 (require 'aj-python)
 
