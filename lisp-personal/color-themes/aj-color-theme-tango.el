@@ -23,7 +23,7 @@
 
      
      (border ((t (:background "#888a85"))))
-     (fringe ((t (:background "grey10"))))
+     (fringe ((t (:background "#404446"))))
      
      (highlight ((t (:background "grey10"))))
      

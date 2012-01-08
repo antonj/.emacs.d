@@ -4,6 +4,7 @@
                              (filename . "emacs-config")))
          ;; ("org-mode" (or (mode . org-mode)
          ;;                 (filename . "OrgMode")))
+         ("monterosa-http" (filename . "monterosa-http"))
          ("monterosa" (filename . "monterosa"))
          ("exjobb" (filename . "exjobb"))
          ("code" (filename . "code"))

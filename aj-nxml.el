@@ -1,4 +1,4 @@
-(setq nxml-child-indent 4)
+(setq nxml-child-indent 3)
 (setq nxml-slash-auto-complete-flag t)
 
 ;; svn co http://whattf.svn.cvsdude.com/syntax/trunk/relaxng/ ~/.emacs.d/resources/schemas/html5

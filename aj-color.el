@@ -1,12 +1,12 @@
 ;; Color and style
-;; Time-stamp: "2011-11-04 09:32:05 antonj"
+;; Time-stamp: "2011-12-08 10:24:53 antonj"
 
 (defun aj-font-mono ()
   (interactive)
   ;; (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
   ;;(set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
   ;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
-  (set-frame-font "-apple-InconsolataDZ-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1" nil))
+  (set-frame-font "-apple-Inconsolata-dz-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1" nil))
 
 (defun aj-font-serif ()
   (interactive)
@@ -33,8 +33,8 @@
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-solarized.el")
   ;; (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
   
-  (aj-font-mono)
   (aj-color-theme-jsc-light)
+  (aj-font-mono)
   
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
   ;; (zenburn)

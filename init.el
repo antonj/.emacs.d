@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2011-12-05 09:08:25 antonj"
+;; Time-stamp: "2012-01-05 13:33:12 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -36,6 +36,13 @@
    ;; (:name emacs-jabber
    ;;        :after (lambda ()
    ;;                 (require 'aj-jabber)))        ;; switch-window
+   (:name color-theme-wombat+
+          :type http
+          :depends color-theme
+          :url "http://jaderholm.com/color-themes/color-theme-wombat.el"
+          :post-init (lambda ()
+                       (autoload 'color-theme-wombat+ "color-theme-wombat"
+                         "color-theme: tango" t)))
    (:name rcirc-notify
           :type git
           :url "git@github.com:antonj/rcirc-notify-el.git"
@@ -115,7 +122,7 @@
    psvn
    yaml-mode
    markdown-mode
-   php-mode-improved
+   ;;php-mode-improved
    coffee-mode
    python-mode
    undo-tree
