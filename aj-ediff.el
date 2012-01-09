@@ -6,7 +6,6 @@
           (lambda ()
             ;; (setq ediff-saved-frame-configuration
             ;;       (current-frame-configuration))
-
             (setq ediff-saved-window-configuration
                   (current-window-configuration))))
 
@@ -15,7 +14,6 @@
          ;; (set-frame-configuration
          ;;  ediff-saved-frame-configuration)
          ;; Fulfix dedicated window Emacs24
-         (other-window 1)
          (set-window-configuration
           ediff-saved-window-configuration))))
   (add-hook 'ediff-quit-hook restore-frame-configuration 'append)
