@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-01-05 13:33:12 antonj"
+;; Time-stamp: "2012-01-21 18:42:31 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -98,6 +98,10 @@
           :after (lambda()
                    (autopair-global-mode t)
                    (setq autopair-autowrap t)))
+   (:name nxhtml
+          :after (lambda()
+                   (load "~/.emacs.d/el-get/nxhtml/autostart.el")
+                   (setq mumamo-background-colors nil)))
    (:name magit
           :after (lambda ()
                    (message "magit after")
@@ -204,7 +208,6 @@
 ;; (load "/Applications/Emacs.app/Contents/Resources/site-lisp/nxml-mode/rng-auto.el")
 (require 'aj-nxml)
 ;; (load "~/.emacs.d/lisp/nxhtml/autostart.el")
-(setq mumamo-background-colors nil)
 
 ;; Default to read-only open files
 ;; (require 'aj-read-only-keymap-hooks)
