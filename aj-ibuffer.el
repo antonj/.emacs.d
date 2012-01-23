@@ -1,3 +1,14 @@
+;; Enable ibuffer-filter-by-filename to filter on directory names too.
+;; From http://www.emacswiki.org/emacs/IbufferMode
+(eval-after-load "ibuf-ext"
+  '(define-ibuffer-filter filename
+       "Toggle current view to buffers with file or directory name matching QUALIFIER."
+     (:description "filename"
+                   :reader (read-from-minibuffer "Filter by file/directory name (regexp): "))
+     (ibuffer-awhen (or (buffer-local-value 'buffer-file-name buf)
+                        (buffer-local-value 'dired-directory buf))
+                    (string-match qualifier it))))
+
 (setq ibuffer-saved-filter-groups
       '(("home"
          ("emacs-config" (or (filename . ".emacs.d")
@@ -6,6 +17,7 @@
          ;;                 (filename . "OrgMode")))
          ("monterosa-http" (filename . "monterosa-http"))
          ("monterosa" (filename . "monterosa"))
+         ("sites" (filename . "Sites"))
          ("exjobb" (filename . "exjobb"))
          ("code" (filename . "code"))
          ("siine" (filename . "siine"))
@@ -19,7 +31,8 @@
                      (name . "\*info\*")))
          ("shells" (mode . shell-mode))
          ("svn" (name . "\*svn"))
-         ("git" (name . "\*git"))
+         ("git" (or (name . "\*magit")
+                    (name . "\*git")))
          )))
 
 (add-hook 'ibuffer-mode-hook
