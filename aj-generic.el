@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2012-01-10 13:38:29 antonj"
+;; Time-stamp: "2012-01-28 11:56:59 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -267,12 +267,10 @@
 (defun aj-toggle-fold ()
   "Toggle fold all lines larger than indentation on current line"
   (interactive)
-  (let ((col 1))
-    (save-excursion
-      (back-to-indentation)
-      (setq col (+ 1 (current-column)))
-      (set-selective-display
-       (if selective-display nil (or col 1))))))
+  (set-selective-display
+   (if selective-display nil
+     (or (save-excursion
+           (back-to-indentation) (+ 1 (current-column))) 1))))
 (global-set-key [(M C i)] 'aj-toggle-fold)
 
 (add-hook 'emacs-lisp-mode-hook
