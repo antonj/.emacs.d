@@ -1,13 +1,15 @@
 ;; CSS
-;; Time-stamp: "2011-12-08 13:28:05 antonj"
+;; Time-stamp: "2012-02-13 11:07:21 antonj"
 
 (defun aj-css-mode-hook()
   (setq css-indent-offset 3)
   ;; C-style indentation
   (setq cssm-indent-function #'cssm-c-style-indenter)
   (autopair-mode -1)
-  (flymake-mode t))
+  ;;(flymake-mode t))
 (add-hook 'css-mode-hook 'aj-css-mode-hook)
+
+(setq scss-sass-options '("--style" "compressed"))
 
 (defun aj-scss-mode-hook()
   (setq cssm-indent-function #'cssm-c-style-indenter)

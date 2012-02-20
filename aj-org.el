@@ -44,10 +44,10 @@
 ;;(setq remember-handler-functions '(org-remember-handler))
 ;;(add-hook 'remember-mode-hook 'org-remember-apply-template)
 
-(set-variable 'org-export-html-style-include-default nil)
+;; (set-variable 'org-export-html-style-include-default nil)
 
-(set-variable 'org-export-html-style
-              "<link rel=\"stylesheet\" type=\"text/css\" href=\"/Users/anton/.emacs.d/org-mode.css\" />")
+;; (set-variable 'org-export-html-style
+;;               "<link rel=\"stylesheet\" type=\"text/css\" href=\"/Users/anton/.emacs.d/org-mode.css\" />")
 
 ;; (defun process-file (file)
 ;;    "Read the contents of a file into a temp buffer and then do
