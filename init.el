@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-01-21 18:42:31 antonj"
+;; Time-stamp: "2012-02-15 12:22:31 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -43,6 +43,11 @@
           :post-init (lambda ()
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
+
+   ;; (:name hindent-minor-mode
+   ;;        :type git
+   ;;        :url "git://gist.github.com/1693964.git"
+   ;;        :features hindent-minor-mode)
    (:name rcirc-notify
           :type git
           :url "git@github.com:antonj/rcirc-notify-el.git"
@@ -98,10 +103,10 @@
           :after (lambda()
                    (autopair-global-mode t)
                    (setq autopair-autowrap t)))
-   (:name nxhtml
-          :after (lambda()
-                   (load "~/.emacs.d/el-get/nxhtml/autostart.el")
-                   (setq mumamo-background-colors nil)))
+   ;; (:name nxhtml
+   ;;        :after (lambda()
+   ;;                 (load "~/.emacs.d/el-get/nxhtml/autostart.el")
+   ;;                 (setq mumamo-background-colors nil)))
    (:name magit
           :after (lambda ()
                    (message "magit after")
@@ -131,6 +136,8 @@
    python-mode
    undo-tree
    rainbow-mode
+   highlight-indentation
+   scss-mode
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
@@ -148,13 +155,13 @@
 (autoload 'less-mode "less-mode")
 (add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
-(autoload 'scss-mode "scss-mode")
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
+;; (autoload 'scss-mode "scss-mode")
+;; (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 ;; (require 'scss-mode)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
-(require 'highlight-indentation)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
+;; (require 'highlight-indentation)
 
 ;; Modes
 
@@ -194,7 +201,7 @@
 (require 'aj-c)
 (require 'aj-flymake)
 (require 'aj-flymake-c)
-(require 'aj-flymake-css)
+;;(require 'aj-flymake-css)
 (require 'aj-flymake-js)
 (require 'aj-flymake-java)
 (require 'aj-compilation)
