@@ -18,7 +18,7 @@
 (setq org-log-done nil)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")
         (sequence "QUESTION(q)" "|" "ANSWERED(s)")))
 
 (setq org-todo-keyword-faces
