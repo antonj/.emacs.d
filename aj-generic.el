@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2012-01-28 11:56:59 antonj"
+;; Time-stamp: "2012-03-14 22:17:24 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -40,15 +40,28 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Set PATH and exec-path from echo PATH
+
+(defun chomp (str)
+  "Chomp leading and tailing whitespace from STR."
+  (while (string-match "\\`\n+\\|^\\s-+\\|\\s-+$\\|\n+\\'"
+                       str)
+    (setq str (replace-match "" t t str)))
+  str)
+
 (let* ((path-prefix "PATH{")
-         (echo-env (concat "$SHELL --login -i -c 'echo " path-prefix "$PATH'"))
-         (path-from-shell
-          (substring (shell-command-to-string echo-env)
-                     (+ (length path-prefix)
-                        (string-match path-prefix
-                                      (shell-command-to-string echo-env))))))
-         (setenv "PATH" path-from-shell)
-         (setq exec-path (split-string path-from-shell path-separator)))
+       (echo-env (concat "$SHELL --login -i -c 'echo " path-prefix "$PATH'"))
+       (shell-output (shell-command-to-string echo-env))
+       (path-from-shell
+        (split-string
+         (substring shell-output
+                    (+ (length path-prefix)
+                       (string-match path-prefix
+                                     shell-output)))
+         path-separator)))
+  
+  (setq path-from-shell (delete-dups (append (mapcar 'chomp path-from-shell) exec-path)))
+  (setenv "PATH" (mapconcat 'identity path-from-shell path-separator))
+  (setq exec-path path-from-shell))
 
 (set-variable 'vc-path '("/usr/local/bin"))
 
