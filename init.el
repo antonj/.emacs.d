@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-02-15 12:22:31 antonj"
+;; Time-stamp: "2012-03-15 16:34:43 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -24,6 +24,11 @@
  el-get-sources
  '((:name color-theme
           :after (lambda () (require 'aj-color)))
+   (:name restclient
+          :type git
+          :features restclient
+          :url "https://github.com/pashky/restclient.el.git")
+   
    ;; (:name aj-package-23-compat
    ;;        :type http
    ;;        :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el"
