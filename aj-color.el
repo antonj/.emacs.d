@@ -1,12 +1,12 @@
 ;; Color and style
-;; Time-stamp: "2011-12-08 10:24:53 antonj"
+;; Time-stamp: "2012-03-14 13:08:39 antonj"
 
 (defun aj-font-mono ()
   (interactive)
   ;; (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
   ;;(set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
-  ;;(set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil)
-  (set-frame-font "-apple-Inconsolata-dz-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1" nil))
+  ;;(set-frame-font "-apple-Inconsolata-g-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1" nil))
+  (set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil))
 
 (defun aj-font-serif ()
   (interactive)
