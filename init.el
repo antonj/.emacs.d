@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-04-20 09:27:26 antonj"
+;; Time-stamp: "2012-04-20 18:53:46 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -8,12 +8,11 @@
 (require 'aj-generic)
 
 ;; El-get
-;; (url-retrieve
-;;  "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-;;  (lambda (s)
-;;    (end-of-buffer)
-;;    (eval-print-last-sexp)))
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
+(unless (require 'el-get nil t)
+  (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+                (lambda (s) (end-of-buffer) (eval-print-last-sexp))))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
@@ -23,9 +22,9 @@
 (setq
  el-get-sources
  '((:name color-theme
-          :after (progn (require 'aj-color)))
+          :after (lambda () (require 'aj-color)))
    (:name markdown-mode
-          :after (progn
+          :after (lambda ()
                    (add-hook 'markdown-mode-hook
                              (local-set-key "\M-n" 'just-one-space))))
 
@@ -50,9 +49,20 @@
           :type http
           :depends color-theme
           :url "http://jaderholm.com/color-themes/color-theme-wombat.el"
-          :post-init (progn
+          :post-init (lambda ()
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
+
+   ;; (:name color-theme-zenburn
+   ;;        :type emacsmirror
+   ;;        :pkgname "zenburn-theme"
+   ;;        :description "Just some alien fruit salad to keep you in the zone"
+   ;;        :post-init
+   ;;        (lambda ()
+   ;;          (autoload 'color-theme-zenburn "color-theme-zenburn"
+   ;;            "Just some alien fruit salad to keep you in the zone." t)
+   ;;          (defalias 'zenburn #'color-theme-zenburn)))
+
 
    ;; (:name hindent-minor-mode
    ;;        :type git
@@ -66,7 +76,7 @@
           :type svn
           :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
           :features yasnippet
-          :after (progn
+          :after (lambda ()
                    (yas/initialize)
                    (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
                    (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
@@ -94,23 +104,30 @@
    ;;                 (require 'aj-anything)
    ;;                 (require 'anything-config)))
    (:name multi-term
-          :after (progn (require 'aj-term)))
+          :after (lambda () (require 'aj-term)))
+
+
+   (:name rainbow-mode
+          :description "Displays color names with colored background."
+          :type git
+          :url "https://github.com/emacsmirror/rainbow-mode.git"
+          :features rainbow-mode)
 
    (:name git-emacs
           :type git
           :url "git@github.com:antonj/git-emacs.git"
-          :after (progn
+          :after (lambda ()
                    (require 'git-emacs)
                    (require 'git-status)))
-   (:name eclim
-          :post-init (progn
-                       ;;(require 'company-emacs-eclim)
-                       (require 'aj-eclim)))
+   ;; (:name eclim
+   ;;        :post-init (lambda ()
+   ;;                     ;;(require 'company-emacs-eclim)
+   ;;                     (require 'aj-eclim)))
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
    (:name autopair
-          :after (progn
+          :after (lambda ()
                    (autopair-global-mode t)
                    (setq autopair-autowrap t)))
    ;; (:name nxhtml
@@ -118,19 +135,20 @@
    ;;                 (load "~/.emacs.d/el-get/nxhtml/autostart.el")
    ;;                 (setq mumamo-background-colors nil)))
    (:name magit
-          :after (progn
+          :after (lambda ()
                    (message "magit after")
                    (add-hook 'magit-mode-hook
                              (lambda ()
                                (local-set-key "\M-1" 'beginning-of-buffer)
                                (local-set-key "\M-2" 'end-of-buffer)
                                (local-set-key [(c)] 'git-commit)))))
-   (:name auctex
-          :repo ("ELPA" . "http://tromey.com/elpa/")
-          :type elpa
-          :post-init (lambda ()
-                       (add-to-list 'load-path
-                                    (expand-file-name (concat el-get-dir "auctex")))))))
+   ;; (:name auctex
+   ;;        :repo ("ELPA" . "http://tromey.com/elpa/")
+   ;;        :type elpa
+   ;;        :post-init (lambda ()
+   ;;                     (add-to-list 'load-path
+   ;;                                  (expand-file-name (concat el-get-dir "auctex")))))
+   ))
 
 (setq
  aj:el-get-packages
@@ -144,13 +162,14 @@
    coffee-mode
    python-mode
    undo-tree
-   rainbow-mode
+   ;;rainbow-mode
    highlight-indentation
    scss-mode
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
-   color-theme-zenburn))
+   ;;color-theme-zenburn
+   ))
 
 (setq aj:el-get-packages
       (append
