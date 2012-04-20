@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-03-15 16:34:43 antonj"
+;; Time-stamp: "2012-04-20 09:27:26 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -23,12 +23,17 @@
 (setq
  el-get-sources
  '((:name color-theme
-          :after (lambda () (require 'aj-color)))
+          :after (progn (require 'aj-color)))
+   (:name markdown-mode
+          :after (progn
+                   (add-hook 'markdown-mode-hook
+                             (local-set-key "\M-n" 'just-one-space))))
+
    (:name restclient
           :type git
           :features restclient
           :url "https://github.com/pashky/restclient.el.git")
-   
+
    ;; (:name aj-package-23-compat
    ;;        :type http
    ;;        :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el"
@@ -45,7 +50,7 @@
           :type http
           :depends color-theme
           :url "http://jaderholm.com/color-themes/color-theme-wombat.el"
-          :post-init (lambda ()
+          :post-init (progn
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
 
@@ -61,7 +66,7 @@
           :type svn
           :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
           :features yasnippet
-          :after (lambda ()
+          :after (progn
                    (yas/initialize)
                    (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
                    (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
@@ -89,23 +94,23 @@
    ;;                 (require 'aj-anything)
    ;;                 (require 'anything-config)))
    (:name multi-term
-          :after (lambda() (require 'aj-term)))
+          :after (progn (require 'aj-term)))
 
    (:name git-emacs
           :type git
           :url "git@github.com:antonj/git-emacs.git"
-          :after (lambda()
+          :after (progn
                    (require 'git-emacs)
                    (require 'git-status)))
    (:name eclim
-          :post-init (lambda()
+          :post-init (progn
                        ;;(require 'company-emacs-eclim)
                        (require 'aj-eclim)))
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
    (:name autopair
-          :after (lambda()
+          :after (progn
                    (autopair-global-mode t)
                    (setq autopair-autowrap t)))
    ;; (:name nxhtml
@@ -113,7 +118,7 @@
    ;;                 (load "~/.emacs.d/el-get/nxhtml/autostart.el")
    ;;                 (setq mumamo-background-colors nil)))
    (:name magit
-          :after (lambda ()
+          :after (progn
                    (message "magit after")
                    (add-hook 'magit-mode-hook
                              (lambda ()
@@ -123,7 +128,7 @@
    (:name auctex
           :repo ("ELPA" . "http://tromey.com/elpa/")
           :type elpa
-          :post-init (lambda()
+          :post-init (lambda ()
                        (add-to-list 'load-path
                                     (expand-file-name (concat el-get-dir "auctex")))))))
 
@@ -135,7 +140,6 @@
    auto-complete
    psvn
    yaml-mode
-   markdown-mode
    ;;php-mode-improved
    coffee-mode
    python-mode
