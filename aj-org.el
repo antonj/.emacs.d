@@ -16,6 +16,7 @@
 (setq org-level-color-stars-only nil)
 (setq org-fontify-emphasized-text t)
 (setq org-log-done nil)
+(setq org-export-htmlize-output-type 'css)
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")

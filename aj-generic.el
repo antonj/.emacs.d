@@ -121,6 +121,8 @@
                            (concat "open " (buffer-file-name)))))
 (global-set-key "\C-x\C-m" 'execute-extended-command) ;; M-x
 (global-set-key "\C-c\C-m" 'execute-extended-command) ;; M-x
+(global-set-key "\C-xm" 'magit-status)
+(global-set-key "\C-cm" 'magit-status)
 (global-set-key "\C-xF" 'ido-find-file-other-window)
 (global-set-key "\C-xO" (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-<tab>") 'other-window)

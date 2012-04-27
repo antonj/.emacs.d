@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-04-20 18:53:46 antonj"
+;; Time-stamp: "2012-04-28 01:38:44 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -10,9 +10,11 @@
 ;; El-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(unless (require 'el-get nil t)
-  (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-                (lambda (s) (end-of-buffer) (eval-print-last-sexp))))
+(url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+              (lambda (s)
+                (let (el-get-master-branch) (end-of-buffer)
+                     (eval-print-last-sexp))))
+
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
@@ -21,30 +23,33 @@
 
 (setq
  el-get-sources
- '((:name color-theme
+ '(el-get
+   js2-mode
+   ruby-mode
+   auto-complete
+   psvn
+   yaml-mode
+   coffee-mode
+   python-mode
+   undo-tree
+   highlight-indentation
+   scss-mode
+   color-theme-solarized
+   color-theme-tango
+   color-theme-tango-2
+   ;;php-mode-improved
+   ;;color-theme-zenburn
+   
+   (:name color-theme
           :after (lambda () (require 'aj-color)))
    (:name markdown-mode
           :after (lambda ()
                    (add-hook 'markdown-mode-hook
                              (local-set-key "\M-n" 'just-one-space))))
-
    (:name restclient
           :type git
           :features restclient
           :url "https://github.com/pashky/restclient.el.git")
-
-   ;; (:name aj-package-23-compat
-   ;;        :type http
-   ;;        :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el"
-   ;;        :post-init (lambda() (setq package-archives
-   ;;                                   '(("ELPA" . "http://tromey.com/elpa/")
-   ;;                                     ("gnu" . "http://elpa.gnu.org/packages/")
-   ;;                                     ("marmalade" . "http://marmalade-repo.org/packages")))))
-   ;; (:name org-mode
-   ;;        :after (lambda () (require 'aj-org)))
-   ;; (:name emacs-jabber
-   ;;        :after (lambda ()
-   ;;                 (require 'aj-jabber)))        ;; switch-window
    (:name color-theme-wombat+
           :type http
           :depends color-theme
@@ -53,21 +58,6 @@
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
 
-   ;; (:name color-theme-zenburn
-   ;;        :type emacsmirror
-   ;;        :pkgname "zenburn-theme"
-   ;;        :description "Just some alien fruit salad to keep you in the zone"
-   ;;        :post-init
-   ;;        (lambda ()
-   ;;          (autoload 'color-theme-zenburn "color-theme-zenburn"
-   ;;            "Just some alien fruit salad to keep you in the zone." t)
-   ;;          (defalias 'zenburn #'color-theme-zenburn)))
-
-
-   ;; (:name hindent-minor-mode
-   ;;        :type git
-   ;;        :url "git://gist.github.com/1693964.git"
-   ;;        :features hindent-minor-mode)
    (:name rcirc-notify
           :type git
           :url "git@github.com:antonj/rcirc-notify-el.git"
@@ -99,30 +89,19 @@
                                                yas/snippet-end)))
                    (set-variable 'yas/wrap-around-region nil)
                    (yas/reload-all)))
-   ;; (:name anything
-   ;;        :after (lambda()
-   ;;                 (require 'aj-anything)
-   ;;                 (require 'anything-config)))
    (:name multi-term
           :after (lambda () (require 'aj-term)))
-
-
    (:name rainbow-mode
           :description "Displays color names with colored background."
           :type git
           :url "https://github.com/emacsmirror/rainbow-mode.git"
           :features rainbow-mode)
-
    (:name git-emacs
           :type git
           :url "git@github.com:antonj/git-emacs.git"
           :after (lambda ()
                    (require 'git-emacs)
                    (require 'git-status)))
-   ;; (:name eclim
-   ;;        :post-init (lambda ()
-   ;;                     ;;(require 'company-emacs-eclim)
-   ;;                     (require 'aj-eclim)))
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
@@ -130,10 +109,6 @@
           :after (lambda ()
                    (autopair-global-mode t)
                    (setq autopair-autowrap t)))
-   ;; (:name nxhtml
-   ;;        :after (lambda()
-   ;;                 (load "~/.emacs.d/el-get/nxhtml/autostart.el")
-   ;;                 (setq mumamo-background-colors nil)))
    (:name magit
           :after (lambda ()
                    (message "magit after")
@@ -142,6 +117,21 @@
                                (local-set-key "\M-1" 'beginning-of-buffer)
                                (local-set-key "\M-2" 'end-of-buffer)
                                (local-set-key [(c)] 'git-commit)))))
+   ;; (:name emacs-jabber
+   ;;        :after (lambda ()
+   ;;                 (require 'aj-jabber)))
+   ;; (:name anything
+   ;;        :after (lambda()
+   ;;                 (require 'aj-anything)
+   ;;                 (require 'anything-config)))
+   ;; (:name eclim
+   ;;        :post-init (lambda ()
+   ;;                     ;;(require 'company-emacs-eclim)
+   ;;                     (require 'aj-eclim)))
+   ;; (:name nxhtml
+   ;;        :after (lambda()
+   ;;                 (load "~/.emacs.d/el-get/nxhtml/autostart.el")
+   ;;                 (setq mumamo-background-colors nil)))
    ;; (:name auctex
    ;;        :repo ("ELPA" . "http://tromey.com/elpa/")
    ;;        :type elpa
@@ -150,34 +140,13 @@
    ;;                                  (expand-file-name (concat el-get-dir "auctex")))))
    ))
 
-(setq
- aj:el-get-packages
- '(el-get
-   js2-mode
-   ruby-mode
-   auto-complete
-   psvn
-   yaml-mode
-   ;;php-mode-improved
-   coffee-mode
-   python-mode
-   undo-tree
-   ;;rainbow-mode
-   highlight-indentation
-   scss-mode
-   color-theme-solarized
-   color-theme-tango
-   color-theme-tango-2
-   ;;color-theme-zenburn
-   ))
-
-(setq aj:el-get-packages
-      (append
-       aj:el-get-packages
-       (loop for src in el-get-sources collect (el-get-source-name src))))
-
 ;; install new packages and init already installed packages
-(el-get 'sync aj:el-get-packages)
+
+
+(setq el-get-packages
+      (mapcar 'el-get-source-name el-get-sources))
+
+(el-get 'sync el-get-packages)
 
 ;; Personal
 (autoload 'less-mode "less-mode")
