@@ -1,6 +1,6 @@
 ;; (require 'flymake)
 (defvar flymake-eclipse-batch-compiler-path
-  "/Applications/eclipse/plugins/org.eclipse.jdt.core_3.7.0.v_B61.jar")
+  "/Applications/eclipse/plugins/org.eclipse.jdt.core_3.7.3.v20120119-1537.jar")
 
 ;; TODO fix hardcoded 1.6
 (defvar flymake-java-version "1.6")
@@ -14,7 +14,7 @@
     (list "java" (list "-jar" flymake-eclipse-batch-compiler-path "-Xemacs" "-d" "none" 
                        "-warn:+over-ann,uselessTypeCheck";;,allJavadoc"
                        "-source" flymake-java-version "-target" flymake-java-version "-proceedOnError"
-                       "-classpath" (eclim/project-classpath)
+                       "-classpath" (car (eclim/project-classpath))
                        ;; "-log" "c:/temp/foo.xml"
                        local-file))))
 
