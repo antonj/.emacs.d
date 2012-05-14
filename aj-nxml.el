@@ -6,6 +6,8 @@
   '(add-to-list 'rng-schema-locating-files
                 "~/.emacs.d/resources/schemas/schemas.xml"))
 
+(setq mumamo-background-colors nil)
+
 (put 'http://whattf.org/datatype-draft
      'rng-dt-compile
      'whattf-dt-compile)
