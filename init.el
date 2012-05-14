@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-04-28 01:38:44 antonj"
+;; Time-stamp: "2012-05-14 09:02:56 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -10,11 +10,12 @@
 ;; El-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-              (lambda (s)
-                (let (el-get-master-branch) (end-of-buffer)
-                     (eval-print-last-sexp))))
-
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch) (end-of-buffer)
+          (eval-print-last-sexp)))))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
@@ -26,7 +27,6 @@
  '(el-get
    js2-mode
    ruby-mode
-   auto-complete
    psvn
    yaml-mode
    coffee-mode
@@ -37,13 +37,15 @@
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
+   protobuf-mode
+   paredit
    ;;php-mode-improved
    ;;color-theme-zenburn
    
    (:name color-theme
-          :after (lambda () (require 'aj-color)))
+          :after (progn (require 'aj-color)))
    (:name markdown-mode
-          :after (lambda ()
+          :after (progn
                    (add-hook 'markdown-mode-hook
                              (local-set-key "\M-n" 'just-one-space))))
    (:name restclient
@@ -54,7 +56,7 @@
           :type http
           :depends color-theme
           :url "http://jaderholm.com/color-themes/color-theme-wombat.el"
-          :post-init (lambda ()
+          :post-init (progn
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
 
@@ -66,7 +68,7 @@
           :type svn
           :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
           :features yasnippet
-          :after (lambda ()
+          :after (progn
                    (yas/initialize)
                    (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
                    (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
@@ -90,7 +92,7 @@
                    (set-variable 'yas/wrap-around-region nil)
                    (yas/reload-all)))
    (:name multi-term
-          :after (lambda () (require 'aj-term)))
+          :after (progn (require 'aj-term)))
    (:name rainbow-mode
           :description "Displays color names with colored background."
           :type git
@@ -99,35 +101,53 @@
    (:name git-emacs
           :type git
           :url "git@github.com:antonj/git-emacs.git"
-          :after (lambda ()
+          :after (progn
                    (require 'git-emacs)
                    (require 'git-status)))
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
-   (:name autopair
-          :after (lambda ()
-                   (autopair-global-mode t)
-                   (setq autopair-autowrap t)))
+   ;; (:name autopair
+   ;;        :after (progn
+   ;;                 (autopair-global-mode t)
+   ;;                 (setq autopair-autowrap t)
+   ;;                 (message "autopair after")
+   ;;                 ;; Fix sldb-mode http://code.google.com/p/autopair/issues/detail?id=32
+   ;;                 (add-hook 'sldb-mode-hook
+   ;;                           #'(lambda ()
+   ;;                               ;; for emacsen < 24
+   ;;                               (setq autopair-dont-activate t)
+   ;;                               ;; for emacsen >= 24
+   ;;                               (autopair-mode -1)))))
    (:name magit
-          :after (lambda ()
+          :after (progn
                    (message "magit after")
                    (add-hook 'magit-mode-hook
                              (lambda ()
                                (local-set-key "\M-1" 'beginning-of-buffer)
                                (local-set-key "\M-2" 'end-of-buffer)
                                (local-set-key [(c)] 'git-commit)))))
+   (:name eclim
+          :post-init (progn
+                       ;;(require 'company-emacs-eclim)
+                       (require 'aj-eclim)))
+   (:name auto-complete)
+   (:name ac-slime
+          :after (progn
+                   (add-hook 'slime-mode-hook 'set-up-slime-ac)))
+   (:name clojure-mode
+          :after (progn
+                   (add-hook 'slime-mode-hook
+                             '(lambda ()
+                                (local-set-key "\M-n" 'just-one-space)))))
+
    ;; (:name emacs-jabber
-   ;;        :after (lambda ()
+   ;;        :after (progn
    ;;                 (require 'aj-jabber)))
    ;; (:name anything
    ;;        :after (lambda()
    ;;                 (require 'aj-anything)
    ;;                 (require 'anything-config)))
-   ;; (:name eclim
-   ;;        :post-init (lambda ()
-   ;;                     ;;(require 'company-emacs-eclim)
-   ;;                     (require 'aj-eclim)))
    ;; (:name nxhtml
    ;;        :after (lambda()
    ;;                 (load "~/.emacs.d/el-get/nxhtml/autostart.el")
@@ -135,7 +155,7 @@
    ;; (:name auctex
    ;;        :repo ("ELPA" . "http://tromey.com/elpa/")
    ;;        :type elpa
-   ;;        :post-init (lambda ()
+   ;;        :post-init (progn
    ;;                     (add-to-list 'load-path
    ;;                                  (expand-file-name (concat el-get-dir "auctex")))))
    ))
