@@ -1,3 +1,8 @@
+;; (require 'ac-emacs-eclim-source)
+;; (add-hook 'eclim-mode-hook
+;;           (lambda ()
+;;             (add-to-list 'ac-sources 'ac-source-emacs-eclim)))
+
 (defun aj-eclim-ido-complete()
   (interactive)
   (let* ((completion-list (mapcar 'eclim--completion-candidate-doc (eclim/java-complete)))

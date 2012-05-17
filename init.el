@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-05-14 09:02:56 antonj"
+;; Time-stamp: "2012-05-14 13:22:47 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -33,6 +33,7 @@
    python-mode
    undo-tree
    highlight-indentation
+   highlight-parentheses
    scss-mode
    color-theme-solarized
    color-theme-tango

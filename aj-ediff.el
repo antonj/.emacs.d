@@ -1,5 +1,10 @@
 ;; Ediff
-(set-variable 'ediff-split-window-function 'split-window-horizontally)
+(custom-set-variables
+ ;; No whitespace
+ ;;'(ediff-diff-options "-w") 
+ '(ediff-split-window-function (quote split-window-horizontally))
+ ;; No extra frame
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
 
 ;; TODO: fix, this adds a lot of hooks without removing them!
 (add-hook 'ediff-before-setup-hook
