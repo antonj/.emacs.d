@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2012-03-14 22:17:24 antonj"
+;; Time-stamp: "2012-06-26 14:26:24 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -80,8 +80,17 @@
 ;; (set-variable 'skeleton-pair t)
 
 ;; Keybindings
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings)) ;; allows window move with shift-arrowkeys
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x C-<up>") 'windmove-up)
+
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x C-<down>") 'windmove-down)
+
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "C-x C-<right>") 'windmove-right)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+(global-set-key (kbd "C-x C-<left>") 'windmove-left)
+
 (global-set-key "\M-1" 'beginning-of-buffer)
 (global-set-key "\M-2" 'end-of-buffer)
 (global-set-key (kbd "C-M-SPC") 'anything)
@@ -134,6 +143,7 @@
 (global-set-key (kbd "C-8") 'comment-region)
 (global-set-key (kbd "C-9") 'uncomment-region)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+
 (define-key isearch-mode-map (kbd "C-o")
   (lambda ()
     (interactive)
@@ -263,16 +273,16 @@
 (add-hook 'before-save-hook 'time-stamp) ;; insert time-stamp before saves
 
 ;; From sean @ http://emacsblog.org/2007/10/07/declaring-emacs-bankruptcy/
-(add-hook 'after-save-hook 'aj-recompile-el)
-(defun aj-recompile-el ()
-  (interactive)
-  (when (and buffer-file-name
-             (string-match "/.*\\.el$"  buffer-file-name)
-             (file-newer-than-file-p buffer-file-name
-                                     (concat buffer-file-name "c"))
-             (y-or-n-p (format "byte-compile %s? "
-                               (file-name-nondirectory (buffer-file-name)))))
-    (byte-compile-file buffer-file-name)))
+;; (add-hook 'after-save-hook 'aj-recompile-el)
+;; (defun aj-recompile-el ()
+;;   (interactive)
+;;   (when (and buffer-file-name
+;;              (string-match "/.*\\.el$"  buffer-file-name)
+;;              (file-newer-than-file-p buffer-file-name
+;;                                      (concat buffer-file-name "c"))
+;;              (y-or-n-p (format "byte-compile %s? "
+;;                                (file-name-nondirectory (buffer-file-name)))))
+;;     (byte-compile-file buffer-file-name)))
 
 ;; Log-edit
 (add-hook 'log-edit-mode-hook 'flyspell-mode)

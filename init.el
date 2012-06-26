@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-05-14 13:22:47 antonj"
+;; Time-stamp: "2012-06-26 14:32:50 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -30,10 +30,9 @@
    psvn
    yaml-mode
    coffee-mode
-   python-mode
+   ;;python-mode
    undo-tree
    highlight-indentation
-   highlight-parentheses
    scss-mode
    color-theme-solarized
    color-theme-tango
@@ -42,13 +41,25 @@
    paredit
    ;;php-mode-improved
    ;;color-theme-zenburn
+   ;; (:name powerline
+   ;;        :type git
+   ;;        :features powerline
+   ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
    
+   (:name highlight-parentheses
+          :after (progn
+                   (highlight-parentheses-mode)))
    (:name color-theme
           :after (progn (require 'aj-color)))
    (:name markdown-mode
+          :after (progn (require 'aj-markdown)))
+   (:name framemove
+          :type http
+          :features framemove
+          :url "http://www.emacswiki.org/emacs/download/framemove.el"
           :after (progn
-                   (add-hook 'markdown-mode-hook
-                             (local-set-key "\M-n" 'just-one-space))))
+                   (windmove-default-keybindings)
+                   (setq framemove-hook-into-windmove t)))
    (:name restclient
           :type git
           :features restclient
@@ -60,7 +71,14 @@
           :post-init (progn
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
-
+   (:name slime
+          :description "Superior Lisp Interaction Mode for Emacs"
+          :type github
+          :features slime-autoloads
+          :pkgname "nablaone/slime"
+          :load-path ("." "contrib")
+          :compile (".")
+          :post-init (slime-setup))
    (:name rcirc-notify
           :type git
           :url "git@github.com:antonj/rcirc-notify-el.git"
@@ -123,11 +141,7 @@
    (:name magit
           :after (progn
                    (message "magit after")
-                   (add-hook 'magit-mode-hook
-                             (lambda ()
-                               (local-set-key "\M-1" 'beginning-of-buffer)
-                               (local-set-key "\M-2" 'end-of-buffer)
-                               (local-set-key [(c)] 'git-commit)))))
+                   (require 'aj-magit)))
    (:name eclim
           :post-init (progn
                        ;;(require 'company-emacs-eclim)
@@ -206,6 +220,8 @@
 
 ;; Personal customizations
 
+(require 'aj-magit)
+(require 'aj-markdown)
 (require 'aj-org)
 (require 'aj-mac)
 (require 'aj-ibuffer)

@@ -3,6 +3,9 @@
 ;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 ;; (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
+
+
+
 (add-hook 'python-mode-hook
           (lambda ()
             (global-set-key "\C-o" 'open-line)
@@ -11,8 +14,8 @@
             (setq outline-regexp "def\\|class ")))
 
 ;; Eldoc mode
-(add-hook 'python-mode-hook
-          '(lambda () (eldoc-mode 1)) t)
+;; (add-hook 'python-mode-hook
+;;           '(lambda () (eldoc-mode 1)) t)
 
 ;; Ipython
 ;; (setq ipython-command "/usr/local/bin/ipython")
