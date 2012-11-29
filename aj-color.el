@@ -1,12 +1,12 @@
 ;; Color and style
-;; Time-stamp: "2012-03-14 13:08:39 antonj"
+;; Time-stamp: "2012-11-07 09:28:27 antonj"
 
 (defun aj-font-mono ()
   (interactive)
   ;; (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
   ;;(set-frame-font "-apple-menlo-medium-r-normal--12-0-72-72-m-0-iso10646-1")
   ;;(set-frame-font "-apple-Inconsolata-g-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1" nil))
-  (set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--11-0-72-72-m-0-iso10646-1" nil))
+  (set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--14-0-72-72-m-0-iso10646-1" nil))
 
 (defun aj-font-serif ()
   (interactive)
@@ -109,16 +109,16 @@
 (global-set-key (kbd "<f7>") 'toggle-line-spacing)
 
 ;; From http://sachachua.com/wp/2006/09/15/emacs-changingn-the-font-size-on-the-fly/
-(defun sacha/increase-font-size ()
-  (interactive)
-  (set-face-attribute 'default nil :height (ceiling (* 1.10
-                                  (face-attribute 'default :height)))))
-(defun sacha/decrease-font-size ()
-  (interactive)
-  (set-face-attribute 'default nil :height (floor (* 0.9
-                                  (face-attribute 'default :height)))))
-(global-set-key (kbd "C-+") 'sacha/increase-font-size)
-(global-set-key (kbd "C--") 'sacha/decrease-font-size)
+;; (defun sacha/increase-font-size ()
+;;   (interactive)
+;;   (set-face-attribute 'default nil :height (ceiling (* 1.10
+;;                                   (face-attribute 'default :height)))))
+;; (defun sacha/decrease-font-size ()
+;;   (interactive)
+;;   (set-face-attribute 'default nil :height (floor (* 0.9
+;;                                   (face-attribute 'default :height)))))
+;; (global-set-key (kbd "C-+") 'sacha/increase-font-size)
+;; (global-set-key (kbd "C--") 'sacha/decrease-font-size)
 
 
 ;; From http://www.emacswiki.org/emacs/HexColour
