@@ -49,6 +49,20 @@
    (:name ensime
           :load-path ("./dist_2.9.2/elisp"))
    
+   (:name scala-mode
+          :after (progn
+                   (add-hook 'scala-mode-hook
+                             '(lambda()
+                                (local-set-key (kbd "C-<tab>") 'other-window)
+                                (local-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))
+                                (local-set-key "\M-n" 'just-one-space)))))
+   (:name ensime
+          :load-path ("./dist_2.9.2/elisp")
+          :after (progn
+                   (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
+                   (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
+                   (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
+   
    (:name highlight-parentheses
           :after (progn
                    (highlight-parentheses-mode)))
