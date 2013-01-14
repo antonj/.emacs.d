@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-11-14 09:46:34 antonj"
+;; Time-stamp: "2013-01-14 11:36:18 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -68,10 +68,10 @@
                    (highlight-parentheses-mode)))
    (:name multiple-cursors
           :after (progn
-                   (global-set-key (kbd "C-S-c C-S-v") 'mc/mark-next-like-this)
+                   (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
+                   (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-this)
                    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-                   (global-set-key (kbd "C-S-c C-S-x") 'mc/mark-previous-like-this)
-                   (global-set-key (kbd "C-S-c C-S-z") 'mc/mark-all-like-this)))
+                   (global-set-key (kbd "C-S-c C-S-v") 'mc/mark-all-like-this)))
    (:name color-theme
           :after (progn (require 'aj-color)))
    (:name markdown-mode
