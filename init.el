@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-01-06 00:02:38 antonj"
+;; Time-stamp: "2013-01-14 11:36:18 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -46,7 +46,8 @@
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
 
-   (:name scala-mode2)
+   (:name ensime
+          :load-path ("./dist_2.9.2/elisp"))
    
    (:name ensime
           :load-path ("./dist_2.10.0-RC3/elisp")
@@ -58,6 +59,12 @@
    (:name highlight-parentheses
           :after (progn
                    (highlight-parentheses-mode)))
+   (:name multiple-cursors
+          :after (progn
+                   (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
+                   (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-this)
+                   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+                   (global-set-key (kbd "C-S-c C-S-v") 'mc/mark-all-like-this)))
    (:name color-theme
           :after (progn (require 'aj-color)))
    (:name markdown-mode
@@ -229,7 +236,7 @@
 
 ;; Personal customizations
 
-(require 'aj-magit)
+;; (require 'aj-magit)
 (require 'aj-markdown)
 (require 'aj-org)
 (require 'aj-mac)
