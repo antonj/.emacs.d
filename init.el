@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2012-06-26 14:32:50 antonj"
+;; Time-stamp: "2013-01-06 00:02:38 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -45,16 +45,11 @@
    ;;        :type git
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
+
+   (:name scala-mode2)
    
-   (:name scala-mode
-          :after (progn
-                   (add-hook 'scala-mode-hook
-                             '(lambda()
-                                (local-set-key (kbd "C-<tab>") 'other-window)
-                                (local-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))
-                                (local-set-key "\M-n" 'just-one-space)))))
    (:name ensime
-          :load-path ("./dist_2.9.2/elisp")
+          :load-path ("./dist_2.10.0-RC3/elisp")
           :after (progn
                    (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
                    (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
