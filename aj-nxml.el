@@ -14,6 +14,7 @@
 (defun whattf-dt-compile (name params) (list t 'identity))
 
 (defun aj-nxml-mode-hook ()
+  (local-set-key (kbd "C-<return>") 'complete-symbol)
   (if (string= "build.xml" (buffer-name))
       (local-set-key (kbd "C-<return>") 'jde-build))
   (toggle-truncate-lines 1))

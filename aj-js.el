@@ -61,9 +61,9 @@
           c-comment-prefix-regexp))
   ;; end bug with my-indent-sexp
   
-  (setq espresso-indent-level 4
+  (setq espresso-indent-level 2
         indent-tabs-mode nil
-        c-basic-offset 4)
+        c-basic-offset 2)
   (c-toggle-auto-state 0)
   (c-toggle-hungry-state 1)
   (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
