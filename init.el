@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-01-14 11:36:18 antonj"
+;; Time-stamp: "2013-03-02 15:17:17 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -46,8 +46,7 @@
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
 
-   (:name ensime
-          :load-path ("./dist_2.9.2/elisp"))
+   (:name scala-mode2)
    
    (:name ensime
           :load-path ("./dist_2.10.0-RC3/elisp")
