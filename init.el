@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-03-02 15:17:17 antonj"
+;; Time-stamp: "2013-03-02 15:21:05 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -197,6 +197,9 @@
       (mapcar 'el-get-source-name el-get-sources))
 
 (el-get 'sync el-get-packages)
+
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; Personal
 (autoload 'less-mode "less-mode")
