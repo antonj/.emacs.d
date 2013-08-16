@@ -6,6 +6,8 @@
  '(Man-notify-method (quote pushy))
  '(cursor-type (quote box) t)
  '(ecb-options-version "2.40")
+ '(ediff-split-window-function (quote split-window-horizontally))
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(git-state-modeline-decoration (quote git-state-decoration-large-dot))
  '(jabber-chat-buffer-show-avatar nil)
  '(jabber-show-offline-contacts nil)
@@ -15,6 +17,7 @@
  '(org-agenda-files (quote ("~/Documents/org/notes.org")))
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
+ '(safe-local-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t))))
  '(send-mail-function (quote mailclient-send-it)))
 
  

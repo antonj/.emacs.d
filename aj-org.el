@@ -19,11 +19,12 @@
 (setq org-export-htmlize-output-type 'css)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(d)")
+      '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
         (sequence "QUESTION(q)" "|" "ANSWERED(s)")))
 
 (setq org-todo-keyword-faces
-      '(("STARTED" . org-upcoming-deadline)))
+      '(("STARTED" . org-upcoming-deadline)
+        ("WAITING" . org-upcoming-deadline)))
 
 ;; Hide leading stars face
 (setq org-hide-leading-stars nil)
@@ -47,8 +48,9 @@
 
 ;; (set-variable 'org-export-html-style-include-default nil)
 
-;; (set-variable 'org-export-html-style
-;;               "<link rel=\"stylesheet\" type=\"text/css\" href=\"/Users/anton/.emacs.d/org-mode.css\" />")
+(setq org-export-html-postamble nil)
+(set-variable 'org-export-html-style
+              "<link rel=\"stylesheet\" type=\"text/css\" href=\"/Users/antonj/.emacs.d/resources/monterosa-org-css/org-mode.css\" />")
 
 ;; (defun process-file (file)
 ;;    "Read the contents of a file into a temp buffer and then do

@@ -10,3 +10,6 @@
 [submodule "lisp-personal/highlight-indentation"]
 	path = lisp-personal/highlight-indentation
 	url = git@github.com:antonj/Highlight-Indentation-for-Emacs.git
+[submodule "resources/monterosa-org-css"]
+	path = resources/monterosa-org-css
+	url = https://gist.github.com/5222561.git

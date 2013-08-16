@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-02-19 14:36:18 antonj"
+;; Time-stamp: "2013-04-22 09:44:32 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -46,9 +46,6 @@
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
 
-   (:name ensime
-          :load-path ("./dist_2.9.2/elisp"))
-   
    (:name scala-mode
           :after (progn
                    (add-hook 'scala-mode-hook
@@ -56,12 +53,12 @@
                                 (local-set-key (kbd "C-<tab>") 'other-window)
                                 (local-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))
                                 (local-set-key "\M-n" 'just-one-space)))))
-   (:name ensime
-          :load-path ("./dist_2.9.2/elisp")
-          :after (progn
-                   (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
-                   (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
-                   (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
+   ;; (:name ensime
+   ;;        :load-path ("./dist_2.9.2/elisp")
+   ;;        :after (progn
+   ;;                 (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
+   ;;                 (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
+   ;;                 (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
    
    (:name highlight-parentheses
           :after (progn
@@ -165,10 +162,10 @@
           :after (progn
                    (message "magit after")
                    (require 'aj-magit)))
-   (:name eclim
-          :post-init (progn
-                       ;;(require 'company-emacs-eclim)
-                       (require 'aj-eclim)))
+   ;; (:name eclim
+   ;;        :post-init (progn
+   ;;                     ;;(require 'company-emacs-eclim)
+   ;;                     (require 'aj-eclim)))
    (:name auto-complete)
    (:name ac-slime
           :after (progn

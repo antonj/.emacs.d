@@ -1,5 +1,5 @@
 ;; CSS
-;; Time-stamp: "2012-05-15 10:44:37 antonj"
+;; Time-stamp: "2013-08-16 13:10:46 antonj"
 
 (defun aj-css-mode-hook()
   (setq css-indent-offset 3)
@@ -8,6 +8,8 @@
 (add-hook 'css-mode-hook 'aj-css-mode-hook)
 
 (setq scss-sass-options '("--style" "compressed"))
+(set-variable 'scss-compile-at-save nil)
+
 (defun aj-scss-mode-hook()
   (setq cssm-indent-function #'cssm-c-style-indenter)
   ;; (setq scss-sass-options '("--style" "compressed"))
