@@ -12,6 +12,7 @@
 (add-hook 'org-mode-hook 'aj-org-mode-hook)
 
 ;; Custom
+(setq org-adapt-indentation nil)
 (setq org-startup-folded t)
 (setq org-level-color-stars-only nil)
 (setq org-fontify-emphasized-text t)
