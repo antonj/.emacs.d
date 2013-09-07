@@ -20,7 +20,7 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
 
-(setq el-get-default-process-sync t)
+;; (setq el-get-default-process-sync t)
 
 (setq
  el-get-sources
@@ -33,7 +33,6 @@
    ;;python-mode
    undo-tree
    highlight-indentation
-   scss-mode
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
@@ -48,8 +47,17 @@
 
    (:name scala-mode2)
    
+   (:name scss-mode :after (progn
+                             (setq scss-compile-at-save t)
+                             (setq scss-sass-options ())
+                             (defun aj-scss-mode-hook()
+                               (setq cssm-indent-function #'cssm-c-style-indenter)
+                               ;; (setq scss-sass-options '("--style" "compressed"))
+                               (rainbow-mode t))
+                             (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
+   
    (:name ensime
-          :load-path ("./dist_2.10.0-RC3/elisp")
+          :load-path ("./dist/elisp")
           :after (progn
                    (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
                    (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
@@ -170,7 +178,9 @@
                    (add-hook 'slime-mode-hook
                              '(lambda ()
                                 (local-set-key "\M-n" 'just-one-space)))))
-
+   ;; (:name skewer-mode
+   ;;        :repo ("ELPA" . "http://melpa.milkbox.net/packages/")
+   ;;        :type elpa)
    ;; (:name emacs-jabber
    ;;        :after (progn
    ;;                 (require 'aj-jabber)))
@@ -196,10 +206,10 @@
 (setq el-get-packages
       (mapcar 'el-get-source-name el-get-sources))
 
-(el-get 'sync el-get-packages)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(el-get 'sync el-get-packages)
 
 ;; Personal
 (autoload 'less-mode "less-mode")
@@ -237,6 +247,9 @@
 ;; (require 'aj-java)
 
 ;; Personal customizations
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile" . ruby-mode))
+
 
 ;; (require 'aj-magit)
 (require 'aj-markdown)
