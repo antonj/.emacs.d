@@ -145,6 +145,13 @@
           :after (progn
                    (require 'git-emacs)
                    (require 'git-status)))
+   (:name color-theme-waher
+          :type github
+          :depends color-theme
+          :pkgname "jasonm23/emacs-waher-theme"
+          :prepare (autoload 'color-theme-waher "waher-theme"
+                     "color-theme: waher-theme" t))
+   
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
