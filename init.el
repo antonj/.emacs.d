@@ -1,5 +1,4 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-03-02 15:21:05 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -165,10 +164,10 @@
           :after (progn
                    (message "magit after")
                    (require 'aj-magit)))
-   (:name eclim
-          :post-init (progn
-                       ;;(require 'company-emacs-eclim)
-                       (require 'aj-eclim)))
+   ;; (:name eclim
+   ;;        :post-init (progn
+   ;;                     ;;(require 'company-emacs-eclim)
+   ;;                     (require 'aj-eclim)))
    (:name auto-complete)
    (:name ac-slime
           :after (progn
