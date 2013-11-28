@@ -1,5 +1,5 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-04-22 09:44:32 antonj"
+;; Time-stamp: "2013-09-04 18:14:50 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -267,6 +267,7 @@
 (require 'aj-css)
 (require 'aj-dired)
 (require 'aj-python)
+(require 'aj-ruby)
 
 ;; Other customizations
 ;; (load "/Applications/Emacs.app/Contents/Resources/site-lisp/nxml-mode/rng-auto.el")
