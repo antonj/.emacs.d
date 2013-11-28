@@ -1,5 +1,4 @@
 ;; Anton Johansson
-;; Time-stamp: "2013-09-04 18:14:50 antonj"
 
 ;; Load paths
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -20,7 +19,7 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
 
-(setq el-get-default-process-sync t)
+;; (setq el-get-default-process-sync t)
 
 (setq
  el-get-sources
@@ -33,7 +32,6 @@
    ;;python-mode
    undo-tree
    highlight-indentation
-   scss-mode
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
@@ -46,19 +44,23 @@
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
 
-   (:name scala-mode
+   (:name scala-mode2)
+   
+   (:name scss-mode :after (progn
+                             (setq scss-compile-at-save t)
+                             (setq scss-sass-options ())
+                             (defun aj-scss-mode-hook()
+                               (setq cssm-indent-function #'cssm-c-style-indenter)
+                               ;; (setq scss-sass-options '("--style" "compressed"))
+                               (rainbow-mode t))
+                             (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
+   
+   (:name ensime
+          :load-path ("./dist/elisp")
           :after (progn
-                   (add-hook 'scala-mode-hook
-                             '(lambda()
-                                (local-set-key (kbd "C-<tab>") 'other-window)
-                                (local-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))
-                                (local-set-key "\M-n" 'just-one-space)))))
-   ;; (:name ensime
-   ;;        :load-path ("./dist_2.9.2/elisp")
-   ;;        :after (progn
-   ;;                 (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
-   ;;                 (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
-   ;;                 (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
+                   (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
+                   (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
+                   (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
    
    (:name highlight-parentheses
           :after (progn
@@ -143,6 +145,13 @@
           :after (progn
                    (require 'git-emacs)
                    (require 'git-status)))
+   (:name color-theme-waher
+          :type github
+          :depends color-theme
+          :pkgname "jasonm23/emacs-waher-theme"
+          :prepare (autoload 'color-theme-waher "waher-theme"
+                     "color-theme: waher-theme" t))
+   
    (:name espresso-mode
           :type http
           :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
@@ -175,7 +184,9 @@
                    (add-hook 'slime-mode-hook
                              '(lambda ()
                                 (local-set-key "\M-n" 'just-one-space)))))
-
+   ;; (:name skewer-mode
+   ;;        :repo ("ELPA" . "http://melpa.milkbox.net/packages/")
+   ;;        :type elpa)
    ;; (:name emacs-jabber
    ;;        :after (progn
    ;;                 (require 'aj-jabber)))
@@ -201,10 +212,10 @@
 (setq el-get-packages
       (mapcar 'el-get-source-name el-get-sources))
 
-(el-get 'sync el-get-packages)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(el-get 'sync el-get-packages)
 
 ;; Personal
 (autoload 'less-mode "less-mode")
@@ -242,6 +253,9 @@
 ;; (require 'aj-java)
 
 ;; Personal customizations
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile" . ruby-mode))
+
 
 ;; (require 'aj-magit)
 (require 'aj-markdown)
