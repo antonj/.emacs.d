@@ -4,6 +4,7 @@
 ;;              '("\\.js" . speedbar-parse-c-or-c++tag))
 
 (setq js2-mirror-mode nil)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (defun aj-js-compr-buffer()
   (interactive)
@@ -50,7 +51,7 @@
 (defun my-js2-mode-hook ()
   ;; (js2-leave-mirror-mode)
   ;; (set (make-local-variable 'forward-sexp-function) #'js2-mode-forward-sexp)
-  (kill-local-variable 'forward-sexp-function)
+  ;; (kill-local-variable 'forward-sexp-function)
   ;; (require 'espresso)
 
   ;; ;; fix bug with my-indent-sexp
@@ -75,15 +76,16 @@
   ;;      (save-excursion
   ;;        (insert " ]----- */"))
   ;;      ))
-  ;; (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
-  ;; (define-key js2-mode-map [(return)] 'newline-and-indent)
-  ;; (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
-  ;; (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
-  ;; (define-key js2-mode-map [(meta j)] 'hippie-expand)
+  (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
+  (define-key js2-mode-map [(return)] 'newline-and-indent)
+  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+  (define-key js2-mode-map [(meta j)] 'hippie-expand)
   ;; (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
   ;; (if (featurep 'js2-highlight-vars)
   ;;     (js2-highlight-vars-mode))
-  ;; (message "My JS2 hook")
+  ;; (message "My JS2 hook")p
+  (set-variable 'js2-basic-offset 2)
   )
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
