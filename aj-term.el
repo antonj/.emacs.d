@@ -10,8 +10,16 @@
 ;;       ["black" "red4" "green4" "yellow4"
 ;;        "blue3" "magenta4" "cyan4" "white"])
 
+(defun clear-shell ()
+  (interactive)
+  (let ((old-max comint-buffer-maximum-size))
+    (setq comint-buffer-maximum-size 0)
+    (comint-truncate-buffer)
+    (setq comint-buffer-maximum-size old-max))) 
+
 (defun aj-shell-hook()
   (toggle-truncate-lines 1)
+  (local-set-key (kbd "C-c C-k") 'clear-shell)
   (ansi-color-for-comint-mode-on))
 
 (add-hook 'shell-mode-hook 'aj-shell-hook)
