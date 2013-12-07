@@ -84,8 +84,9 @@
   ;; (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
   ;; (if (featurep 'js2-highlight-vars)
   ;;     (js2-highlight-vars-mode))
-  ;; (message "My JS2 hook")p
-  (set-variable 'js2-basic-offset 2)
+  
+  ;; (message "My JS2 hook")
+  (setq js2-basic-offset 2)
   )
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)

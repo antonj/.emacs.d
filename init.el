@@ -55,12 +55,12 @@
                                (rainbow-mode t))
                              (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
    
-   (:name ensime
-          :load-path ("./dist/elisp")
-          :after (progn
-                   (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
-                   (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
-                   (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
+   ;; (:name ensime
+   ;;        :load-path ("./dist/elisp")
+   ;;        :after (progn
+   ;;                 (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
+   ;;                 (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
+   ;;                 (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
    
    (:name highlight-parentheses
           :after (progn
@@ -281,6 +281,7 @@
 (require 'aj-css)
 (require 'aj-dired)
 (require 'aj-python)
+(require 'aj-ruby)
 
 ;; Other customizations
 ;; (load "/Applications/Emacs.app/Contents/Resources/site-lisp/nxml-mode/rng-auto.el")
