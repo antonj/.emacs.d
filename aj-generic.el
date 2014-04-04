@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2012-06-26 14:26:24 antonj"
+;; Time-stamp: "2014-03-20 10:35:23 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -48,6 +48,7 @@
     (setq str (replace-match "" t t str)))
   str)
 
+(cd "~/") ;; Make sure we are in home dir
 (let* ((path-prefix "PATH{")
        (echo-env (concat "$SHELL --login -i -c 'echo " path-prefix "$PATH'"))
        (shell-output (shell-command-to-string echo-env))
