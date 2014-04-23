@@ -26,6 +26,7 @@
      (fringe ((t (:background "#404446"))))
      
      (highlight ((t (:background "grey10"))))
+     (secondary-selection ((t (:background "grey15"))))
      
      
      (mode-line ((t (:foreground "#eeeeec" :background "#555753"))))
