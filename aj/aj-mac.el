@@ -2,6 +2,7 @@
 (setq trash-directory (expand-file-name "~/.Trash"))
 
 (setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
 ;;(setq mac-option-modifier 'alt)
 
 (defun mac-toggle-max-window ()
