@@ -1,4 +1,5 @@
 <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+   <uri resource="../../../Documents/monterosa-http/di-mob-web/prototype/templates/sok.html" typeId="XHTML5"/>
    <uri pattern="*.html" typeId="XHTML5"/>
    <uri pattern="*.xhtml" typeId="XHTML5"/>
    <namespace ns="http://www.w3.org/1999/xhtml" typeId="XHTML5"/>

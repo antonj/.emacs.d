@@ -4,11 +4,14 @@
 (setq mc/cmds-to-run-for-all
       '(
         backward-sexp
+        beginning-of-buffer
         c-electric-delete-forward
         c-electric-paren
         c-electric-semi&comma
         c-indent-line-or-region
         comment-region
+        end-of-buffer
+        end-of-visual-line
         extend-selection
         fill-paragraph
         forward-sexp
@@ -28,6 +31,7 @@
         org-delete-char
         org-return-indent
         org-self-insert-command
+        org-shiftleft
         org-shiftright
         python-backspace
         python-electric-colon
@@ -43,6 +47,7 @@
         isearch-printing-char
         js2-mode-show-node
         magit-status
+        markdown-exdent-or-delete
         mouse-set-region
         wdired-finish-edit
         ))

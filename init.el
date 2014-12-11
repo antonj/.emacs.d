@@ -1,7 +1,7 @@
 ;; Anton Johansson
 
 ;; Load paths
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
 (require 'cl)
 (require 'aj-generic)
@@ -105,18 +105,15 @@
           :type git
           :url "git@github.com:antonj/rcirc-notify-el.git"
           :features rcirc-notify)
-   (:name aj-yasnippet
-          :type svn
-          :url "http://yasnippet.googlecode.com/svn/tags/REL_0_6_1c/"
-          :features yasnippet
+   (:name yasnippet
           :after (progn
-                   (yas/initialize)
-                   (add-to-list 'yas/root-directory (concat el-get-dir "aj-yasnippet/snippets"))
+                   (yas-global-mode 1)
+                   (add-to-list 'yas/root-directory (concat el-get-dir "/aj-yasnippet/snippets"))
                    (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
 
                    ;; Map `yas/load-directory' to every element
                    ;; (mapc 'yas/load-directory yas/root-directory)
-
+                   
                    (setq yas/prompt-functions '(yas/dropdown-prompt
                                                 yas/ido-prompt
                                                 yas/completing-prompt
@@ -306,7 +303,7 @@
                    (insert-html5-template)
                    (message "Inserted xhtml template")))))
 
-(setq custom-file "~/.emacs.d/init-custom.el")
+(setq custom-file "~/.emacs.d/aj/init-custom.el")
 (load custom-file 'noerror)
 
 ;; Turn of debug
