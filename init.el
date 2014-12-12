@@ -31,7 +31,6 @@
    coffee-mode
    ;;python-mode
    undo-tree
-   highlight-indentation
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
@@ -44,6 +43,10 @@
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
 
+   (:name highlight-indentation
+          :after (progn
+                   (setq highlight-indentation-offset 2)))
+   
    (:name scala-mode2)
    
    (:name scss-mode :after (progn
