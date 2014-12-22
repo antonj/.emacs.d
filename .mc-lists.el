@@ -10,6 +10,7 @@
         c-electric-semi&comma
         c-indent-line-or-region
         comment-region
+        electric-newline-and-maybe-indent
         end-of-buffer
         end-of-visual-line
         extend-selection
@@ -37,6 +38,7 @@
         python-electric-colon
         save-some-buffers
         shell-command
+        yas-expand
         ))
 
 (setq mc/cmds-to-run-once

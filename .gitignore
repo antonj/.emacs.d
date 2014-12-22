@@ -16,3 +16,4 @@ resources/schemas/html5/
 %backup%~
 !lisp/org-mode
 !lisp/git-emacs
+.DS_Store

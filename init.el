@@ -110,9 +110,8 @@
           :features rcirc-notify)
    (:name yasnippet
           :after (progn
+                   (setq yas-snippet-dirs '("~/.emacs.d/aj-snippets"))
                    (yas-global-mode 1)
-                   (add-to-list 'yas/root-directory (concat el-get-dir "/aj-yasnippet/snippets"))
-                   (add-to-list 'yas/root-directory  "~/.emacs.d/aj-snippets")
 
                    ;; Map `yas/load-directory' to every element
                    ;; (mapc 'yas/load-directory yas/root-directory)
@@ -125,6 +124,9 @@
 
                    ;; (add-to-list 'yas/extra-mode-hooks
                    ;;              'nxml-mode-hook)
+                   (define-key yas-minor-mode-map [(tab)] nil)
+                   (define-key yas-minor-mode-map (kbd "TAB") nil)
+
                    (set-variable 'yas/trigger-key "")
                    (add-hook 'yas/after-exit-snippet-hook
                              '(lambda ()

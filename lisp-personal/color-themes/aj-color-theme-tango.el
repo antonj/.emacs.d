@@ -8,7 +8,7 @@
       (background-mode . dark)
       (border-color . "#888a85")
       (cursor-color . "#fce94f")
-      (foreground-color . "#eeeeec")
+      (foreground-color . "#ccccca")
       (mouse-color . "#8ae234"))
      
      ((help-highlight-face . underline)
