@@ -50,7 +50,7 @@
    (:name scala-mode2)
    
    (:name scss-mode :after (progn
-                             (setq scss-compile-at-save t)
+                             (setq scss-compile-at-save nil)
                              (setq scss-sass-options ())
                              (defun aj-scss-mode-hook()
                                (setq cssm-indent-function #'cssm-c-style-indenter)
@@ -220,6 +220,11 @@
 (el-get 'sync el-get-packages)
 
 ;; Personal
+
+(add-hook 'sws-mode-hook
+          '(lambda ()
+             (highlight-indentation-mode)))
+
 (autoload 'less-mode "less-mode")
 (add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))
 
