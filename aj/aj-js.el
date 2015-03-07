@@ -49,45 +49,23 @@
       (when (> offset 0) (forward-char offset)))))
 
 (defun my-js2-mode-hook ()
-  ;; (js2-leave-mirror-mode)
-  ;; (set (make-local-variable 'forward-sexp-function) #'js2-mode-forward-sexp)
-  ;; (kill-local-variable 'forward-sexp-function)
-  ;; (require 'espresso)
-
-  ;; ;; fix bug with my-indent-sexp
-  ;; (setq c-current-comment-prefix
-  ;;       (if (listp c-comment-prefix-regexp)
-  ;;           (cdr-safe (or (assoc major-mode c-comment-prefix-regexp)
-  ;;                         (assoc 'other c-comment-prefix-regexp)))
-  ;;         c-comment-prefix-regexp))
-  ;; ;; end bug with my-indent-sexp
-  
-  ;; (setq espresso-indent-level 2
-  ;;       indent-tabs-mode nil
-  ;;       c-basic-offset 2)
-  ;; (c-toggle-auto-state 0)
-  ;; (c-toggle-hungry-state 1)
-  ;; (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
-  ;; (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
-  ;; (define-key js2-mode-map [(meta control \;)]
-  ;;   '(lambda()
-  ;;      (interactive)
-  ;;      (insert "/* -----[ ")
-  ;;      (save-excursion
-  ;;        (insert " ]----- */"))
-  ;;      ))
   (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
   (define-key js2-mode-map [(return)] 'newline-and-indent)
   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
   (define-key js2-mode-map [(meta j)] 'hippie-expand)
-  ;; (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
-  ;; (if (featurep 'js2-highlight-vars)
-  ;;     (js2-highlight-vars-mode))
-  
-  ;; (message "My JS2 hook")
   (setq js2-basic-offset 2)
-  )
+
+
+  ;; npm install -g tern
+  ;; M-x package-install tern
+  ;; M-x package-install tern-auto-complete
+  (tern-mode t)
+  (eval-after-load 'tern
+    '(progn
+       (require 'tern-auto-complete)
+       (tern-ac-setup)))
+)
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 (provide 'aj-js)
