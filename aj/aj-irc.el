@@ -1,5 +1,5 @@
 ;; Irc
-;; Time-stamp: "2009-10-17 19:03:18 anton"
+;; Time-stamp: "2015-03-14 16:15:50 antonj"
 
 (eval-after-load 'rcirc '(require 'rcirc-notify))
 (eval-after-load 'rcirc '(load "~/.rcirc-authinfo"))
@@ -10,7 +10,7 @@
             (set (make-local-variable 'scroll-conservatively) 8192)
             (local-set-key "\C-c\C-o" 'ffap)))
 
-(setq rcirc-default-nick "blastura")
+(setq rcirc-default-nick "antonj")
 
 (setq rcirc-startup-channels-alist
       '(("\\.freenode\\.net$" "#emacs" "#svn")))

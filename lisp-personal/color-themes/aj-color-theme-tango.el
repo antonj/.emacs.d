@@ -27,8 +27,7 @@
      
      (highlight ((t (:background "grey10"))))
      (secondary-selection ((t (:background "grey15"))))
-     
-     
+
      (mode-line ((t (:foreground "#eeeeec" :background "#555753"))))
      (region ((t (:background "#555753"))))
      (font-lock-builtin-face ((t (:foreground "#729fcf"))))
@@ -51,6 +50,15 @@
      (minibuffer-prompt ((t (:foreground "#729fcf" :bold t))))
      (info-xref ((t (:foreground "#729fcf"))))
      (info-xref-visited ((t (:foreground "#ad7fa8"))))
+
+
+     ;; Speedbar
+     (speedbar-button-face ((t (:foreground "green4"))))
+     (speedbar-directory-face ((t (:inherit font-lock-function-name-face))))
+     (speedbar-file-face ((t (:foreground "cyan4"))))
+     (speedbar-highlight-face ((t (:background "#333333"))))
+     (speedbar-selected-face ((t (:inherit font-lock-keyword-face))))
+     (speedbar-tag-face ((t (:foreground "brown"))))
      )))
 
 (provide 'aj-color-theme-tango)

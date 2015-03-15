@@ -25,6 +25,7 @@
  el-get-sources
  '(el-get
    js2-mode
+   ;; tern
    ruby-mode
    psvn
    yaml-mode
@@ -34,7 +35,7 @@
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
-   protobuf-mode
+   ;; protobuf-mode
    paredit
    ;;php-mode-improved
    ;;color-theme-zenburn
