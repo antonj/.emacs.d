@@ -51,7 +51,10 @@
      (info-xref ((t (:foreground "#729fcf"))))
      (info-xref-visited ((t (:foreground "#ad7fa8"))))
 
-
+     ;; Highlight indentation
+     (highlight-indentation-face ((t (:background "#404446"))))
+     (highlight-indentation-current-column-face ((t (:background "#505556"))))
+     
      ;; Speedbar
      (speedbar-button-face ((t (:foreground "green4"))))
      (speedbar-directory-face ((t (:inherit font-lock-function-name-face))))
