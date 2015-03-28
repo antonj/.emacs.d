@@ -221,10 +221,10 @@
 (el-get 'sync el-get-packages)
 
 ;; Personal
-
 (add-hook 'sws-mode-hook
           '(lambda ()
-             (highlight-indentation-mode)))
+             (highlight-indentation-mode)
+             (highlight-indentation-current-column-mode)))
 
 (autoload 'less-mode "less-mode")
 (add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))

@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2014-03-20 10:35:23 antonj"
+;; Time-stamp: "2015-03-28 12:37:47 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -22,6 +22,14 @@
 (put 'narrow-to-region 'disabled nil)
 (setq sentence-end-double-space nil)
 (setq dabbrev-abbrev-skip-leading-regexp "[^ ]*[<>=*]") ;; skip <tags> when expanding
+
+(add-to-list 'same-window-regexps '("^\*"))
+(add-to-list 'same-window-buffer-names "*Help*")
+(add-to-list 'same-window-buffer-names "*shell*")
+(add-to-list 'same-window-buffer-names "*Apropos*")
+(add-to-list 'same-window-buffer-names "*Summary*")
+(add-to-list 'same-window-buffer-names "*grep*")
+(setq pop-up-windows nil)
 
 ;; Spelling
 ;; $ brew install aspell --lang=sv,en
