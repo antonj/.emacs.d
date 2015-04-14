@@ -15,6 +15,8 @@
                              (filename . "emacs-config")))
          ;; ("org-mode" (or (mode . org-mode)
          ;;                 (filename . "OrgMode")))
+         ("department-http" (filename . "department-http"))
+         ("department" (filename . "department"))
          ("monterosa-http" (filename . "monterosa-http"))
          ("monterosa" (filename . "monterosa"))
          ("sites" (filename . "Sites"))

@@ -30,6 +30,7 @@
    psvn
    yaml-mode
    coffee-mode
+   editorconfig ;; brew install editorconfig
    ;;python-mode
    undo-tree
    color-theme-solarized
@@ -228,6 +229,8 @@
 
 (autoload 'less-mode "less-mode")
 (add-to-list 'auto-mode-alist '("\\.less\\'" . less-mode))
+
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . javascript-mode))
 
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
 ;; (autoload 'scss-mode "scss-mode")

@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2015-03-28 12:37:47 antonj"
+;; Time-stamp: "2015-03-30 09:53:39 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -23,7 +23,9 @@
 (setq sentence-end-double-space nil)
 (setq dabbrev-abbrev-skip-leading-regexp "[^ ]*[<>=*]") ;; skip <tags> when expanding
 
-(add-to-list 'same-window-regexps '("^\*"))
+;; (add-to-list 'same-window-regexps '("^\*"))
+
+(setq same-window-regexps nil);;'(("^*")))
 (add-to-list 'same-window-buffer-names "*Help*")
 (add-to-list 'same-window-buffer-names "*shell*")
 (add-to-list 'same-window-buffer-names "*Apropos*")

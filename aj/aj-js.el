@@ -21,7 +21,27 @@
   (eval-after-load 'tern
     '(progn
        (tern-ac-setup)))
-)
+  (highlight-indentation-mode)
+  (highlight-indentation-current-column-mode)
+  )
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+
+(defun my-js-mode-hook ()
+  (define-key js-mode-map [(meta q)] 'c-fill-paragraph)
+  (define-key js-mode-map [(return)] 'newline-and-indent)
+  (define-key js-mode-map [(backspace)] 'c-electric-backspace)
+  (define-key js-mode-map [(control d)] 'c-electric-delete-forward)
+  (define-key js-mode-map [(meta j)] 'hippie-expand)
+  (setq js-indent-level 2)
+  (tern-mode t)
+  (eval-after-load 'tern
+    '(progn
+       (tern-ac-setup)))
+  (highlight-indentation-mode)
+  (highlight-indentation-current-column-mode)
+  )
+(add-hook 'js-mode-hook 'my-js-mode-hook)
+
 (provide 'aj-js)
