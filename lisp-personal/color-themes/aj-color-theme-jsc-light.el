@@ -106,8 +106,8 @@
      (jabber-chat-prompt-local ((t (:inherit font-lock-comment-face))))
 
      ;; mode-line-inactive
-     (modeline ((t (:background "plum" :foreground "black" :box nil))))
-     (mode-line-inactive ((t (:background "thistle" :foreground "black" :box nil))))
+     (mode-line ((t (:background "plum" :foreground "black" :box nil))))
+     (mode-line-inactive ((t (:background "gray77" :foreground "black" :box nil))))
      (modeline-buffer-id ((t (:background "plum" :foreground "black"))))
      (modeline-mousable ((t (:background "plum" :foreground "black"))))
      (modeline-mousable-minor-mode ((t (:background "plum" :foreground "black"))))

@@ -21,7 +21,9 @@
   (eval-after-load 'tern
     '(progn
        (tern-ac-setup)))
+  (electric-indent-local-mode -1)
   (highlight-indentation-mode)
+  (projectile-mode)
   (highlight-indentation-current-column-mode)
   )
 
@@ -39,6 +41,8 @@
   (eval-after-load 'tern
     '(progn
        (tern-ac-setup)))
+  (electric-indent-local-mode -1)
+  (projectile-mode)
   (highlight-indentation-mode)
   (highlight-indentation-current-column-mode)
   )

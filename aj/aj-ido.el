@@ -5,6 +5,12 @@
 (setq ido-use-filename-at-point 'nil)
 (setq ido-show-dot-for-dired nil)
 
+;; Flx
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+;; (setq ido-use-faces nil)
+
 (defun ido-aj-keys ()
   "Add my keybindings for ido."
   (define-key ido-completion-map "\C-w" 'ido-delete-backward-word-updir))

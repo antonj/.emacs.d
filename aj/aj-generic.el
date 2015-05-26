@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2015-03-30 09:53:39 antonj"
+;; Time-stamp: "2015-05-04 17:27:35 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -318,7 +318,7 @@
             (local-set-key [(M C i)] 'aj-toggle-fold)))
 
 ;; From http://www.reddit.com/r/emacs/comments/gjqki/is_there_any_way_to_tell_emacs_to_not/
-(defun toggle-sticky-buffer-window ()
+(defun sticky-buffer-window ()
   "Toggle whether this window is dedicated to this buffer."
   (interactive)
   (set-window-dedicated-p

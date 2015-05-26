@@ -5,6 +5,7 @@
       '(
         backward-sexp
         beginning-of-buffer
+        c-electric-brace
         c-electric-delete-forward
         c-electric-paren
         c-electric-semi&comma
@@ -38,6 +39,7 @@
         python-electric-colon
         save-some-buffers
         shell-command
+        tern-ac-dot-complete
         yas-expand
         ))
 

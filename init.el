@@ -25,6 +25,7 @@
  el-get-sources
  '(el-get
    js2-mode
+   git-timemachine
    ;; tern
    ruby-mode
    psvn
@@ -44,7 +45,19 @@
    ;;        :type git
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
-
+   (:name flycheck ;; npm i -g eslint
+          :type elpa
+          :after (progn
+                   (require 'aj-flycheck)))
+   (:name flx :after (progn
+                       ))
+   (:name projectile :after (progn
+                              (projectile-global-mode)
+                              ;; (define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+                              ;; (define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+                              (define-key projectile-mode-map (kbd "C-x C-j") 'projectile-find-file)
+                              ;; (define-key projectile-mode-map [?\s-g] 'projectile-grep)
+                              ))
    (:name highlight-indentation
           :after (progn
                    (setq highlight-indentation-offset 2)))
