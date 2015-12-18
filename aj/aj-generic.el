@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2015-12-18 13:42:32 antonj"
+;; Time-stamp: "2015-12-18 14:34:36 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -166,7 +166,7 @@
       (occur (if isearch-regexp isearch-string
                (regexp-quote isearch-string))))))
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key "\M-s" 'project-explorer-toggle)
+(global-set-key "\M-s" 'project-explorer-open)
 (global-set-key [f5]   'call-last-kbd-macro) ;; bind key for calling last macro
 (global-set-key "\M-\"" 'shell-command-on-region)
 
