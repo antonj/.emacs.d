@@ -11,6 +11,7 @@
         c-electric-semi&comma
         c-indent-line-or-region
         comment-region
+        dabbrev-expand
         electric-newline-and-maybe-indent
         end-of-buffer
         end-of-visual-line
@@ -45,6 +46,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        handle-switch-frame
         ido-find-file
         ido-switch-buffer
         isearch-other-control-char

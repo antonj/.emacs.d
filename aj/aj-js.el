@@ -4,7 +4,7 @@
 ;;              '("\\.js" . speedbar-parse-c-or-c++tag))
 
 (setq js2-mirror-mode nil)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 
 (defun my-js2-mode-hook ()
   (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)

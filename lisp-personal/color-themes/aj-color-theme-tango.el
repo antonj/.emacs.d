@@ -28,7 +28,10 @@
      (highlight ((t (:background "grey10"))))
      (secondary-selection ((t (:background "grey15"))))
 
-     (mode-line ((t (:foreground "#eeeeec" :background "#555753"))))
+     (mode-line ((t (:background "#eeeeec" :foreground "black" :box nil))))
+     (mode-line-inactive ((t (:background "gray55" :foreground "black" :box nil))))
+     ;; (mode-line ((t (:foreground "#eeeeec" :background "#555753"))))
+     ;; (mode-line-inactive ((t (:background "gray77" :foreground "black" :box nil))))
      (region ((t (:background "#555753"))))
      (font-lock-builtin-face ((t (:foreground "#729fcf"))))
      (font-lock-comment-face ((t (:foreground "#888a85"))))

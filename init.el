@@ -25,6 +25,7 @@
  el-get-sources
  '(el-get
    js2-mode
+   json-mode
    git-timemachine
    ;; tern
    ruby-mode
@@ -37,6 +38,7 @@
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
+   project-explorer
    ;; protobuf-mode
    paredit
    ;;php-mode-improved
@@ -45,12 +47,9 @@
    ;;        :type git
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
-   (:name flycheck ;; npm i -g eslint
-          :type elpa
-          :after (progn
-                   (require 'aj-flycheck)))
-   (:name flx :after (progn
-                       ))
+   (:name flycheck :type elpa)
+   ;; :after (progn (require 'aj-flycheck))
+   (:name flx :after (progn )) ;; Flex matching fuzzy stuff
    (:name projectile :after (progn
                               (projectile-global-mode)
                               ;; (define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
@@ -294,6 +293,7 @@
 (require 'aj-irc)
 (require 'aj-octave)
 (require 'aj-c)
+(require 'aj-flycheck) ;; Install flycheck, elpa
 (require 'aj-flymake)
 (require 'aj-flymake-c)
 ;;(require 'aj-flymake-css)
@@ -338,3 +338,5 @@
 ;; Start server
 (server-start)
 (message "loaded init.el")
+(provide 'init)
+;;; init.el ends here

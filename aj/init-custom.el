@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Man-notify-method (quote pushy))
- '(cursor-type (quote box) t)
+ '(cursor-type (quote box))
  '(ecb-options-version "2.40")
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
@@ -12,12 +12,30 @@
  '(jabber-chat-buffer-show-avatar nil)
  '(jabber-show-offline-contacts nil)
  '(jde-jdk (quote ("1.6")))
- '(jde-jdk-registry (quote (("1.6" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6"))))
+ '(jde-jdk-registry
+   (quote
+    (("1.6" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6"))))
  '(ns-alternate-modifier nil)
  '(org-agenda-files (quote ("~/Documents/org/notes.org")))
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
- '(safe-local-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t))))
+ '(safe-local-variable-values
+   (quote
+    ((whitespace-style face tabs trailing lines-tail)
+     (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
+     (whitespace-line-column . 80)
+     (whitespace-style face trailing lines-tail)
+     (require-final-newline . t))))
  '(send-mail-function (quote mailclient-send-it)))
 
  

@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2015-05-04 17:27:35 antonj"
+;; Time-stamp: "2015-12-18 13:42:32 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -11,7 +11,8 @@
 (setq-default indicate-empty-lines t)
 (setq fill-column 80)
 (column-number-mode t)
-(setq visible-bell t)                ;; disable audible bell
+(setq visible-bell nil) ;; The default
+(setq ring-bell-function 'ignore) ;; Prevent el capitan visible bell bugg
 (setq-default indent-tabs-mode nil)  ;; TAB ger mellanslag
 (setq default-tab-width 3)           ;; Emacs < 23 set tabs to 3 spaces
 (setq tab-width 3)                   ;; Emacs 23: set tabs to 3 spaces
@@ -22,7 +23,10 @@
 (put 'narrow-to-region 'disabled nil)
 (setq sentence-end-double-space nil)
 (setq dabbrev-abbrev-skip-leading-regexp "[^ ]*[<>=*]") ;; skip <tags> when expanding
-
+(eval-after-load "grep"
+  '(progn
+     (add-to-list 'grep-find-ignored-files "*.min.js")
+     (add-to-list 'grep-find-ignored-directories "node_modules")))
 ;; (add-to-list 'same-window-regexps '("^\*"))
 
 (setq same-window-regexps nil);;'(("^*")))
@@ -162,7 +166,7 @@
       (occur (if isearch-regexp isearch-string
                (regexp-quote isearch-string))))))
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key "\M-s" 'speedbar-get-focus)
+(global-set-key "\M-s" 'project-explorer-toggle)
 (global-set-key [f5]   'call-last-kbd-macro) ;; bind key for calling last macro
 (global-set-key "\M-\"" 'shell-command-on-region)
 
@@ -180,18 +184,25 @@
 ;; Put autosave files (ie #foo#) in one place, *not* scattered all over the
 ;; file system! (The make-autosave-file-name function is invoked to determine
 ;; the filename of an autosave file.)
-(defvar autosave-dir "~/.emacs.d/autosave")
-(make-directory autosave-dir t)
+;; (defvar autosave-dir "~/.emacs.d/autosave")
+;; (make-directory autosave-dir t)
 
-(defun auto-save-file-name-p (filename)
-  (string-match "^#.*#$" (file-name-nondirectory filename)))
+;; (defun auto-save-file-name-p (filename)
+;;   (string-match "^#.*#$" (file-name-nondirectory filename)))
 
-(defun make-auto-save-file-name ()
-  (concat autosave-dir
-          (if buffer-file-name
-              (concat "/#" (file-name-nondirectory buffer-file-name) "#")
-            (expand-file-name
-             (concat "#%" (buffer-name) "#")))))
+;; (defun make-auto-save-file-name ()
+;;   (concat autosave-dir
+;;           (if buffer-file-name
+;;               (concat "/#" (file-name-nondirectory buffer-file-name) "#")
+;;             (expand-file-name
+;;              (concat "#%" (buffer-name) "#")))))
+
+;; store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+(setq create-lockfiles nil)
 
 ;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
 ;; list contains regexp=>directory mappings; filenames matching a regexp are

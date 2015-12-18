@@ -28,7 +28,7 @@
      ;; "#c70"
      ;; "#7c0"
      (highlight ((t (:background "#e3e3d3"))))
-     ;; (highlight-indent-face ((t (:inherit highlight))))
+     (highlight-indentation-face ((t (:inherit highlight))))
      (highlight-indentation-current-column-face ((t (:background "#d3d3c3"))))
      (fringe ((t (:inherit highlight))))
      (hl-line-face ((t (:inherit highlight))))
