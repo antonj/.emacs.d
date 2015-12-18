@@ -6,7 +6,7 @@
             (local-set-key (kbd "2") 'magit-show-level-2-all)
             (local-set-key (kbd "3") 'magit-show-level-3-all)
             (local-set-key (kbd "4") 'magit-show-level-4-all)
-            (local-set-key "\M-s" 'speedbar-get-focus)
+            (local-set-key "\M-s" 'project-explorer-open)
             (local-set-key [(c)] 'git-commit)))
 
 (provide 'aj-magit)
