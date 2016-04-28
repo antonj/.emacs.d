@@ -40,6 +40,7 @@
         python-electric-colon
         save-some-buffers
         shell-command
+        slim-electric-backspace
         tern-ac-dot-complete
         yas-expand
         ))

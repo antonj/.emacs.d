@@ -38,7 +38,9 @@
    color-theme-solarized
    color-theme-tango
    color-theme-tango-2
-   project-explorer
+   (:name project-explorer
+          :after (progn 
+                   (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
    ;; protobuf-mode
    paredit
    ;;php-mode-improved
@@ -47,8 +49,17 @@
    ;;        :type git
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
+   (:name slim-mode
+          :after (progn
+                   (defun aj-slim-mode-hook()
+                     (highlight-indentation-mode)
+                     (highlight-indentation-current-column-mode))
+                   (add-hook 'slim-mode-hook 'aj-slim-mode-hook)))
+   (:name seq)
    (:name flycheck :type elpa)
-   ;; :after (progn (require 'aj-flycheck))
+   (:name web-mode 
+          :type elpa 
+          :after (progn (require 'aj-web)))
    (:name flx :after (progn )) ;; Flex matching fuzzy stuff
    (:name projectile :after (progn
                               (projectile-global-mode)
@@ -110,14 +121,14 @@
           :post-init (progn
                        (autoload 'color-theme-wombat+ "color-theme-wombat"
                          "color-theme: tango" t)))
-   (:name slime
-          :description "Superior Lisp Interaction Mode for Emacs"
-          :type github
-          :features slime-autoloads
-          :pkgname "nablaone/slime"
-          :load-path ("." "contrib")
-          :compile (".")
-          :post-init (slime-setup))
+   ;; (:name slime
+   ;;        :description "Superior Lisp Interaction Mode for Emacs"
+   ;;        :type github
+   ;;        :features slime-autoloads
+   ;;        :pkgname "nablaone/slime"
+   ;;        :load-path ("." "contrib")
+   ;;        :compile (".")
+   ;;        :post-init (slime-setup))
    (:name rcirc-notify
           :type git
           :url "git@github.com:antonj/rcirc-notify-el.git"
@@ -192,14 +203,14 @@
    ;;                     ;;(require 'company-emacs-eclim)
    ;;                     (require 'aj-eclim)))
    (:name auto-complete)
-   (:name ac-slime
-          :after (progn
-                   (add-hook 'slime-mode-hook 'set-up-slime-ac)))
-   (:name clojure-mode
-          :after (progn
-                   (add-hook 'slime-mode-hook
-                             '(lambda ()
-                                (local-set-key "\M-n" 'just-one-space)))))
+   ;; (:name ac-slime
+   ;;        :after (progn
+   ;;                 (add-hook 'slime-mode-hook 'set-up-slime-ac)))
+   ;; (:name clojure-mode
+   ;;        :after (progn
+   ;;                 (add-hook 'slime-mode-hook
+   ;;                           '(lambda ()
+   ;;                              (local-set-key "\M-n" 'just-one-space)))))
    ;; (:name skewer-mode
    ;;        :repo ("ELPA" . "http://melpa.milkbox.net/packages/")
    ;;        :type elpa)
@@ -316,19 +327,19 @@
 ;; (require 'aj-read-only-keymap-hooks)
 
 ;; Insert snippets to bufferts with certain extensions
-(add-hook 'find-file-not-found-hooks
-          '(lambda ()
-             (if (equal (file-name-extension (buffer-file-name)) "java")
-                 (progn
-                   (java-mode)
-                   (insert-java-template)
-                   (message "Inserted java template")))
+;; (add-hook 'find-file-not-found-hooks
+;;           '(lambda ()
+;;              (if (equal (file-name-extension (buffer-file-name)) "java")
+;;                  (progn
+;;                    (java-mode)
+;;                    (insert-java-template)
+;;                    (message "Inserted java template")))
 
-             (if (equal (file-name-extension (buffer-file-name)) "html")
-                 (progn
-                   (nxml-mode)
-                   (insert-html5-template)
-                   (message "Inserted xhtml template")))))
+;;              (if (equal (file-name-extension (buffer-file-name)) "html")
+;;                  (progn
+;;                    (nxml-mode)
+;;                    (insert-html5-template)
+;;                    (message "Inserted xhtml template")))))
 
 (setq custom-file "~/.emacs.d/aj/init-custom.el")
 (load custom-file 'noerror)
