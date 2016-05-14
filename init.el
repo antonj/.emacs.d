@@ -27,12 +27,14 @@
    js2-mode
    json-mode
    git-timemachine
-   ;; tern
+   tern
    ruby-mode
    psvn
    yaml-mode
    coffee-mode
-   editorconfig ;; brew install editorconfig
+   (:name editorconfig ;; brew install editorconfig
+          :after (progn
+                   (editorconfig-mode 1)))
    ;;python-mode
    undo-tree
    color-theme-solarized
@@ -202,7 +204,12 @@
    ;;        :post-init (progn
    ;;                     ;;(require 'company-emacs-eclim)
    ;;                     (require 'aj-eclim)))
-   (:name auto-complete)
+   (:name auto-complete
+          :after (progn
+                   (define-key ac-complete-mode-map "\C-n" 'ac-next)
+                   (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+                   (define-key ac-menu-map "\r" 'ac-expand)))
+   
    ;; (:name ac-slime
    ;;        :after (progn
    ;;                 (add-hook 'slime-mode-hook 'set-up-slime-ac)))
