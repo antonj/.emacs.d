@@ -1,6 +1,7 @@
 ;; Anton Johansson
 
 ;; Load paths
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
 (require 'cl)
@@ -9,17 +10,12 @@
 ;; El-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (let (el-get-master-branch) (end-of-buffer)
-          (eval-print-last-sexp)))))
-
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get)
-
-;; (setq el-get-default-process-sync t)
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
 
 (setq
  el-get-sources
@@ -27,11 +23,11 @@
    js2-mode
    json-mode
    git-timemachine
-   tern
    ruby-mode
    psvn
    yaml-mode
    coffee-mode
+   (:name tern)
    (:name editorconfig ;; brew install editorconfig
           :after (progn
                    (editorconfig-mode 1)))
@@ -59,8 +55,9 @@
                    (add-hook 'slim-mode-hook 'aj-slim-mode-hook)))
    (:name seq)
    (:name flycheck :type elpa)
-   (:name web-mode 
-          :type elpa 
+   (:name flycheck-flow :type elpa)
+   (:name web-mode
+          :type elpa
           :after (progn (require 'aj-web)))
    (:name flx :after (progn )) ;; Flex matching fuzzy stuff
    (:name projectile :after (progn
@@ -74,7 +71,6 @@
           :after (progn
                    (setq highlight-indentation-offset 2)))
    
-   (:name scala-mode2)
    
    (:name scss-mode :after (progn
                              (setq scss-compile-at-save nil)
@@ -116,6 +112,12 @@
           :type git
           :features restclient
           :url "https://github.com/pashky/restclient.el.git")
+   (:name jade-mode
+          :after (progn
+                   (defun aj-jade-mode-hook ()
+                     (highlight-indentation-mode)
+                     (highlight-indentation-current-column-mode))
+                   (add-hook 'jade-mode-hook 'aj-jade-mode-hook)))
    (:name color-theme-wombat+
           :type http
           :depends color-theme
@@ -200,15 +202,41 @@
           :after (progn
                    (message "magit after")
                    (require 'aj-magit)))
+   (:name 
+    ido-vertical-mode
+    :after 
+    (progn 
+      (ido-mode 1)
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
    ;; (:name eclim
    ;;        :post-init (progn
    ;;                     ;;(require 'company-emacs-eclim)
    ;;                     (require 'aj-eclim)))
-   (:name auto-complete
-          :after (progn
-                   (define-key ac-complete-mode-map "\C-n" 'ac-next)
-                   (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-                   (define-key ac-menu-map "\r" 'ac-expand)))
+
+   ;; (:name company-mode 
+   ;;        :type elpa)
+   ;; (:name 
+   ;;  company-flow
+   ;;  :type elpa
+   ;;  :after 
+   ;;  (progn
+   ;;    (add-to-list 'company-backends 'company-flow)
+   ;;    ))
+   ;; (:name
+   ;;  company-tern
+   ;;  :type elpa
+   ;;  :after (progn
+   ;;           (add-to-list 'company-backends 'company-tern)
+   ;;           ))
+   (:name
+    auto-complete
+    :after 
+    (progn
+      (define-key ac-complete-mode-map "\C-n" 'ac-next)
+      (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+      (define-key ac-complete-mode-map "\r" 'ac-expand)
+      (define-key ac-menu-map "\r" 'ac-expand)))
    
    ;; (:name ac-slime
    ;;        :after (progn
@@ -247,9 +275,10 @@
       (mapcar 'el-get-source-name el-get-sources))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")))
 
 (el-get 'sync el-get-packages)
+(package-initialize)
 
 ;; Personal
 (add-hook 'sws-mode-hook
@@ -269,6 +298,9 @@
 
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
 ;; (require 'highlight-indentation)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/auto-complete-flowtype"))
+(require 'auto-complete-flowtype)
 
 ;; Modes
 

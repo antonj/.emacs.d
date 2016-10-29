@@ -4,30 +4,34 @@
 ;;              '("\\.js" . speedbar-parse-c-or-c++tag))
 
 (setq js2-mirror-mode nil)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-(defun my-js2-mode-hook ()
-  (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
-  (define-key js2-mode-map [(return)] 'newline-and-indent)
-  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
-  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
-  (define-key js2-mode-map [(meta j)] 'hippie-expand)
-  (setq js2-basic-offset 2)
+(setq js2-basic-offset 2)
+(setq js-switch-indent-offset 2)
+(setq js2-include-node-externs t)
+(setq js2-include-browser-externs t)
 
-  ;; npm install -g tern
-  ;; M-x package-install tern
-  ;; M-x package-install tern-auto-complete
-  (tern-mode t)
-  (eval-after-load 'tern
-    '(progn
-       (tern-ac-setup)))
-  (electric-indent-local-mode -1)
-  (highlight-indentation-mode)
-  (projectile-mode)
-  (highlight-indentation-current-column-mode)
-  )
+;; (defun my-js2-mode-hook ()
+;;   (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
+;;   (define-key js2-mode-map [(return)] 'newline-and-indent)
+;;   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+;;   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+;;   (define-key js2-mode-map [(meta j)] 'hippie-expand)
 
-(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+;;   ;; npm install -g tern
+;;   ;; M-x package-install tern
+;;   ;; M-x package-install tern-auto-complete
+;;   (tern-mode t)
+;;   (eval-after-load 'tern
+;;     '(progn
+;;        (tern-ac-setup)))
+;;   (electric-indent-local-mode -1)
+;;   (highlight-indentation-mode)
+;;   (projectile-mode)
+;;   (highlight-indentation-current-column-mode)
+;;   )
+
+;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 
 (defun my-js-mode-hook ()
@@ -40,12 +44,33 @@
   (tern-mode t)
   (eval-after-load 'tern
     '(progn
+       (require 'tern-auto-complete)
        (tern-ac-setup)))
+  (auto-complete-flowtype-setup)
   (electric-indent-local-mode -1)
   (projectile-mode)
   (highlight-indentation-mode)
-  (highlight-indentation-current-column-mode)
-  )
+  (highlight-indentation-current-column-mode))
+
+(defun my-js2-mode-hook ()
+  (setq js2-strict-missing-semi-warning nil)
+  (setq js2-missing-semi-one-line-override nil)
+  (setq-default js2-mode-indent-ignore-first-tab t)
+  (setq-default js2-show-parse-errors nil)
+  (setq-default js2-strict-inconsistent-return-warning nil)
+  (setq-default js2-strict-var-hides-function-arg-warning nil)
+  (setq-default js2-strict-trailing-comma-warning nil)
+  (setq-default js2-strict-cond-assign-warning nil)
+  (setq-default js2-strict-var-redeclaration-warning nil)
+
+  (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
+  (define-key js2-mode-map [(return)] 'newline-and-indent)
+  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+  (define-key js2-mode-map [(meta j)] 'hippie-expand)
+  (my-js-mode-hook))
+
 (add-hook 'js-mode-hook 'my-js-mode-hook)
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 (provide 'aj-js)

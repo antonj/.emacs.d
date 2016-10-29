@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2015-12-18 14:34:36 antonj"
+;; Time-stamp: "2016-10-20 11:15:13 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -148,6 +148,14 @@
 (global-set-key "\C-xm" 'magit-status)
 (global-set-key "\C-cm" 'magit-status)
 (global-set-key "\C-xF" 'ido-find-file-other-window)
+(global-set-key "\M-x"
+                (lambda ()
+                  (interactive)
+                  (call-interactively
+                   (intern
+                    (ido-completing-read
+                     "M-x "
+                     (all-completions "" obarray 'commandp))))))
 (global-set-key "\C-xO" (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-<tab>") 'other-window)
 (global-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))

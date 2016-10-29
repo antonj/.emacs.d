@@ -5,6 +5,7 @@
   (setq-default mode-line-buffer-identification
                 (list (propertize "%12b" 'face
                                   (list :weight 'bold
+                                        :background nil
                                         :foreground "#222222"))))
   
   (color-theme-install
@@ -106,8 +107,19 @@
      (jabber-chat-prompt-local ((t (:inherit font-lock-comment-face))))
 
      ;; mode-line-inactive
-     (mode-line ((t (:background "plum" :foreground "black" :box nil))))
-     (mode-line-inactive ((t (:background "gray77" :foreground "black" :box nil))))
+     (mode-line 
+      ((t (:background "plum"
+                       :foreground "black"
+                       :underline nil
+                       :box (:line-width 1 :color "plum3"
+                                         :style unspecified)))))
+     (mode-line-inactive
+      ((t (:background "#e3e3d3" 
+                       :underline nil 
+                       :foreground "black" 
+                       :box (:line-width 1 :color "gray77"
+                                         :style unspecified)
+                       ))))
      (modeline-buffer-id ((t (:background "plum" :foreground "black"))))
      (modeline-mousable ((t (:background "plum" :foreground "black"))))
      (modeline-mousable-minor-mode ((t (:background "plum" :foreground "black"))))
