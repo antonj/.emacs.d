@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2016-10-20 11:15:13 antonj"
+;; Time-stamp: "2017-02-10 13:26:28 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -36,6 +36,8 @@
 (add-to-list 'same-window-buffer-names "*Summary*")
 (add-to-list 'same-window-buffer-names "*grep*")
 (setq pop-up-windows nil)
+(setq split-height-threshold 1200)
+(setq split-width-threshold 2000)
 
 ;; Spelling
 ;; $ brew install aspell --lang=sv,en
@@ -148,6 +150,7 @@
 (global-set-key "\C-xm" 'magit-status)
 (global-set-key "\C-cm" 'magit-status)
 (global-set-key "\C-xF" 'ido-find-file-other-window)
+(global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key "\M-x"
                 (lambda ()
                   (interactive)
@@ -336,9 +339,9 @@
           (lambda()
             (local-set-key [(M C i)] 'aj-toggle-fold)))
 
-;; From http://www.reddit.com/r/emacs/comments/gjqki/is_there_any_way_to_tell_emacs_to_not/
 (defun sticky-buffer-window ()
-  "Toggle whether this window is dedicated to this buffer."
+  "Toggle whether this window is dedicated to this buffer. From
+http://www.reddit.com/r/emacs/comments/gjqki/is_there_any_way_to_tell_emacs_to_not/"
   (interactive)
   (set-window-dedicated-p
    (selected-window)

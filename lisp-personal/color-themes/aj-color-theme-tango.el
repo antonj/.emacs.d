@@ -3,28 +3,17 @@
   "A color theme based on Tango Palette."
   (interactive)
   (color-theme-install
-   '(color-theme-tango
+   '(aj-color-theme-tango
      ((background-color . "#2e3436")
       (background-mode . dark)
       (border-color . "#888a85")
       (cursor-color . "#fce94f")
       (foreground-color . "#ccccca")
       (mouse-color . "#8ae234"))
-     
-     ((help-highlight-face . underline)
-      (ibuffer-dired-buffer-face . font-lock-function-name-face)
-      (ibuffer-help-buffer-face . font-lock-comment-face)
-      (ibuffer-hidden-buffer-face . font-lock-warning-face)
-      (ibuffer-occur-match-face . font-lock-warning-face)
-      (ibuffer-read-only-buffer-face . font-lock-type-face)
-      (ibuffer-special-buffer-face . font-lock-keyword-face)
-      (ibuffer-title-face . font-lock-type-face))
-     
 
-     
      (border ((t (:background "#888a85"))))
      (fringe ((t (:background "#404446"))))
-     
+
      (highlight ((t (:background "grey10"))))
      (secondary-selection ((t (:background "grey15"))))
 
@@ -57,7 +46,7 @@
      ;; Highlight indentation
      (highlight-indentation-face ((t (:background "#404446"))))
      (highlight-indentation-current-column-face ((t (:background "#505556"))))
-     
+
      ;; Speedbar
      (speedbar-button-face ((t (:foreground "green4"))))
      (speedbar-directory-face ((t (:inherit font-lock-function-name-face))))
@@ -65,6 +54,15 @@
      (speedbar-highlight-face ((t (:background "#333333"))))
      (speedbar-selected-face ((t (:inherit font-lock-keyword-face))))
      (speedbar-tag-face ((t (:foreground "brown"))))
+
+     (help-highlight-face ((t (:inherit underline))))
+     (ibuffer-dired-buffer-face ((t (:inherit font-lock-function-name-face))))
+     (ibuffer-help-buffer-face ((t (:inherit font-lock-comment-face))))
+     (ibuffer-hidden-buffer-face ((t (:inherit font-lock-warning-face))))
+     (ibuffer-occur-match-face ((t (:inherit font-lock-warning-face))))
+     (ibuffer-read-only-buffer-face ((t (:inherit font-lock-type-face))))
+     (ibuffer-special-buffer-face ((t (:inherit font-lock-keyword-face))))
+     (ibuffer-title-face ((t (:inherit font-lock-type-face))))
      )))
 
 (provide 'aj-color-theme-tango)

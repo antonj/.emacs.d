@@ -4,12 +4,10 @@
 ;;              '("\\.js" . speedbar-parse-c-or-c++tag))
 
 (setq js2-mirror-mode nil)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
-(setq js2-basic-offset 2)
-(setq js-switch-indent-offset 2)
-(setq js2-include-node-externs t)
-(setq js2-include-browser-externs t)
+(setq sgml-basic-offset 2)
+
 
 ;; (defun my-js2-mode-hook ()
 ;;   (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
@@ -53,8 +51,12 @@
   (highlight-indentation-current-column-mode))
 
 (defun my-js2-mode-hook ()
-  (setq js2-strict-missing-semi-warning nil)
-  (setq js2-missing-semi-one-line-override nil)
+  (setq-default js2-basic-offset 2)
+  (setq-defatul js-switch-indent-offset 2)
+  (setq-defatul js2-include-node-externs t)
+  (setq-defatul js2-include-browser-externs t)
+  (setq-defatul js2-strict-missing-semi-warning nil)
+  (setq-defatul js2-missing-semi-one-line-override nil)
   (setq-default js2-mode-indent-ignore-first-tab t)
   (setq-default js2-show-parse-errors nil)
   (setq-default js2-strict-inconsistent-return-warning nil)

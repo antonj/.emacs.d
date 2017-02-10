@@ -20,25 +20,60 @@
 (setq
  el-get-sources
  '(el-get
-   js2-mode
    json-mode
    git-timemachine
    ruby-mode
    psvn
    yaml-mode
    coffee-mode
-   (:name tern)
+   (:name prettier
+          :url "https://raw.githubusercontent.com/jlongster/prettier/master/editors/emacs/prettier-js.el"
+          :type http
+          :after (progn
+                   (require 'prettier-js)
+                   (add-hook 'js-mode-hook
+                             (lambda ()
+                               (add-hook 'before-save-hook 'prettier-before-save)))))
+   (:name js2-mode :type elpa)
+   (:name rjsx-mode :type elpa
+          :after (progn
+                   (defun aj-rjsx-mode-hook ()
+                     (define-key rjsx-mode-map "<" nil)
+                     (define-key rjsx-mode-map (kbd "C-d") nil))
+                   (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
+   (:name tern
+          :type elpa)
    (:name editorconfig ;; brew install editorconfig
           :after (progn
                    (editorconfig-mode 1)))
+   (:name neotree
+          :type elpa
+          :after (progn
+                   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+                   (setq neo-smart-open t)
+                   (defun neotree-project-dir ()
+                     "Open NeoTree using the git root."
+                     (interactive)
+                     (let ((project-dir (projectile-project-root))
+                           (file-name (buffer-file-name)))
+                       (neotree-toggle)
+                       (if project-dir
+                           (if (neo-global--window-exists-p)
+                               (progn
+                                 (neotree-dir project-dir)
+                                 (neotree-find file-name)))
+                         (message "Could not find git project root."))))
+                   ))
+   (:name all-the-icons :type elpa)
    ;;python-mode
-   undo-tree
-   color-theme-solarized
-   color-theme-tango
-   color-theme-tango-2
+   (:name undo-tree :type elpa)
+   (:name color-theme-solarized :type elpa)
    (:name project-explorer
-          :after (progn 
-                   (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
+          :after (progn
+                   (setq pe/width 25)
+                   (defun aj-project-explorer-mode-hook() (sticky-buffer-window))
+                   (add-hook 'project-explorer-mode-hook 'aj-project-explorer-mode-hook)
+          (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
    ;; protobuf-mode
    paredit
    ;;php-mode-improved
@@ -48,12 +83,44 @@
    ;;        :features powerline
    ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
    (:name slim-mode
+          :type elpa
           :after (progn
                    (defun aj-slim-mode-hook()
                      (highlight-indentation-mode)
                      (highlight-indentation-current-column-mode))
                    (add-hook 'slim-mode-hook 'aj-slim-mode-hook)))
-   (:name seq)
+   (:name seq
+          :type elpa)
+   (:name drag-stuff :type elpa
+          :after (progn
+                   (drag-stuff-global-mode 1)
+
+                   (defun shift-text (distance)
+                     (if (use-region-p)
+                         (let ((mark (mark)))
+                           (save-excursion
+                             (indent-rigidly (region-beginning)
+                                             (region-end)
+                                             distance)
+                             (push-mark mark t t)
+                             (setq deactivate-mark nil)))
+                       (indent-rigidly (line-beginning-position)
+                                       (line-end-position)
+                                       distance)))
+
+                   (defun shift-right (count)
+                     (interactive "p")
+                     (shift-text count))
+
+                   (defun shift-left (count)
+                     (interactive "p")
+                     (shift-text (- count)))
+
+                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'up) 'drag-stuff-up)
+                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'down) 'drag-stuff-down)
+                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'left) 'shift-left)
+                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'right) 'shift-right)
+                   ))
    (:name flycheck :type elpa)
    (:name flycheck-flow :type elpa)
    (:name web-mode
@@ -108,10 +175,10 @@
           :after (progn
                    (windmove-default-keybindings)
                    (setq framemove-hook-into-windmove t)))
-   (:name restclient
-          :type git
-          :features restclient
-          :url "https://github.com/pashky/restclient.el.git")
+   ;; (:name restclient
+   ;;        :type git
+   ;;        :features restclient
+   ;;        :url "https://github.com/pashky/restclient.el.git")
    (:name jade-mode
           :after (progn
                    (defun aj-jade-mode-hook ()
@@ -202,13 +269,11 @@
           :after (progn
                    (message "magit after")
                    (require 'aj-magit)))
-   (:name 
-    ido-vertical-mode
-    :after 
-    (progn 
-      (ido-mode 1)
-      (ido-vertical-mode 1)
-      (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
+   (:name ido-vertical-mode
+          :after (progn 
+                   (ido-mode 1)
+                   (ido-vertical-mode 1)
+                   (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
    ;; (:name eclim
    ;;        :post-init (progn
    ;;                     ;;(require 'company-emacs-eclim)
@@ -229,14 +294,12 @@
    ;;  :after (progn
    ;;           (add-to-list 'company-backends 'company-tern)
    ;;           ))
-   (:name
-    auto-complete
-    :after 
-    (progn
-      (define-key ac-complete-mode-map "\C-n" 'ac-next)
-      (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-      (define-key ac-complete-mode-map "\r" 'ac-expand)
-      (define-key ac-menu-map "\r" 'ac-expand)))
+   (:name auto-complete
+          :after (progn
+                   (define-key ac-complete-mode-map "\C-n" 'ac-next)
+                   (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+                   (define-key ac-complete-mode-map "\r" 'ac-expand)
+                   (define-key ac-menu-map "\r" 'ac-expand)))
    
    ;; (:name ac-slime
    ;;        :after (progn
@@ -276,7 +339,6 @@
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
-
 (el-get 'sync el-get-packages)
 (package-initialize)
 
