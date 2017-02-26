@@ -17,7 +17,9 @@
     (("1.6" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6"))))
  '(ns-alternate-modifier nil)
  '(org-agenda-files (quote ("~/Documents/org/notes.org")))
- '(package-selected-packages (quote (flycheck-flow nil swift-mode slim-mode flycheck)))
+ '(package-selected-packages
+   (quote
+    (magit flycheck-flow nil swift-mode slim-mode flycheck)))
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
  '(safe-local-variable-values

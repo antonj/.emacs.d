@@ -31,9 +31,13 @@
           :type http
           :after (progn
                    (require 'prettier-js)
-                   (add-hook 'js-mode-hook
-                             (lambda ()
-                               (add-hook 'before-save-hook 'prettier-before-save)))))
+                   (setq prettier-target-mode "rjsx-mode")
+                   (defun prettier-before-save-on ()
+                     (interactive)
+                     (add-hook 'before-save-hook 'prettier-before-save))
+                   (defun prettier-before-save-off ()
+                     (interactive)
+                     (remove-hook 'before-save-hook 'prettier-before-save))))
    (:name js2-mode :type elpa)
    (:name rjsx-mode :type elpa
           :after (progn
@@ -266,6 +270,7 @@
    ;;                               ;; for emacsen >= 24
    ;;                               (autopair-mode -1)))))
    (:name magit
+          :type elpa
           :after (progn
                    (message "magit after")
                    (require 'aj-magit)))
