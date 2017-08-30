@@ -32,25 +32,32 @@
 ;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 
+
+
 (defun my-js-mode-hook ()
   (define-key js-mode-map [(meta q)] 'c-fill-paragraph)
   (define-key js-mode-map [(return)] 'newline-and-indent)
   (define-key js-mode-map [(backspace)] 'c-electric-backspace)
   (define-key js-mode-map [(control d)] 'c-electric-delete-forward)
   (define-key js-mode-map [(meta j)] 'hippie-expand)
+  (define-key js-mode-map (kbd "<tab>") 'aj-indent-relative)
+  (subword-mode) ;; CamelCase aware kill-word
   (setq js-indent-level 2)
   (tern-mode t)
   (eval-after-load 'tern
     '(progn
        (require 'tern-auto-complete)
        (tern-ac-setup)))
-  (auto-complete-flowtype-setup)
+  ;;(auto-complete-flowtype-setup)
+  (auto-complete-mode)
   (electric-indent-local-mode -1)
   (projectile-mode)
   (highlight-indentation-mode)
-  (highlight-indentation-current-column-mode))
+  (highlight-indentation-current-column-mode)
+  )
 
 (defun my-js2-mode-hook ()
+  (my-js-mode-hook)
   (setq-default js2-basic-offset 2)
   (setq-default js-switch-indent-offset 2)
   (setq-default js2-include-node-externs t)
@@ -70,7 +77,7 @@
   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
   (define-key js2-mode-map [(meta j)] 'hippie-expand)
-  (my-js-mode-hook))
+  )
 
 (add-hook 'js-mode-hook 'my-js-mode-hook)
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)

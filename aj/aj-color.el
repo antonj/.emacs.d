@@ -1,5 +1,5 @@
 ;; Color and style
-;; Time-stamp: "2015-08-31 17:25:11 antonj"
+;; Time-stamp: "2017-08-25 12:40:09 antonj"
 
 (defun aj-font-mono ()
   (interactive)
@@ -13,7 +13,7 @@
   ;; (set-frame-font "-*-Inconsolata-g-normal-normal-normal-*-13-*-*-*-m-0-fontset-auto11")
   ;; (set-frame-font "-*-Inconsolata-g-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1" nil nil)
   ;; (set-default-font "Inconsolata 12")
-  (setq-default line-spacing 0.1)
+  (setq-default line-spacing 0)
   ;; (set-frame-font "-apple-menlo-medium-r-normal--16-0-72-72-m-0-iso10646-1")
   ;; (set-frame-font "-apple-Inconsolata-g-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1" nil))
   ;; (set-frame-font "-apple-bitstream vera sans mono-medium-r-normal--14-0-72-72-m-0-iso10646-1" nil)

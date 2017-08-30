@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2017-02-10 13:26:28 antonj"
+;; Time-stamp: "2017-06-09 13:47:38 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -36,8 +36,9 @@
 (add-to-list 'same-window-buffer-names "*Summary*")
 (add-to-list 'same-window-buffer-names "*grep*")
 (setq pop-up-windows nil)
-(setq split-height-threshold 1200)
-(setq split-width-threshold 2000)
+(setq pop-up-frames nil)
+(setq split-height-threshold 6000)
+(setq split-width-threshold 6000)
 
 ;; Spelling
 ;; $ brew install aspell --lang=sv,en
@@ -56,6 +57,17 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Set PATH and exec-path from echo PATH
+
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
 
 (defun chomp (str)
   "Chomp leading and tailing whitespace from STR."
@@ -227,6 +239,26 @@
 ;;  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1)))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+(defun current-line-empty-p ()
+  "Return t if line contain other things than whitespace, nil otherwise."
+  (interactive)
+  (= 0 (string-match-p "^\\s-*$" (thing-at-point 'line))))
+
+    
+(defun aj-indent-relative()
+  "Indent relative to line above no matter where on the line your are"
+  (interactive)
+  (if (current-line-empty-p)
+      (progn
+        (move-beginning-of-line 1)
+        (just-one-space)
+        (backward-delete-char 1)
+        (indent-relative t))
+    (save-excursion
+      (move-beginning-of-line 1)
+      (just-one-space)
+      (backward-delete-char 1)
+      (indent-relative t))))
 
 ;; Functions
 (defun insert-date-time()

@@ -3,13 +3,18 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        aj-indent-relative
+        aj-toggle-fold
         backward-sexp
         beginning-of-buffer
         c-electric-brace
         c-electric-delete-forward
         c-electric-paren
         c-electric-semi&comma
+        c-electric-slash
         c-indent-line-or-region
+        comint-delchar-or-maybe-eof
+        comint-next-input
         comment-region
         dabbrev-expand
         electric-newline-and-maybe-indent
@@ -42,6 +47,7 @@
         shell-command
         slim-electric-backspace
         tern-ac-dot-complete
+        undefined
         yas-expand
         ))
 
@@ -56,5 +62,8 @@
         magit-status
         markdown-exdent-or-delete
         mouse-set-region
+        next-error
         wdired-finish-edit
+        wgrep-change-to-wgrep-mode
+        wgrep-finish-edit
         ))

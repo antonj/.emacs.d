@@ -26,14 +26,52 @@
    psvn
    yaml-mode
    coffee-mode
+   (:name go-eldoc
+          :type elpa)
+(:name flow-jsx
+       :type git
+       :url "https://gitlab.com/rudolfo/emacs-flow-jsx.git"
+       :prepare (autoload 'flow-jsx-mode "emacs-flow-jsx-mode.el"))
+(:name go-autocomplete
+          :type elpa
+          :after (progn
+                   (with-eval-after-load 'go-mode
+                     (require 'go-autocomplete))))
+   (:name go-mode
+          :type elpa
+          :after (progn
+                   (defun aj-go-mode-hook ()
+                     (auto-complete-mode 1)
+                     (setq gofmt-command "goimports")
+                     (go-eldoc-setup)
+                     (subword-mode t)
+                     ;; (setq compile-command "go build -v && go test -v && go vet && golint")
+                     (local-set-key (kbd "M-.") 'godef-jump)
+                     (local-set-key (kbd "M-,") 'pop-tag-mark)
+                     ;; (setq 'ac-sources '('ac-source-go))
+                     (add-hook 'before-save-hook 'gofmt-before-save))
+                   (add-hook 'go-mode-hook 'aj-go-mode-hook)))
+   (:name ag ;;  brew install the_silver_searcher
+       :type elpa)
+   (:name wgrep-ag
+          :type elpa
+          :after (progn
+                   (setq wgrep-enable-key (kbd "C-x C-q"))
+                   (defun aj-wgrep-setup ()
+                     (define-key wgrep-mode-map (kbd "C-c C-q") 'wgrep-abort-changes))
+                   (setq wgrep-setup-hook 'aj-wgrep-setup)
+                   ))
    (:name prettier
           :url "https://raw.githubusercontent.com/jlongster/prettier/master/editors/emacs/prettier-js.el"
           :type http
           :after (progn
                    (require 'prettier-js)
-                   (setq prettier-target-mode "rjsx-mode")
+                   
+                   ;; (setq prettier-command "PATH=$(npm bin):$PATH prettier")
+                   (setq prettier-command "prettier")
                    (defun prettier-before-save-on ()
                      (interactive)
+                     (setq prettier-target-mode major-mode)
                      (add-hook 'before-save-hook 'prettier-before-save))
                    (defun prettier-before-save-off ()
                      (interactive)
@@ -42,8 +80,21 @@
    (:name rjsx-mode :type elpa
           :after (progn
                    (defun aj-rjsx-mode-hook ()
+                     (subword-mode t)
                      (define-key rjsx-mode-map "<" nil)
-                     (define-key rjsx-mode-map (kbd "C-d") nil))
+                     (define-key rjsx-mode-map (kbd "C-d") nil)
+                     (define-key rjsx-mode-map (kbd "TAB")
+                       '(lambda ()
+                          (interactive "*")
+                          (indent-for-tab-command)
+                          (when (zerop (current-column))
+                            (indent-relative))))
+                     (define-key rjsx-mode-map (kbd "C-j")
+                       '(lambda ()
+                          (interactive "*")
+                          (electric-newline-and-maybe-indent)
+                          (when (zerop (current-column))
+                            (indent-relative)))))
                    (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
    (:name tern
           :type elpa)
@@ -75,6 +126,7 @@
    (:name project-explorer
           :after (progn
                    (setq pe/width 25)
+                   (setq pe/omit-regex "^.DS_Store\\|^#\\|~$\\|^node_modules$\\|[.]pb[.]go$")
                    (defun aj-project-explorer-mode-hook() (sticky-buffer-window))
                    (add-hook 'project-explorer-mode-hook 'aj-project-explorer-mode-hook)
           (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
@@ -279,6 +331,10 @@
                    (ido-mode 1)
                    (ido-vertical-mode 1)
                    (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
+(:name ido-ubiquitous-mode
+       :after (progn 
+                (ido-ubiquitous-mode 1)
+                ))
    ;; (:name eclim
    ;;        :post-init (progn
    ;;                     ;;(require 'company-emacs-eclim)
@@ -366,8 +422,9 @@
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
 ;; (require 'highlight-indentation)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/auto-complete-flowtype"))
-(require 'auto-complete-flowtype)
+;;;; Flowtype autocomplete
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/auto-complete-flowtype"))
+;; (require 'auto-complete-flowtype)
 
 ;; Modes
 

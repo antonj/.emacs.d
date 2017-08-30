@@ -19,7 +19,7 @@
  '(org-agenda-files (quote ("~/Documents/org/notes.org")))
  '(package-selected-packages
    (quote
-    (magit flycheck-flow nil swift-mode slim-mode flycheck)))
+    (ido-ubiquitous js-import rjsx-mode dockerfile-mode graphql-mode golint go-eldoc protobuf-mode go-autocomplete go-mode tern-auto-complete tern browse-kill-ring wgrep wgrep-ag magit flycheck-flow nil swift-mode slim-mode flycheck)))
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
  '(safe-local-variable-values
