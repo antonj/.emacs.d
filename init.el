@@ -3,6 +3,7 @@
 ;; Load paths
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
+(package-initialize)
 
 (require 'cl)
 (require 'aj-generic)
@@ -16,6 +17,7 @@
        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
+
 
 (setq
  el-get-sources
@@ -104,32 +106,51 @@
    (:name neotree
           :type elpa
           :after (progn
-                   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-                   (setq neo-smart-open t)
                    (defun neotree-project-dir ()
                      "Open NeoTree using the git root."
                      (interactive)
-                     (let ((project-dir (projectile-project-root))
-                           (file-name (buffer-file-name)))
-                       (neotree-toggle)
-                       (if project-dir
-                           (if (neo-global--window-exists-p)
-                               (progn
-                                 (neotree-dir project-dir)
-                                 (neotree-find file-name)))
-                         (message "Could not find git project root."))))
+                     (if (eq neo-global--window (selected-window))
+                         (progn
+                           (message "goto window %s" neo-global--window-previous-antonj)
+                           (select-window neo-global--window-previous-antonj))
+                       (progn
+                         (setq neo-global--window-previous-antonj (selected-window))
+                         (message "save window %s" (selected-window))
+                         (let ((project-dir (projectile-project-root))
+                               (file-name (buffer-file-name)))
+                           (neotree)
+                           (if project-dir
+                               (if (neo-global--window-exists-p)
+                                   (progn
+                                     (neotree-dir project-dir)
+                                     (neotree-find file-name)))
+                             (message "Could not find git project root."))))))
+
+
+                   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+                   (define-key neotree-mode-map "\M-s" 'neotree-project-dir)
+                   (define-key neotree-mode-map (kbd "C-M-p") 'neotree-select-up-node)
+                   (define-key neotree-mode-map (kbd "C-M-n") 'neotree-select-next-sibling-node)
+
+                   (defun aj-neotree-mode-hook ()
+                     (highlight-indentation-mode t))
+                   (add-hook 'neotree-mode-hook 'aj-neotree-mode-hook)
+
+                   (setq neo-smart-open t)
+                   (setq neo-toggle-window-keep-p nil)
+
                    ))
    (:name all-the-icons :type elpa)
    ;;python-mode
    (:name undo-tree :type elpa)
    (:name color-theme-solarized :type elpa)
-   (:name project-explorer
-          :after (progn
-                   (setq pe/width 25)
-                   (setq pe/omit-regex "^.DS_Store\\|^#\\|~$\\|^node_modules$\\|[.]pb[.]go$")
-                   (defun aj-project-explorer-mode-hook() (sticky-buffer-window))
-                   (add-hook 'project-explorer-mode-hook 'aj-project-explorer-mode-hook)
-          (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
+   ;; (:name project-explorer
+   ;;        :after (progn
+   ;;                 (setq pe/width 25)
+   ;;                 (setq pe/omit-regex "^.next\\|^.cache\\|^.DS_Store\\|^#\\|~$\\|^node_modules$\\|[.]pb[.]go$")
+   ;;                 (defun aj-project-explorer-mode-hook() (sticky-buffer-window))
+   ;;                 (add-hook 'project-explorer-mode-hook 'aj-project-explorer-mode-hook)
+   ;;        (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
    ;; protobuf-mode
    paredit
    ;;php-mode-improved
@@ -327,14 +348,13 @@
                    (message "magit after")
                    (require 'aj-magit)))
    (:name ido-vertical-mode
-          :after (progn 
+          :after (progn
                    (ido-mode 1)
                    (ido-vertical-mode 1)
                    (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
-(:name ido-ubiquitous-mode
-       :after (progn 
-                (ido-ubiquitous-mode 1)
-                ))
+(:name ido-completing-read+
+       :type elpa
+       :after (progn (ido-ubiquitous-mode 1)))
    ;; (:name eclim
    ;;        :post-init (progn
    ;;                     ;;(require 'company-emacs-eclim)
@@ -401,7 +421,6 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 (el-get 'sync el-get-packages)
-(package-initialize)
 
 ;; Personal
 (add-hook 'sws-mode-hook

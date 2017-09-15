@@ -6,7 +6,7 @@
   (local-set-key (kbd "2") 'magit-section-show-level-2-all)
   (local-set-key (kbd "3") 'magit-section-show-level-3-all)
   (local-set-key (kbd "4") 'magit-section-show-level-4-all)
-  (local-set-key "\M-s" 'project-explorer-open)
+  (local-set-key "\M-s" 'neotree-project-dir)
   (local-set-key [(c)] 'git-commit))
 
 (add-hook 'magit-mode-hook 'aj-magit-mode-hook)

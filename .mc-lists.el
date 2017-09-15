@@ -8,6 +8,7 @@
         backward-sexp
         beginning-of-buffer
         c-electric-brace
+        c-electric-colon
         c-electric-delete-forward
         c-electric-paren
         c-electric-semi&comma
@@ -47,6 +48,7 @@
         shell-command
         slim-electric-backspace
         tern-ac-dot-complete
+        transpose-words
         undefined
         yas-expand
         ))

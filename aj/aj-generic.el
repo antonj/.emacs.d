@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2017-06-09 13:47:38 antonj"
+;; Time-stamp: "2017-09-15 08:45:27 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -39,6 +39,7 @@
 (setq pop-up-frames nil)
 (setq split-height-threshold 6000)
 (setq split-width-threshold 6000)
+(delete-selection-mode t)
 
 ;; Spelling
 ;; $ brew install aspell --lang=sv,en
@@ -181,15 +182,22 @@
 (global-set-key (kbd "C-8") 'comment-region)
 (global-set-key (kbd "C-9") 'uncomment-region)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda ()
-    (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string
-               (regexp-quote isearch-string))))))
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key "\M-s" 'project-explorer-open)
+(global-set-key (kbd "C-M-s") 'isearch-forward-symbol-at-point)
+(global-set-key (kbd "C-M-r") 'isearch-forward-symbol-at-point)
+
+(define-key occur-mode-map (kbd "C-x C-q") 'occur-edit-mode)
+(define-key occur-edit-mode-map (kbd "C-x C-q") 'occur-cease-edit)
+
+  (define-key isearch-mode-map (kbd "C-o")
+    (lambda ()
+      (interactive)
+      (let ((case-fold-search isearch-case-fold-search))
+        (occur (if isearch-regexp isearch-string
+                 (regexp-quote isearch-string))))))
+
+(global-set-key (kbd "M-s") 'neotree-project-dir)
 (global-set-key [f5]   'call-last-kbd-macro) ;; bind key for calling last macro
 (global-set-key "\M-\"" 'shell-command-on-region)
 
@@ -244,6 +252,10 @@
   (interactive)
   (= 0 (string-match-p "^\\s-*$" (thing-at-point 'line))))
 
+(defun uuid ()
+  "Insert an UUID."
+  (interactive)
+  (insert (shell-command-to-string "printf %s \"$(uuidgen)\"")))
     
 (defun aj-indent-relative()
   "Indent relative to line above no matter where on the line your are"
