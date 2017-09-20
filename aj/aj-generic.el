@@ -1,5 +1,5 @@
 ;; Generics and keybindings ~random stuff
-;; Time-stamp: "2017-09-15 08:45:27 antonj"
+;; Time-stamp: "2017-09-16 09:40:39 antonj"
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -37,6 +37,7 @@
 (add-to-list 'same-window-buffer-names "*grep*")
 (setq pop-up-windows nil)
 (setq pop-up-frames nil)
+
 (setq split-height-threshold 6000)
 (setq split-width-threshold 6000)
 (delete-selection-mode t)

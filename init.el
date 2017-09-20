@@ -1,8 +1,15 @@
-;; Anton Johansson
+;;; package --- hej
 
+;;; Commentary: grejsneo
+
+;;; Code
 ;; Load paths
 
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 (require 'cl)
@@ -103,28 +110,42 @@
    (:name editorconfig ;; brew install editorconfig
           :after (progn
                    (editorconfig-mode 1)))
+   (:name all-the-icons :type elpa)
+   (:name graphql-mode
+          :type elpa
+          :after (progn
+                   (add-to-list 'auto-mode-alist '("\\.gql\\'" . graphql-mode))
+                   (defun aj-graphql-mode-hook ()
+                     (subword-mode t))
+                   (add-hook 'graphql-mode-hook 'aj-graphql-mode-hook)))
+   (:name protobuf-mode
+          :type elpa
+          :after (progn
+                   (defun aj-protobuf-mode-hook ()
+                     (subword-mode t))
+                   (add-hook 'protobuf-mode-hook 'aj-protobuf-mode-hook)))
    (:name neotree
           :type elpa
           :after (progn
                    (defun neotree-project-dir ()
                      "Open NeoTree using the git root."
                      (interactive)
-                     (if (eq neo-global--window (selected-window))
+                     (if (and (boundp 'neo-global--window) (eq neo-global--window (selected-window)))
                          (progn
-                           (message "goto window %s" neo-global--window-previous-antonj)
                            (select-window neo-global--window-previous-antonj))
                        (progn
                          (setq neo-global--window-previous-antonj (selected-window))
-                         (message "save window %s" (selected-window))
                          (let ((project-dir (projectile-project-root))
                                (file-name (buffer-file-name)))
+
                            (neotree)
                            (if project-dir
                                (if (neo-global--window-exists-p)
                                    (progn
                                      (neotree-dir project-dir)
-                                     (neotree-find file-name)))
-                             (message "Could not find git project root."))))))
+                                     (message "goto %s" file-name)
+                                     (neotree-find file-name))
+                                 (message "Could not find git project root.")))))))
 
 
                    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -418,8 +439,6 @@
 (setq el-get-packages
       (mapcar 'el-get-source-name el-get-sources))
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
 (el-get 'sync el-get-packages)
 
 ;; Personal
