@@ -6,6 +6,10 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
+
+(setenv "GOPATH" "/Users/antonj/Documents/department-http/telness/backend:/Users/antonj/go")
+
+
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
@@ -79,11 +83,20 @@
                      (interactive)
                      (remove-hook 'before-save-hook 'prettier-before-save))))
    (:name js2-mode :type elpa)
+   (:name lsp-javascript-typescript
+          :type elpa
+          :after (progn
+                   ;; (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable)
+                   ))
    (:name rjsx-mode :type elpa
           :after (progn
                    (defun aj-rjsx-mode-hook ()
                      (subword-mode t)
                      (prettier-js-mode t)
+                     (auto-complete-mode -1)
+                     (eldoc-mode -1)
+                     (flycheck-mode t)
+
                      (define-key rjsx-mode-map "<" nil)
                      (define-key rjsx-mode-map (kbd "C-d") nil)
                      (define-key rjsx-mode-map (kbd "TAB")
@@ -125,6 +138,8 @@
                    (defun neotree-project-dir ()
                      "Open NeoTree using the git root."
                      (interactive)
+                     (set-variable 'neo-window-width 35)
+
                      (if (and (boundp 'neo-global--window) (eq neo-global--window (selected-window)))
                          (progn
                            (select-window neo-global--window-previous-antonj))
@@ -154,6 +169,11 @@
                      (highlight-indentation-mode t))
                    (add-hook 'neotree-mode-hook 'aj-neotree-mode-hook)
 
+                   (with-eval-after-load 'neotree
+                     (progn
+                       (add-to-list 'neo-hidden-regexp-list "^node_modules")
+                       (add-to-list 'neo-hidden-regexp-list "[.]test$")
+                       ))
                    (setq neo-smart-open t)
                    (setq neo-toggle-window-keep-p nil)
 
@@ -206,7 +226,10 @@
                    (define-key drag-stuff-mode-map (drag-stuff--kbd 'left) 'shift-left)
                    (define-key drag-stuff-mode-map (drag-stuff--kbd 'right) 'shift-right)
                    ))
-   (:name flycheck :type elpa)
+   (:name flycheck :type elpa
+          :after (progn
+                   (require 'aj-flycheck) ;; Install flycheck, elpa
+                   ))
    (:name flycheck-flow :type elpa)
    (:name web-mode :type elpa
           :after (progn (require 'aj-web)))
@@ -492,7 +515,6 @@
 (require 'aj-irc)
 (require 'aj-octave)
 (require 'aj-c)
-(require 'aj-flycheck)
 (require 'aj-flymake)
 (require 'aj-flymake-c)
 ;;(require 'aj-flymake-css)
