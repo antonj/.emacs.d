@@ -2,9 +2,7 @@
 
 ;;; Commentary: grejsneo
 
-;;; Code
-;; Load paths
-
+;;; Code:
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
@@ -29,19 +27,15 @@
 (setq
  el-get-sources
  '(el-get
-   json-mode
-   git-timemachine
-   ruby-mode
-   psvn
-   yaml-mode
-   coffee-mode
-   (:name go-eldoc
-          :type elpa)
-(:name flow-jsx
-       :type git
-       :url "https://gitlab.com/rudolfo/emacs-flow-jsx.git"
-       :prepare (autoload 'flow-jsx-mode "emacs-flow-jsx-mode.el"))
-(:name go-autocomplete
+   (:name git-timemachine :type elpa)
+   (:name json-mode :type elpa)
+   (:name yaml-mode :type elpa)
+   (:name go-eldoc :type elpa)
+   (:name flow-jsx
+          :type git
+          :url "https://gitlab.com/rudolfo/emacs-flow-jsx.git"
+          :prepare (autoload 'flow-jsx-mode "emacs-flow-jsx-mode.el"))
+   (:name go-autocomplete
           :type elpa
           :after (progn
                    (with-eval-after-load 'go-mode
@@ -61,7 +55,7 @@
                      (add-hook 'before-save-hook 'gofmt-before-save))
                    (add-hook 'go-mode-hook 'aj-go-mode-hook)))
    (:name ag ;;  brew install the_silver_searcher
-       :type elpa)
+          :type elpa)
    (:name wgrep-ag
           :type elpa
           :after (progn
@@ -70,12 +64,11 @@
                      (define-key wgrep-mode-map (kbd "C-c C-q") 'wgrep-abort-changes))
                    (setq wgrep-setup-hook 'aj-wgrep-setup)
                    ))
-   (:name prettier
-          :url "https://raw.githubusercontent.com/jlongster/prettier/master/editors/emacs/prettier-js.el"
-          :type http
+   (:name prettier-js
+          :type elpa
           :after (progn
-                   (require 'prettier-js)
-                   
+                   ;; (require 'prettier-js)
+
                    ;; (setq prettier-command "PATH=$(npm bin):$PATH prettier")
                    (setq prettier-command "prettier")
                    (defun prettier-before-save-on ()
@@ -105,12 +98,13 @@
                           (when (zerop (current-column))
                             (indent-relative)))))
                    (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
-   (:name tern
-          :type elpa)
+   (:name lsp-mode :type elpa)
+   (:name lsp-javascript-typescript :type elpa)
+   (:name tern :type elpa) ;; npm i -g ternjs
    (:name editorconfig ;; brew install editorconfig
+          :type elpa
           :after (progn
                    (editorconfig-mode 1)))
-   (:name all-the-icons :type elpa)
    (:name graphql-mode
           :type elpa
           :after (progn
@@ -149,9 +143,11 @@
 
 
                    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-                   (define-key neotree-mode-map "\M-s" 'neotree-project-dir)
-                   (define-key neotree-mode-map (kbd "C-M-p") 'neotree-select-up-node)
-                   (define-key neotree-mode-map (kbd "C-M-n") 'neotree-select-next-sibling-node)
+                   (eval-after-load "neotree"
+                     '(progn
+                       (define-key neotree-mode-map "\M-s" 'neotree-project-dir)
+                       (define-key neotree-mode-map (kbd "C-M-p") 'neotree-select-up-node)
+                       (define-key neotree-mode-map (kbd "C-M-n") 'neotree-select-next-sibling-node)))
 
                    (defun aj-neotree-mode-hook ()
                      (highlight-indentation-mode t))
@@ -162,7 +158,6 @@
 
                    ))
    (:name all-the-icons :type elpa)
-   ;;python-mode
    (:name undo-tree :type elpa)
    (:name color-theme-solarized :type elpa)
    ;; (:name project-explorer
@@ -172,23 +167,14 @@
    ;;                 (defun aj-project-explorer-mode-hook() (sticky-buffer-window))
    ;;                 (add-hook 'project-explorer-mode-hook 'aj-project-explorer-mode-hook)
    ;;        (define-key project-explorer-mode-map "\M-s" 'previous-multiframe-window)))
-   ;; protobuf-mode
-   paredit
-   ;;php-mode-improved
-   ;;color-theme-zenburn
-   ;; (:name powerline
-   ;;        :type git
-   ;;        :features powerline
-   ;;        :url "https://github.com/jonathanchu/emacs-powerline.git")
-   (:name slim-mode
-          :type elpa
+   (:name paredit :type elpa)
+   (:name slim-mode :type elpa
           :after (progn
                    (defun aj-slim-mode-hook()
                      (highlight-indentation-mode)
                      (highlight-indentation-current-column-mode))
                    (add-hook 'slim-mode-hook 'aj-slim-mode-hook)))
-   (:name seq
-          :type elpa)
+   (:name seq :type elpa)
    (:name drag-stuff :type elpa
           :after (progn
                    (drag-stuff-global-mode 1)
@@ -221,55 +207,57 @@
                    ))
    (:name flycheck :type elpa)
    (:name flycheck-flow :type elpa)
-   (:name web-mode
-          :type elpa
+   (:name web-mode :type elpa
           :after (progn (require 'aj-web)))
-   (:name flx :after (progn )) ;; Flex matching fuzzy stuff
-   (:name projectile :after (progn
-                              (projectile-global-mode)
-                              ;; (define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
-                              ;; (define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
-                              (define-key projectile-mode-map (kbd "C-x C-j") 'projectile-find-file)
-                              ;; (define-key projectile-mode-map [?\s-g] 'projectile-grep)
-                              ))
+   (:name flx :type elpa) ;; Flex matching fuzzy stuff
+   (:name flx-ido :type elpa) ;; Flex matching fuzzy stuff
+   (:name projectile
+          :type elpa
+          :after (progn
+                   (projectile-global-mode)
+                   ;; (define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+                   ;; (define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+                   (define-key projectile-mode-map (kbd "C-x C-j") 'projectile-find-file)
+                   ;; (define-key projectile-mode-map [?\s-g] 'projectile-grep)
+                   ))
    (:name highlight-indentation
+          :type elpa
           :after (progn
                    (setq highlight-indentation-offset 2)))
-   
-   
-   (:name scss-mode :after (progn
-                             (setq scss-compile-at-save nil)
-                             (setq scss-sass-options ())
-                             (defun aj-scss-mode-hook()
-                               (setq cssm-indent-function #'cssm-c-style-indenter)
-                               ;; (setq scss-sass-options '("--style" "compressed"))
-                               (rainbow-mode t))
-                             (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
-   
+   (:name scss-mode
+          :type elpa
+          :after (progn
+                   (setq scss-compile-at-save nil)
+                   (setq scss-sass-options ())
+                   (defun aj-scss-mode-hook()
+                     (setq cssm-indent-function #'cssm-c-style-indenter)
+                     ;; (setq scss-sass-options '("--style" "compressed"))
+                     (rainbow-mode t))
+                   (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
+
    ;; (:name ensime
    ;;        :load-path ("./dist/elisp")
    ;;        :after (progn
    ;;                 (define-key ensime-mode-map (kbd "M-g n") 'ensime-forward-note)
    ;;                 (define-key ensime-mode-map (kbd "M-g p") 'ensime-backward-note)
    ;;                 (define-key ensime-mode-map (kbd "M-n") 'just-one-space)))
-   
+
    (:name highlight-parentheses
+          :type elpa
           :after (progn
                    (highlight-parentheses-mode)))
    (:name multiple-cursors
+          :type elpa
           :after (progn
                    (global-set-key (kbd "C-S-n") 'mc/mark-next-like-this)
                    (global-set-key (kbd "C-S-p") 'mc/mark-previous-like-this)
                    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
                    (global-set-key (kbd "C-S-c C-S-v") 'mc/mark-all-like-this)))
-   (:name color-theme
-          :after (progn (require 'aj-color)))
    (:name markdown-mode
+          :type elpa
           :after (progn (require 'aj-markdown)))
    (:name framemove
-          :type http
-          :features framemove
-          :url "http://www.emacswiki.org/emacs/download/framemove.el"
+          :type elpa
           :after (progn
                    (windmove-default-keybindings)
                    (setq framemove-hook-into-windmove t)))
@@ -278,18 +266,19 @@
    ;;        :features restclient
    ;;        :url "https://github.com/pashky/restclient.el.git")
    (:name jade-mode
+          :type elpa
           :after (progn
                    (defun aj-jade-mode-hook ()
                      (highlight-indentation-mode)
                      (highlight-indentation-current-column-mode))
                    (add-hook 'jade-mode-hook 'aj-jade-mode-hook)))
-   (:name color-theme-wombat+
-          :type http
-          :depends color-theme
-          :url "http://jaderholm.com/color-themes/color-theme-wombat.el"
-          :post-init (progn
-                       (autoload 'color-theme-wombat+ "color-theme-wombat"
-                         "color-theme: tango" t)))
+   ;; (:name color-theme-wombat+
+   ;;        :type http
+   ;;        :depends color-theme
+   ;;        :url "http://jaderholm.com/color-themes/color-theme-wombat.el"
+   ;;        :post-init (progn
+   ;;                     (autoload 'color-theme-wombat+ "color-theme-wombat"
+   ;;                       "color-theme: tango" t)))
    ;; (:name slime
    ;;        :description "Superior Lisp Interaction Mode for Emacs"
    ;;        :type github
@@ -300,16 +289,17 @@
    ;;        :post-init (slime-setup))
    (:name rcirc-notify
           :type git
-          :url "git@github.com:antonj/rcirc-notify-el.git"
+          :url "https://github.com/antonj/rcirc-notify-el.git"
           :features rcirc-notify)
    (:name yasnippet
+          :type elpa
           :after (progn
                    (setq yas-snippet-dirs '("~/.emacs.d/aj-snippets"))
                    (yas-global-mode 1)
 
                    ;; Map `yas/load-directory' to every element
                    ;; (mapc 'yas/load-directory yas/root-directory)
-                   
+
                    (setq yas/prompt-functions '(yas/dropdown-prompt
                                                 yas/ido-prompt
                                                 yas/completing-prompt
@@ -329,28 +319,19 @@
                    (set-variable 'yas/wrap-around-region nil)
                    (yas/reload-all)))
    (:name multi-term
-          :after (progn (require 'aj-term)))
+          :type elpa
+          :after (progn
+                   (eval-after-load "mutli-term" '(require 'aj-term))))
    (:name rainbow-mode
           :description "Displays color names with colored background."
-          :type git
-          :url "https://github.com/emacsmirror/rainbow-mode.git"
-          :features rainbow-mode)
+          :type elpa)
    (:name git-emacs
           :type git
-          :url "git@github.com:antonj/git-emacs.git"
+          :url "https://github.com/tsgates/git-emacs.git"
           :after (progn
                    (require 'git-emacs)
                    (require 'git-status)))
-   (:name color-theme-waher
-          :type github
-          :depends color-theme
-          :pkgname "jasonm23/emacs-waher-theme"
-          :prepare (autoload 'color-theme-waher "waher-theme"
-                     "color-theme: waher-theme" t))
-   
-   (:name espresso-mode
-          :type http
-          :url "http://download-mirror.savannah.gnu.org/releases/espresso/espresso.el")
+
    ;; (:name autopair
    ;;        :after (progn
    ;;                 (autopair-global-mode t)
@@ -369,24 +350,25 @@
                    (message "magit after")
                    (require 'aj-magit)))
    (:name ido-vertical-mode
+          :type elpa
           :after (progn
                    (ido-mode 1)
                    (ido-vertical-mode 1)
                    (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
-(:name ido-completing-read+
-       :type elpa
-       :after (progn (ido-ubiquitous-mode 1)))
+   (:name ido-completing-read+
+          :type elpa
+          :after (progn (ido-ubiquitous-mode 1)))
    ;; (:name eclim
    ;;        :post-init (progn
    ;;                     ;;(require 'company-emacs-eclim)
    ;;                     (require 'aj-eclim)))
 
-   ;; (:name company-mode 
+   ;; (:name company-mode
    ;;        :type elpa)
-   ;; (:name 
+   ;; (:name
    ;;  company-flow
    ;;  :type elpa
-   ;;  :after 
+   ;;  :after
    ;;  (progn
    ;;    (add-to-list 'company-backends 'company-flow)
    ;;    ))
@@ -397,12 +379,15 @@
    ;;           (add-to-list 'company-backends 'company-tern)
    ;;           ))
    (:name auto-complete
+          :type elpa
           :after (progn
-                   (define-key ac-complete-mode-map "\C-n" 'ac-next)
-                   (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-                   (define-key ac-complete-mode-map "\r" 'ac-expand)
-                   (define-key ac-menu-map "\r" 'ac-expand)))
-   
+                   (eval-after-load "auto-complete" 
+                     '(progn
+                       (define-key ac-complete-mode-map "\C-n" 'ac-next)
+                       (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+                       (define-key ac-complete-mode-map "\r" 'ac-expand)
+                       (define-key ac-menu-map "\r" 'ac-expand)))))
+          
    ;; (:name ac-slime
    ;;        :after (progn
    ;;                 (add-hook 'slime-mode-hook 'set-up-slime-ac)))
@@ -493,6 +478,7 @@
 
 
 ;; (require 'aj-magit)
+(require 'aj-color)
 (require 'aj-markdown)
 (require 'aj-org)
 (require 'aj-mac)
@@ -505,7 +491,7 @@
 (require 'aj-irc)
 (require 'aj-octave)
 (require 'aj-c)
-(require 'aj-flycheck) ;; Install flycheck, elpa
+(require 'aj-flycheck)
 (require 'aj-flymake)
 (require 'aj-flymake-c)
 ;;(require 'aj-flymake-css)
