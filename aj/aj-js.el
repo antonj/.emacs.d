@@ -57,6 +57,7 @@
   )
 
 (defun my-js2-mode-hook ()
+  (prettier-js-mode t)
   (my-js-mode-hook)
   (setq-default js2-basic-offset 2)
   (setq-default js-switch-indent-offset 2)

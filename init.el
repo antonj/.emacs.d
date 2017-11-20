@@ -70,7 +70,7 @@
                    ;; (require 'prettier-js)
 
                    ;; (setq prettier-command "PATH=$(npm bin):$PATH prettier")
-                   (setq prettier-command "prettier")
+                   ;; (setq prettier-command "prettier")
                    (defun prettier-before-save-on ()
                      (interactive)
                      (setq prettier-target-mode major-mode)
@@ -83,6 +83,7 @@
           :after (progn
                    (defun aj-rjsx-mode-hook ()
                      (subword-mode t)
+                     (prettier-js-mode t)
                      (define-key rjsx-mode-map "<" nil)
                      (define-key rjsx-mode-map (kbd "C-d") nil)
                      (define-key rjsx-mode-map (kbd "TAB")
