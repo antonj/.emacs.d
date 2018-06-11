@@ -31,9 +31,21 @@
 (setq
  el-get-sources
  '(el-get
+   (:name color-theme)
    (:name git-timemachine :type elpa)
-   (:name json-mode :type elpa)
-   (:name yaml-mode :type elpa)
+   (:name json-mode :type elpa
+          :after (progn
+                   (defun aj-json-mode-hook ()
+                     (prettier-js-mode t))
+                   (add-hook 'json-mode-hook 'aj-json-mode-hook)
+                   ))
+   (:name yaml-mode :type elpa
+          :after (progn
+                   (defun aj-yaml-mode-hook ()
+                     (highlight-indentation-mode)
+                     (highlight-indentation-current-column-mode)
+                     (local-set-key (kbd "C-M-i") 'aj-toggle-fold))
+                   (add-hook 'yaml-mode-hook 'aj-yaml-mode-hook)))
    (:name go-eldoc :type elpa)
    (:name flow-jsx
           :type git
@@ -83,11 +95,50 @@
                      (interactive)
                      (remove-hook 'before-save-hook 'prettier-before-save))))
    (:name js2-mode :type elpa)
-   (:name lsp-javascript-typescript
+   (:name typescript-mode :type elpa
+          :after (progn
+                   ;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+                   ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+                   (defun aj-typescript-mode-hook ()
+                     (company-mode t)
+                     (lsp-javascript-typescript-enable)
+                     (prettier-js-mode)
+                     (setq typescript-indent-level 2)
+                     )
+                   (add-hook 'typescript-mode-hook 'aj-typescript-mode-hook)
+                   ))
+   (:name company
           :type elpa
           :after (progn
-                   ;; (add-hook 'rjsx-mode #'lsp-javascript-typescript-enable)
+                   (global-company-mode)
+                   (setq company-tooltip-align-annotations t)
+                   (setq company-idle-delay 0.2)
+                   (setq company-minimum-prefix-length 2)
+                   (global-set-key (kbd "C-M-j") 'company-complete)
                    ))
+   (:name company-lsp
+          :type elpa
+          :after (progn
+                   (require 'company-lsp)
+                   (setq company-lsp-async t)
+
+                   (define-key company-active-map [tab] 'company-complete-selection)
+                   (define-key company-active-map "\C-w" nil)
+                   (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+                   (define-key company-active-map (kbd "C-n") 'company-select-next)
+                   (define-key company-active-map (kbd "C-p") 'company-select-previous)
+
+                   (push 'company-lsp company-backends)
+                   ))
+   (:name js-import :type elpa
+          :after (progn
+                   (defun js-import-is-js-file (filename)
+                     "Check if FILENAME ends with either .js or .jsx."
+                     (or (js-import-string-ends-with-p filename ".js")
+                         (js-import-string-ends-with-p filename ".jsx")
+                         (js-import-string-ends-with-p filename ".tsx")
+                         (js-import-string-ends-with-p filename ".ts")))
+         ))
    (:name rjsx-mode :type elpa
           :after (progn
                    (defun aj-rjsx-mode-hook ()
@@ -97,6 +148,7 @@
                      (eldoc-mode -1)
                      (flycheck-mode t)
 
+                     (add-node-modules-path)
                      (define-key rjsx-mode-map "<" nil)
                      (define-key rjsx-mode-map (kbd "C-d") nil)
                      (define-key rjsx-mode-map (kbd "TAB")
@@ -112,9 +164,26 @@
                           (when (zerop (current-column))
                             (indent-relative)))))
                    (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
-   (:name lsp-mode :type elpa)
-   (:name lsp-javascript-typescript :type elpa)
+   (:name lsp-mode :type elpa
+          :after (progn
+                   (defun aj-lsp-mode-hook ()
+                     (local-set-key (kbd "C-M-j") 'company-complete))
+                   (add-hook 'lsp-mode-hook 'aj-lsp-mode-hook)))
+   (:name lsp-ui :type elpa
+          :after (progn
+                   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+                   ))
+   (:name lsp-python :type elpa
+          :after (progn
+                   (require 'lsp-python)
+                   (defun aj-lsp-python-mode-hook ()
+                     (lsp-python-enable)
+                     )
+                   (add-hook 'python-mode-hook 'aj-lsp-python-mode-hook)))
+   (:name company-quickhelp
+          :type elpa)
    (:name tern :type elpa) ;; npm i -g ternjs
+   (:name tern-auto-complete :type elpa)
    (:name editorconfig ;; brew install editorconfig
           :type elpa
           :after (progn
@@ -124,6 +193,11 @@
           :after (progn
                    (add-to-list 'auto-mode-alist '("\\.gql\\'" . graphql-mode))
                    (defun aj-graphql-mode-hook ()
+
+                     
+                     ;;npm i -g graphql-language-service-interface
+                     ;;npm install -g graphql-cli
+
                      (subword-mode t))
                    (add-hook 'graphql-mode-hook 'aj-graphql-mode-hook)))
    (:name protobuf-mode
@@ -138,7 +212,7 @@
                    (defun neotree-project-dir ()
                      "Open NeoTree using the git root."
                      (interactive)
-                     (set-variable 'neo-window-width 35)
+                     (set-variable 'neo-window-width 30)
 
                      (if (and (boundp 'neo-global--window) (eq neo-global--window (selected-window)))
                          (progn
@@ -161,9 +235,9 @@
                    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
                    (eval-after-load "neotree"
                      '(progn
-                       (define-key neotree-mode-map "\M-s" 'neotree-project-dir)
-                       (define-key neotree-mode-map (kbd "C-M-p") 'neotree-select-up-node)
-                       (define-key neotree-mode-map (kbd "C-M-n") 'neotree-select-next-sibling-node)))
+                        (define-key neotree-mode-map "\M-s" 'neotree-project-dir)
+                        (define-key neotree-mode-map (kbd "C-M-p") 'neotree-select-up-node)
+                        (define-key neotree-mode-map (kbd "C-M-n") 'neotree-select-next-sibling-node)))
 
                    (defun aj-neotree-mode-hook ()
                      (highlight-indentation-mode t))
@@ -180,7 +254,7 @@
                    ))
    (:name all-the-icons :type elpa)
    (:name undo-tree :type elpa)
-   (:name color-theme-solarized :type elpa)
+   ;; (:name color-theme-solarized :type elpa)
    ;; (:name project-explorer
    ;;        :after (progn
    ;;                 (setq pe/width 25)
@@ -231,8 +305,41 @@
                    (require 'aj-flycheck) ;; Install flycheck, elpa
                    ))
    (:name flycheck-flow :type elpa)
+   (:name add-node-modules-path :type elpa)
    (:name web-mode :type elpa
-          :after (progn (require 'aj-web)))
+          :after (progn
+                   (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+                   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+
+                   (defun aj-web-mode-hook ()
+                     (add-node-modules-path)
+                     (setq web-mode-markup-indent-offset 2)
+                     (setq web-mode-css-indent-offset 2)
+                     (setq web-mode-code-indent-offset 2)
+                     (setq web-mode-enable-auto-quoting nil)
+                     (subword-mode)
+                     (local-set-key (kbd "C-M-j") 'company-complete)
+                     (company-mode t)
+
+                     ;; npm i -g javascript-typescript-langserver
+                     (lsp-javascript-typescript-enable)
+
+                     
+                     ;; https://github.com/theia-ide/typescript-language-server
+                     ;; npm install -g typescript-language-server 
+                     ;; (lsp-typescript-enable)
+                     (prettier-js-mode t))
+
+                   (add-hook 'web-mode-hook 'aj-web-mode-hook)
+
+                   ;; for better jsx syntax-highlighting in web-mode
+                   ;; - courtesy of Patrick @halbtuerke
+                   (defadvice web-mode-highlight-part (around tweak-jsx activate)
+                     (if (equal web-mode-content-type "jsx")
+                         (let ((web-mode-enable-part-face nil))
+                           ad-do-it)
+                       ad-do-it))
+                   ))
    (:name flx :type elpa) ;; Flex matching fuzzy stuff
    (:name flx-ido :type elpa) ;; Flex matching fuzzy stuff
    (:name projectile
@@ -281,7 +388,6 @@
           :type elpa
           :after (progn (require 'aj-markdown)))
    (:name framemove
-          :type elpa
           :after (progn
                    (windmove-default-keybindings)
                    (setq framemove-hook-into-windmove t)))
@@ -387,8 +493,6 @@
    ;;                     ;;(require 'company-emacs-eclim)
    ;;                     (require 'aj-eclim)))
 
-   ;; (:name company-mode
-   ;;        :type elpa)
    ;; (:name
    ;;  company-flow
    ;;  :type elpa
@@ -405,13 +509,13 @@
    (:name auto-complete
           :type elpa
           :after (progn
-                   (eval-after-load "auto-complete" 
+                   (eval-after-load "auto-complete"
                      '(progn
-                       (define-key ac-complete-mode-map "\C-n" 'ac-next)
-                       (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-                       (define-key ac-complete-mode-map "\r" 'ac-expand)
-                       (define-key ac-menu-map "\r" 'ac-expand)))))
-          
+                        (define-key ac-complete-mode-map "\C-n" 'ac-next)
+                        (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+                        (define-key ac-complete-mode-map "\r" 'ac-expand)
+                        (define-key ac-menu-map "\r" 'ac-expand)))))
+
    ;; (:name ac-slime
    ;;        :after (progn
    ;;                 (add-hook 'slime-mode-hook 'set-up-slime-ac)))
@@ -499,6 +603,13 @@
 ;; Personal customizations
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Guardfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '(".env" . shell-script-mode))
+(add-to-list 'auto-mode-alist '(".env-sample" . shell-script-mode))
+
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/lsp-javascript/"))
+(require 'lsp-javascript-typescript)
+(require 'lsp-typescript)
 
 
 ;; (require 'aj-magit)

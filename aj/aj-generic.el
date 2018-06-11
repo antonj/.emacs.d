@@ -1,5 +1,10 @@
-;; Generics and keybindings ~random stuff
-;; Time-stamp: "2017-09-24 10:29:43 antonj"
+;;; package -- Generic stuff
+;;; Commentary:
+;; Time-stamp: "2018-02-27 11:22:25 antonj"
+;;; Code:
+
+(global-subword-mode t)
+(global-auto-revert-mode t)
 (set-variable 'inhibit-startup-message t)
 (set-variable 'user-mail-address "anton\.johansson@gmail\.com")
 (set-variable 'user-full-name "Anton Johansson")
@@ -89,7 +94,7 @@
                        (string-match path-prefix
                                      shell-output)))
          path-separator)))
-  
+
   (setq path-from-shell (delete-dups (append (mapcar 'chomp path-from-shell) exec-path)))
   (setenv "PATH" (mapconcat 'identity path-from-shell path-separator))
   (setq exec-path path-from-shell))
@@ -142,9 +147,6 @@
         try-expand-dabbrev-from-kill
         try-complete-file-name
         try-complete-file-name-partially
-        ;;try-expand-all-abbrevs
-        ;;try-expand-list
-        ;;try-expand-line
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol
         ))
@@ -191,12 +193,12 @@
 (define-key occur-mode-map (kbd "C-x C-q") 'occur-edit-mode)
 (define-key occur-edit-mode-map (kbd "C-x C-q") 'occur-cease-edit)
 
-  (define-key isearch-mode-map (kbd "C-o")
-    (lambda ()
-      (interactive)
-      (let ((case-fold-search isearch-case-fold-search))
-        (occur (if isearch-regexp isearch-string
-                 (regexp-quote isearch-string))))))
+(define-key isearch-mode-map (kbd "C-o")
+  (lambda ()
+    (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string
+               (regexp-quote isearch-string))))))
 
 (global-set-key (kbd "M-s") 'neotree-project-dir)
 (global-set-key [f5]   'call-last-kbd-macro) ;; bind key for calling last macro
@@ -257,7 +259,7 @@
   "Insert an UUID."
   (interactive)
   (insert (shell-command-to-string "printf %s \"$(uuidgen)\"")))
-    
+
 (defun aj-indent-relative()
   "Indent relative to line above no matter where on the line your are"
   (interactive)
@@ -404,7 +406,7 @@ http://www.reddit.com/r/emacs/comments/gjqki/is_there_any_way_to_tell_emacs_to_n
 
 Angry colors."
   nil " AngryLog" nil
-  
+
   (cond (angry-fruit-salad-log-view-mode
          (auto-revert-tail-mode 1)
          (highlight-changes-mode 1)

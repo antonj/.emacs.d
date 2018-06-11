@@ -41,6 +41,12 @@
      (italic ((t (:italic t))))
      (underline ((t (:underline t))))
 
+     ;; LSP
+     (lsp-face-highlight-read ((t (:background "#d3d3c3"))))
+     (lsp-face-highlight-textual ((t (:background "#d3d388"))))
+     (lsp-face-highlight-write ((t (:background "#88d3c3"))))
+     
+     
      ;; Error warning
      (flyspell-incorrect ((t (:inherit default :underline "OrangeRed"))))
      (flyspell-duplicate ((t (:inherit default :underline "Gold3"))))

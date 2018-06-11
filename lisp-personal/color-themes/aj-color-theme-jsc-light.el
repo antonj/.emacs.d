@@ -5,7 +5,6 @@
   (setq-default mode-line-buffer-identification
                 (list (propertize "%12b" 'face
                                   (list :weight 'bold
-                                        :background nil
                                         :foreground "#222222"))))
   
   (color-theme-install
@@ -40,6 +39,11 @@
      (bold-italic ((t (:italic t :bold t))))
      (italic ((t (:italic t))))
      (underline ((t (:underline t))))
+
+     ;; LSP
+     (lsp-face-highlight-read ((t (:background "#d3d3c3"))))
+     (lsp-face-highlight-textual ((t (:background "#d3d388"))))
+     (lsp-face-highlight-write ((t (:background "#88d3c3"))))
 
      ;; Error warning
      (flyspell-incorrect ((t (:inherit default :underline "OrangeRed"))))

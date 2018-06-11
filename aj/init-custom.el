@@ -15,11 +15,14 @@
  '(jde-jdk-registry
    (quote
     (("1.6" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6"))))
+ '(lsp-project-whitelist
+   (quote
+    ("^/Users/antonj/Documents/department-http/hyperisland/$")))
  '(ns-alternate-modifier nil)
  '(org-agenda-files (quote ("~/Documents/org/notes.org")))
  '(package-selected-packages
    (quote
-    (lsp-javascript-typescript rjsx-mode ac-capf ido-at-point lsp-mode ob-typescript company company-tern tide neotree ag all-the-icons srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint go-eldoc protobuf-mode go-autocomplete go-mode tern-auto-complete tern browse-kill-ring wgrep wgrep-ag magit flycheck-flow nil swift-mode slim-mode flycheck)))
+    (lsp-php lsp-python company-quickhelp lsp-mode php+-mode php-mode company-lsp tide add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag all-the-icons srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint go-eldoc protobuf-mode go-autocomplete go-mode tern-auto-complete tern browse-kill-ring wgrep wgrep-ag magit flycheck-flow nil swift-mode slim-mode flycheck)))
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
  '(safe-local-variable-values
@@ -73,8 +76,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(cursor ((t (:background "red"))))
- '(flymake-errline ((((class color)) (:underline "OrangeRed"))))
- '(flymake-warnline ((((class color)) (:underline "yellow"))))
+ '(flymake-error ((((class color)) (:underline "OrangeRed"))))
+ '(flymake-warning ((((class color)) (:underline "yellow"))))
  '(jabber-title-large ((t (:inherit variable-pitch :weight bold :height 1.3 :width ultra-expanded))))
  '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.1 :width expanded))))
  '(org-hide ((((background light)) (:foreground "dim gray")) (((background dark)) (:foreground "dim gray")))))

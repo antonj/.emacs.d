@@ -26,6 +26,7 @@
         forward-sexp
         indent-for-tab-command
         indent-region
+        insert-parentheses
         isearch-forward-regexp
         js2-beginning-of-line
         js2-end-of-line
@@ -44,11 +45,13 @@
         org-shiftright
         python-backspace
         python-electric-colon
+        rjsx-electric-gt
         save-some-buffers
         shell-command
         slim-electric-backspace
         tern-ac-dot-complete
         transpose-words
+        typescript-insert-and-indent
         undefined
         yas-expand
         ))

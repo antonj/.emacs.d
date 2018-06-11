@@ -1,5 +1,4 @@
 ;; Color and style
-;; Time-stamp: "2017-10-30 09:18:23 antonj"
 
 (defun aj-font-mono ()
   (interactive)
@@ -7,6 +6,7 @@
   ;; (set-frame-font "Inconsolata-dz-14")
   ;; (set-frame-font "-*-Inconsolata-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
   (set-frame-font "-*-Hack-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+  ;; (set-frame-font "-*-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   ;; (set-frame-font "Inconsolata")
   ;; (set-frame-font "Inconsolata-g-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
   ;; (set-frame-font "Inconsolata-g:pixelsize=12:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
@@ -35,6 +35,7 @@
   ;; (color-theme-initialize)
   ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
   (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
+  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light-grey.el")
   (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-tango.el")
   (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-egoist.el")
   ;; (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-zenbrund.el")
