@@ -53,6 +53,7 @@
         transpose-words
         typescript-insert-and-indent
         undefined
+        yaml-electric-dash-and-dot
         yas-expand
         ))
 
@@ -66,6 +67,7 @@
         js2-mode-show-node
         magit-status
         markdown-exdent-or-delete
+        markdown-outdent-or-delete
         mouse-set-region
         next-error
         wdired-finish-edit

@@ -6,6 +6,7 @@
 (defun aj-dired-mode-hook ()
   (local-set-key (kbd "C-M-p") 'dired-up-directory)
   (local-set-key (kbd "C-M-n") 'dired-find-file)
+  (local-set-key (kbd "C-t") 'shell-here)
   (local-set-key "\M-s" 'neotree-project-dir)
   (local-set-key (kbd "C-<return>") 'aj-dired-osx-open-file-at-point))
 

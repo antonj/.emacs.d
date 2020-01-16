@@ -39,6 +39,8 @@
                      (prettier-js-mode t))
                    (add-hook 'json-mode-hook 'aj-json-mode-hook)
                    ))
+   (:name shell-here :type elpa
+          :after (progn (global-set-key (kbd "C-t") 'shell-here)))
    (:name yaml-mode :type elpa
           :after (progn
                    (defun aj-yaml-mode-hook ()
@@ -101,7 +103,7 @@
                    ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
                    (defun aj-typescript-mode-hook ()
                      (company-mode t)
-                     (lsp-javascript-typescript-enable)
+                     ;; (lsp-javascript-typescript-enable)
                      (prettier-js-mode)
                      (setq typescript-indent-level 2)
                      )
@@ -169,21 +171,11 @@
                    (defun aj-lsp-mode-hook ()
                      (local-set-key (kbd "C-M-j") 'company-complete))
                    (add-hook 'lsp-mode-hook 'aj-lsp-mode-hook)))
-   (:name lsp-ui :type elpa
-          :after (progn
-                   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-                   ))
-   (:name lsp-python :type elpa
-          :after (progn
-                   (require 'lsp-python)
-                   (defun aj-lsp-python-mode-hook ()
-                     (lsp-python-enable)
-                     )
-                   (add-hook 'python-mode-hook 'aj-lsp-python-mode-hook)))
+   (:name lsp-ui :type elpa)
    (:name company-quickhelp
           :type elpa)
-   (:name tern :type elpa) ;; npm i -g ternjs
-   (:name tern-auto-complete :type elpa)
+   ;;(:name tern :type elpa) ;; npm i -g ternjs
+   ;;(:name tern-auto-complete :type elpa)
    (:name editorconfig ;; brew install editorconfig
           :type elpa
           :after (progn
@@ -308,6 +300,8 @@
    (:name add-node-modules-path :type elpa)
    (:name web-mode :type elpa
           :after (progn
+                   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+                   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
                    (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
                    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 
@@ -319,10 +313,10 @@
                      (setq web-mode-enable-auto-quoting nil)
                      (subword-mode)
                      (local-set-key (kbd "C-M-j") 'company-complete)
-                     (company-mode t)
+                     ;; (company-mode t)
 
                      ;; npm i -g javascript-typescript-langserver
-                     (lsp-javascript-typescript-enable)
+                     ;; (lsp-javascript-typescript-enable)
 
                      
                      ;; https://github.com/theia-ide/typescript-language-server
@@ -331,14 +325,15 @@
                      (prettier-js-mode t))
 
                    (add-hook 'web-mode-hook 'aj-web-mode-hook)
+                   (add-hook 'web-mode-hook #'lsp-deferred)
 
                    ;; for better jsx syntax-highlighting in web-mode
                    ;; - courtesy of Patrick @halbtuerke
-                   (defadvice web-mode-highlight-part (around tweak-jsx activate)
-                     (if (equal web-mode-content-type "jsx")
-                         (let ((web-mode-enable-part-face nil))
-                           ad-do-it)
-                       ad-do-it))
+;;                   (defadvice web-mode-highlight-part (around tweak-jsx activate)
+;;                     (if (equal web-mode-content-type "jsx")
+;;                         (let ((web-mode-enable-part-face nil))
+;;                           ad-do-it)
+;;                       ad-do-it))
                    ))
    (:name flx :type elpa) ;; Flex matching fuzzy stuff
    (:name flx-ido :type elpa) ;; Flex matching fuzzy stuff
@@ -565,6 +560,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . javascript-mode))
 
+(defun aj-php-mode-hook () 
+  """ npm install --global prettier @prettier/plugin-php"""
+  (prettier-js-mode t))
+
+(add-hook 'php-mode-hook 'aj-php-mode-hook)
+
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/scss-mode"))
 ;; (autoload 'scss-mode "scss-mode")
 ;; (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
@@ -607,12 +608,13 @@
 (add-to-list 'auto-mode-alist '(".env-sample" . shell-script-mode))
 
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/lsp-javascript/"))
-(require 'lsp-javascript-typescript)
-(require 'lsp-typescript)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/lsp-javascript/"))
+;; (require 'lsp-javascript-typescript)
+;; (require 'lsp-typescript)
 
 
 ;; (require 'aj-magit)
+(require 'aj-shell)
 (require 'aj-color)
 (require 'aj-markdown)
 (require 'aj-org)

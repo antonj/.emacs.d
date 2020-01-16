@@ -12,10 +12,9 @@
 
 (defun clear-shell ()
   (interactive)
-  (let ((old-max comint-buffer-maximum-size))
-    (setq comint-buffer-maximum-size 0)
-    (comint-truncate-buffer)
-    (setq comint-buffer-maximum-size old-max))) 
+  (message "clear buffer")
+  (comint-clear-buffer))
+
 
 (defun aj-shell-hook()
   (toggle-truncate-lines 1)

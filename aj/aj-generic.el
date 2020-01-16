@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2018-02-27 11:22:25 antonj"
+;; Time-stamp: "2019-08-20 19:39:02 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -46,6 +46,7 @@
 (setq split-height-threshold 6000)
 (setq split-width-threshold 6000)
 (delete-selection-mode t)
+(setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
 ;; Spelling
 ;; $ brew install aspell --lang=sv,en
