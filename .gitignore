@@ -17,3 +17,8 @@ resources/schemas/html5/
 !lisp/org-mode
 !lisp/git-emacs
 .DS_Store
+/recentf
+/transient/
+/projectile-bookmarks.eld
+/.lsp-session-v1
+/network-security.data

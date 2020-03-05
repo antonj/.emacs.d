@@ -18,6 +18,8 @@
         comint-next-input
         comment-region
         dabbrev-expand
+        drag-stuff-down
+        drag-stuff-up
         electric-newline-and-maybe-indent
         end-of-buffer
         end-of-visual-line

@@ -22,7 +22,7 @@
  '(org-agenda-files (quote ("~/Documents/org/notes.org")))
  '(package-selected-packages
    (quote
-    (shell-here lsp-treemacs editorconfig drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag all-the-icons srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint go-eldoc protobuf-mode go-autocomplete go-mode browse-kill-ring wgrep wgrep-ag flycheck-flow nil swift-mode slim-mode flycheck)))
+    (typescript-mode docker shell-here lsp-treemacs editorconfig drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag all-the-icons srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag flycheck-flow nil swift-mode slim-mode flycheck)))
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
  '(safe-local-variable-values

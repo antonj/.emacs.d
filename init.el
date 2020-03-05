@@ -7,7 +7,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
 
-(setenv "GOPATH" "/Users/antonj/Documents/department-http/telness/backend:/Users/antonj/go")
+(setenv "GOPATH" "/Users/antonj/Documents/department/telness-platform/backend:/Users/antonj/go")
 
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -48,29 +48,30 @@
                      (highlight-indentation-current-column-mode)
                      (local-set-key (kbd "C-M-i") 'aj-toggle-fold))
                    (add-hook 'yaml-mode-hook 'aj-yaml-mode-hook)))
-   (:name go-eldoc :type elpa)
-   (:name flow-jsx
-          :type git
-          :url "https://gitlab.com/rudolfo/emacs-flow-jsx.git"
-          :prepare (autoload 'flow-jsx-mode "emacs-flow-jsx-mode.el"))
-   (:name go-autocomplete
-          :type elpa
-          :after (progn
-                   (with-eval-after-load 'go-mode
-                     (require 'go-autocomplete))))
+   ;; (:name go-eldoc :type elpa)
+   ;; (:name flow-jsx
+   ;;        :type git
+   ;;        :url "https://gitlab.com/rudolfo/emacs-flow-jsx.git"
+   ;;        :prepare (autoload 'flow-jsx-mode "emacs-flow-jsx-mode.el"))
+   ;; (:name go-autocomplete
+   ;;        :type elpa
+   ;;        :after (progn
+   ;;                 (with-eval-after-load 'go-mode
+   ;;                   (require 'go-autocomplete))))
    (:name go-mode
           :type elpa
           :after (progn
                    (defun aj-go-mode-hook ()
-                     (auto-complete-mode 1)
-                     (setq gofmt-command "goimports")
-                     (go-eldoc-setup)
+                     ;;(auto-complete-mode 1)
+                     ;;(setq gofmt-command "goimports")
+                     ;;(go-eldoc-setup)
                      (subword-mode t)
                      ;; (setq compile-command "go build -v && go test -v && go vet && golint")
-                     (local-set-key (kbd "M-.") 'godef-jump)
-                     (local-set-key (kbd "M-,") 'pop-tag-mark)
+                     ;; (local-set-key (kbd "M-.") 'godef-jump)
+                     ;; (local-set-key (kbd "M-,") 'pop-tag-mark)
                      ;; (setq 'ac-sources '('ac-source-go))
-                     (add-hook 'before-save-hook 'gofmt-before-save))
+                     ;; (add-hook 'before-save-hook 'gofmt-before-save)
+                     )
                    (add-hook 'go-mode-hook 'aj-go-mode-hook)))
    (:name ag ;;  brew install the_silver_searcher
           :type elpa)
@@ -287,10 +288,10 @@
                      (interactive "p")
                      (shift-text (- count)))
 
-                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'up) 'drag-stuff-up)
-                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'down) 'drag-stuff-down)
-                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'left) 'shift-left)
+                   (define-key drag-stuff-mode-map (kbd "M-π") 'drag-stuff-up)
+                   (define-key drag-stuff-mode-map (kbd "M-‘") 'drag-stuff-down)
                    (define-key drag-stuff-mode-map (drag-stuff--kbd 'right) 'shift-right)
+                   (define-key drag-stuff-mode-map (drag-stuff--kbd 'left) 'shift-left)
                    ))
    (:name flycheck :type elpa
           :after (progn
@@ -381,7 +382,13 @@
                    (global-set-key (kbd "C-S-c C-S-v") 'mc/mark-all-like-this)))
    (:name markdown-mode
           :type elpa
-          :after (progn (require 'aj-markdown)))
+          :after (progn
+                   (defun aj-markdown-mode-hook ()
+                     (visual-line-mode t)
+                     (prettier-js-mode)
+                     (local-set-key (kbd "TAB") 'markdown-cycle)
+                     (local-set-key "\M-n" 'just-one-space))
+                   (add-hook 'markdown-mode-hook 'aj-markdown-mode-hook)))
    (:name framemove
           :after (progn
                    (windmove-default-keybindings)

@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2019-08-20 19:39:02 antonj"
+;; Time-stamp: "2020-02-06 21:48:58 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -463,5 +463,11 @@ Subsequent calls mark higher levels of sexps."
       (mark-sexp -1))))
 
 (global-set-key "\M-p" 'extend-selection)
+
+
+(defun aj-dired-ediff-marked-files ()
+  (interactive)
+  (apply 'ediff-files `(,@(dired-get-marked-files))))
+
 
 (provide 'aj-generic)

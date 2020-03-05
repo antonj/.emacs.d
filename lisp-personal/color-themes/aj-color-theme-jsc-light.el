@@ -105,6 +105,21 @@
      
      (org-level-4 ((t (:inherit font-lock-comment-face
                                 :weight bold))))
+
+
+     (markdown-header-face-1 ((t (:inherit font-lock-constant-face
+                                :height 1.3
+                                :weight bold))))
+     (markdown-header-face-2 ((t (:inherit font-lock-keyword-face
+                                :height 1.1
+                                :weight bold))))
+     
+     (markdown-header-face-3 ((t (:inherit font-lock-variable-name-face
+                                :weight bold))))
+     
+     (markdown-header-face-4 ((t (:inherit font-lock-comment-face
+                                :weight bold))))
+
      
      ;; Jabber
      (jabber-chat-prompt-foreign ((t (:inherit font-lock-constant-face))))
