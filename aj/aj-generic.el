@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2020-02-06 21:48:58 antonj"
+;; Time-stamp: "2020-03-26 09:15:26 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -277,6 +277,20 @@
       (indent-relative t))))
 
 ;; Functions
+(defun point-indentation ()
+  "Get point at first char of line."
+  (save-excursion
+    (back-to-indentation)
+    (point)))
+
+(defun aj-back-to-line-or-indentation ()
+  "Go to beginning of line or back to indentation."
+  (interactive)
+  (if (equal (point) (point-indentation))
+      (beginning-of-line)
+    (back-to-indentation)))
+(global-set-key (kbd "C-a") 'aj-back-to-line-or-indentation)
+
 (defun insert-date-time()
   "Inserts standard date time string."
   (interactive)

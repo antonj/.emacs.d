@@ -623,7 +623,6 @@
 ;; (require 'aj-magit)
 (require 'aj-shell)
 (require 'aj-color)
-(require 'aj-markdown)
 (require 'aj-org)
 (require 'aj-mac)
 (require 'aj-ibuffer)

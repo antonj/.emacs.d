@@ -33,6 +33,7 @@
         js2-beginning-of-line
         js2-end-of-line
         kill-region
+        markdown-outdent-or-delete
         nxml-backward-element
         nxml-electric-slash
         nxml-finish-element
@@ -68,8 +69,6 @@
         isearch-printing-char
         js2-mode-show-node
         magit-status
-        markdown-exdent-or-delete
-        markdown-outdent-or-delete
         mouse-set-region
         next-error
         wdired-finish-edit
