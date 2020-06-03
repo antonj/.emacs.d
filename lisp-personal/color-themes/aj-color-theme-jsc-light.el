@@ -45,6 +45,8 @@
      (lsp-face-highlight-textual ((t (:background "#d3d388"))))
      (lsp-face-highlight-write ((t (:background "#88d3c3"))))
 
+     (lsp-ui-sideline-code-action((t (:background "#88d3c3"))))
+
      ;; Error warning
      (flyspell-incorrect ((t (:inherit default :underline "OrangeRed"))))
      (flyspell-duplicate ((t (:inherit default :underline "Gold3"))))

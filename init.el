@@ -33,6 +33,13 @@
  '(el-get
    (:name color-theme)
    (:name git-timemachine :type elpa)
+   (:name adaptive-wrap
+          :type elpa
+          :after (progn
+                   (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode)
+                   (setq-default adaptive-wrap-extra-indent 1)
+                   )
+          )
    (:name json-mode :type elpa
           :after (progn
                    (defun aj-json-mode-hook ()
@@ -72,6 +79,7 @@
                      ;; (setq 'ac-sources '('ac-source-go))
                      ;; (add-hook 'before-save-hook 'gofmt-before-save)
                      )
+                   (add-hook 'go-mode-hook #'lsp-deferred)
                    (add-hook 'go-mode-hook 'aj-go-mode-hook)))
    (:name ag ;;  brew install the_silver_searcher
           :type elpa)
@@ -133,6 +141,11 @@
 
                    (push 'company-lsp company-backends)
                    ))
+   (:name company-emoji
+          :type elpa
+          :after (progn
+                   (add-to-list 'company-backends 'company-emoji)
+                   ))
    (:name js-import :type elpa
           :after (progn
                    (defun js-import-is-js-file (filename)
@@ -169,7 +182,10 @@
                    (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
    (:name lsp-mode :type elpa
           :after (progn
+                   (push "/backend/src/telness/vendor" lsp-file-watch-ignored)
+                   (push "/backend/pkg" lsp-file-watch-ignored)
                    (defun aj-lsp-mode-hook ()
+                     (local-set-key (kbd "C-<return>") 'lsp-execute-code-action)
                      (local-set-key (kbd "C-M-j") 'company-complete))
                    (add-hook 'lsp-mode-hook 'aj-lsp-mode-hook)))
    (:name lsp-ui :type elpa)
@@ -297,7 +313,6 @@
           :after (progn
                    (require 'aj-flycheck) ;; Install flycheck, elpa
                    ))
-   (:name flycheck-flow :type elpa)
    (:name add-node-modules-path :type elpa)
    (:name web-mode :type elpa
           :after (progn
@@ -305,6 +320,7 @@
                    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
                    (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
                    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+                   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
                    (defun aj-web-mode-hook ()
                      (add-node-modules-path)
@@ -312,6 +328,7 @@
                      (setq web-mode-css-indent-offset 2)
                      (setq web-mode-code-indent-offset 2)
                      (setq web-mode-enable-auto-quoting nil)
+                     (highlight-indentation-mode t)
                      (subword-mode)
                      (local-set-key (kbd "C-M-j") 'company-complete)
                      ;; (company-mode t)
@@ -386,6 +403,7 @@
                    (defun aj-markdown-mode-hook ()
                      (visual-line-mode t)
                      (prettier-js-mode)
+                     (auto-fill-mode -1)
                      (local-set-key (kbd "TAB") 'markdown-cycle)
                      (local-set-key "\M-n" 'just-one-space))
                    (add-hook 'markdown-mode-hook 'aj-markdown-mode-hook)))

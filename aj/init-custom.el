@@ -3,46 +3,39 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(Man-notify-method (quote pushy))
- '(cursor-type (quote box))
+ '(Man-notify-method 'pushy)
+ '(cursor-type 'box)
  '(ecb-options-version "2.40")
- '(ediff-split-window-function (quote split-window-horizontally))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(git-state-modeline-decoration (quote git-state-decoration-large-dot))
+ '(ediff-split-window-function 'split-window-horizontally)
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(git-state-modeline-decoration 'git-state-decoration-large-dot)
  '(jabber-chat-buffer-show-avatar nil)
  '(jabber-show-offline-contacts nil)
- '(jde-jdk (quote ("1.6")))
+ '(jde-jdk '("1.6"))
  '(jde-jdk-registry
-   (quote
-    (("1.6" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6"))))
- '(lsp-project-whitelist
-   (quote
-    ("^/Users/antonj/Documents/department-http/hyperisland/$")))
+   '(("1.6" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6")))
+ '(lsp-project-whitelist '("^/Users/antonj/Documents/department-http/hyperisland/$"))
  '(ns-alternate-modifier nil)
- '(org-agenda-files (quote ("~/Documents/org/notes.org")))
+ '(org-agenda-files '("~/Documents/org/notes.org"))
  '(package-selected-packages
-   (quote
-    (typescript-mode docker shell-here lsp-treemacs editorconfig drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag all-the-icons srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag flycheck-flow nil swift-mode slim-mode flycheck)))
- '(paren-match-face (quote paren-face-match-light))
+   '(adaptive-wrap docker shell-here lsp-treemacs drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag nil swift-mode slim-mode))
+ '(paren-match-face 'paren-face-match-light)
  '(paren-sexp-mode t)
  '(safe-local-variable-values
-   (quote
-    ((whitespace-style face tabs trailing lines-tail)
+   '((whitespace-style face tabs trailing lines-tail)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook
-            (quote write-contents-functions)
-            (lambda nil
-              (delete-trailing-whitespace)
-              nil))
-           (require
-            (quote whitespace))
+           (add-hook 'write-contents-functions
+                     (lambda nil
+                       (delete-trailing-whitespace)
+                       nil))
+           (require 'whitespace)
            "Sometimes the mode needs to be toggled off and on."
            (whitespace-mode 0)
            (whitespace-mode 1))
      (whitespace-line-column . 80)
      (whitespace-style face trailing lines-tail)
-     (require-final-newline . t))))
- '(send-mail-function (quote mailclient-send-it)))
+     (require-final-newline . t)))
+ '(send-mail-function 'mailclient-send-it))
 
  
 ;; (custom-set-faces

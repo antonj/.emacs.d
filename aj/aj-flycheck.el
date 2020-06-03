@@ -10,10 +10,8 @@
               (append flycheck-disabled-checkers
                       '(javascript-jshint)))
 
-(require 'flycheck-flow)
-
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/flymake-typescript-checkjs"))
-(require 'flymake-typescript-checkjs)
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/flymake-typescript-checkjs"))
+;;(require 'flymake-typescript-checkjs)
 
 ;; npm install -g standard
 ;; npm install -g eslint babel-eslint eslint-plugin-react

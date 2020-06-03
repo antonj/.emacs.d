@@ -49,6 +49,7 @@
   
   (aj-color-theme-jsc-light)
   (aj-font-mono)
+  (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
   
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
   ;; (zenburn)

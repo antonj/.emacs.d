@@ -21,7 +21,9 @@
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)")
-        (sequence "QUESTION(q)" "|" "ANSWERED(s)")))
+        (sequence "QUESTION(q)" "|" "ANSWERED(s)")
+        (sequence "NO(n)" "|" "YES(s)")
+        ))
 
 (setq org-todo-keyword-faces
       '(("STARTED" . org-upcoming-deadline)

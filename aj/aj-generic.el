@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2020-03-26 09:15:26 antonj"
+;; Time-stamp: "2020-06-01 14:30:47 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -183,9 +183,12 @@
                          (save-excursion (newline-and-indent))
                          (indent-according-to-mode)))
 (global-set-key (kbd "C-7") 'indent-region)
+(global-set-key (kbd "M-8") 'comment-region)
 (global-set-key (kbd "C-8") 'comment-region)
 (global-set-key (kbd "C-9") 'uncomment-region)
+(global-set-key (kbd "M-9") 'uncomment-region)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+;;(global-set-key (kbd "C-u C-s") 'isearch-forward-symbol-at-point)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward-symbol-at-point)
@@ -400,6 +403,12 @@
 (add-hook 'nxml-mode-hook
           (lambda()
             (local-set-key [(M C i)] 'aj-toggle-fold)))
+
+;;(defvar markdown-mode-map)
+;;(add-hook 'mardown-mode-hook
+;;          (progn
+;;            (define-key markdown-mode-map [(M C i)] 'aj-toggle-fold)))
+
 
 (defun sticky-buffer-window ()
   "Toggle whether this window is dedicated to this buffer. From

@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        aj-back-to-line-or-indentation
         aj-indent-relative
         aj-toggle-fold
         backward-sexp
@@ -33,6 +34,7 @@
         js2-beginning-of-line
         js2-end-of-line
         kill-region
+        markdown-cycle
         markdown-outdent-or-delete
         nxml-backward-element
         nxml-electric-slash
@@ -42,14 +44,18 @@
         org-ctrl-c-ctrl-c
         org-cycle
         org-delete-char
+        org-end-of-line
+        org-kill-line
         org-return-indent
         org-self-insert-command
         org-shiftleft
         org-shiftright
+        org-yank
         python-backspace
         python-electric-colon
         rjsx-electric-gt
         save-some-buffers
+        sh-assignment
         shell-command
         slim-electric-backspace
         tern-ac-dot-complete
