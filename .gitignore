@@ -22,3 +22,6 @@ resources/schemas/html5/
 /projectile-bookmarks.eld
 /.lsp-session-v1
 /network-security.data
+ido.last
+ido.last~
+.cache
