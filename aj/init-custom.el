@@ -18,7 +18,7 @@
  '(ns-alternate-modifier nil)
  '(org-agenda-files '("~/Documents/org/notes.org"))
  '(package-selected-packages
-   '(adaptive-wrap docker shell-here lsp-treemacs drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag nil swift-mode slim-mode))
+   '(use-package lsp-ui company gradle-mode swift3-mode adaptive-wrap docker shell-here lsp-treemacs drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag nil swift-mode slim-mode))
  '(paren-match-face 'paren-face-match-light)
  '(paren-sexp-mode t)
  '(safe-local-variable-values

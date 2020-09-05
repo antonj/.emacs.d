@@ -19,6 +19,7 @@
         comint-next-input
         comment-region
         dabbrev-expand
+        dired-flag-file-deletion
         drag-stuff-down
         drag-stuff-up
         electric-newline-and-maybe-indent
@@ -31,6 +32,7 @@
         indent-region
         insert-parentheses
         isearch-forward-regexp
+        isearch-printing-char
         js2-beginning-of-line
         js2-end-of-line
         kill-region
@@ -53,6 +55,7 @@
         org-yank
         python-backspace
         python-electric-colon
+        rjsx-delete-creates-full-tag
         rjsx-electric-gt
         save-some-buffers
         sh-assignment
@@ -71,8 +74,7 @@
         handle-switch-frame
         ido-find-file
         ido-switch-buffer
-        isearch-other-control-char
-        isearch-printing-char
+        isearch-repeat-forward
         js2-mode-show-node
         magit-status
         mouse-set-region
