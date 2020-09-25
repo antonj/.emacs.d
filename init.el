@@ -4,10 +4,10 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
-(define-advice make-frame (:around (fn &rest args) suppress)
-  "Suppress making new frame; return existing frame."
-  (message "make-frame suppressed; proceed at your own peril.")
-  (selected-frame))
+;; (define-advice make-frame (:around (fn &rest args) suppress)
+;;   "Suppress making new frame; return existing frame."
+;;   (message "make-frame suppressed; proceed at your own peril.")
+;;   (selected-frame))
 
 
 (setenv "GOPATH" "/Users/antonj/Documents/department/telness-platform/backend:/Users/antonj/go")
@@ -40,16 +40,21 @@
 (use-package go-mode
   :config (progn
             (defun aj-go-mode-hook ()
+              (message "go-mode-hook")
               ;;(auto-complete-mode 1)
               ;;(setq gofmt-command "goimports")
               ;;(go-eldoc-setup)
               (subword-mode t)
+              (add-hook 'before-save-hook #'lsp-format-buffer t t)
+              (add-hook 'before-save-hook #'lsp-organize-imports t t)
+              )
+
+
               ;; (setq compile-command "go build -v && go test -v && go vet && golint")
               ;; (local-set-key (kbd "M-.") 'godef-jump)
               ;; (local-set-key (kbd "M-,") 'pop-tag-mark)
               ;; (setq 'ac-sources '('ac-source-go))
               ;; (add-hook 'before-save-hook 'gofmt-before-save)
-              )
             (add-hook 'go-mode-hook #'lsp-deferred)
             (add-hook 'go-mode-hook 'aj-go-mode-hook)))
 (use-package ag) ;;  brew install the_silver_searcher
@@ -94,6 +99,12 @@
             (setq company-idle-delay 0.2)
             (setq company-minimum-prefix-length 2)
             (global-set-key (kbd "C-M-j") 'company-complete)
+            
+            (define-key company-active-map [tab] 'company-complete-selection)
+            (define-key company-active-map "\C-w" nil)
+            (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+            (define-key company-active-map (kbd "C-n") 'company-select-next)
+            (define-key company-active-map (kbd "C-p") 'company-select-previous)
             ))
 ;; (:name company-lsp
 ;;        :type elpa
@@ -149,12 +160,14 @@
             (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
 (use-package lsp-mode
   :config (progn
-            ;;(push "/backend/src/telness/vendor" lsp-file-watch-ignored)
-            ;;(push "/backend/pkg" lsp-file-watch-ignored)
+            (push "/backend/src/telness/vendor" lsp-file-watch-ignored)
+            (push "/backend/pkg" lsp-file-watch-ignored)
             (defun aj-lsp-mode-hook ()
               (local-set-key (kbd "C-<return>") 'lsp-execute-code-action)
               (local-set-key (kbd "C-M-j") 'company-complete))
             (add-hook 'lsp-mode-hook 'aj-lsp-mode-hook)))
+(use-package lsp-treemacs
+  :config (progn (lsp-treemacs-sync-mode 1)))
 (use-package lsp-ui)
 (use-package company-quickhelp)
 (use-package editorconfig ;; brew install editorconfig
@@ -269,9 +282,8 @@
             (define-key drag-stuff-mode-map (drag-stuff--kbd 'left) 'shift-left)
             ))
 (use-package flycheck
-  :config (progn
-            (require 'aj-flycheck) ;; Install flycheck, elpa
-            ))
+  :ensure t
+  :init (global-flycheck-mode))
 (use-package add-node-modules-path)
 (use-package web-mode
   :config (progn
@@ -351,6 +363,7 @@
               (auto-fill-mode -1)
               (markdown-toggle-wiki-links t)
               (local-set-key (kbd "TAB") 'markdown-cycle)
+              ;;(local-set-key (kbd "S-TAB") 'markdown-outdent-region)
               (local-set-key "\M-n" 'just-one-space))
             (add-hook 'markdown-mode-hook 'aj-markdown-mode-hook)))
 ;;(use-package framemove

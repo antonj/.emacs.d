@@ -36,6 +36,7 @@
         js2-beginning-of-line
         js2-end-of-line
         kill-region
+        kill-visual-line
         markdown-cycle
         markdown-outdent-or-delete
         nxml-backward-element
@@ -82,4 +83,5 @@
         wdired-finish-edit
         wgrep-change-to-wgrep-mode
         wgrep-finish-edit
+        yaml-electric-backspace
         ))
