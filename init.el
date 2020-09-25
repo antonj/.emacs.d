@@ -10,17 +10,14 @@
 ;;   (selected-frame))
 
 
-(setenv "GOPATH" "/Users/antonj/Documents/department/telness-platform/backend:/Users/antonj/go")
-
-
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-(require 'cl)
+;;(require 'cl)
 (require 'aj-generic)
 
-(use-package color-theme)
+;;(use-package color-theme)
 (use-package git-timemachine)
 (use-package adaptive-wrap
   :config
@@ -50,11 +47,11 @@
               )
 
 
-              ;; (setq compile-command "go build -v && go test -v && go vet && golint")
-              ;; (local-set-key (kbd "M-.") 'godef-jump)
-              ;; (local-set-key (kbd "M-,") 'pop-tag-mark)
-              ;; (setq 'ac-sources '('ac-source-go))
-              ;; (add-hook 'before-save-hook 'gofmt-before-save)
+            ;; (setq compile-command "go build -v && go test -v && go vet && golint")
+            ;; (local-set-key (kbd "M-.") 'godef-jump)
+            ;; (local-set-key (kbd "M-,") 'pop-tag-mark)
+            ;; (setq 'ac-sources '('ac-source-go))
+            ;; (add-hook 'before-save-hook 'gofmt-before-save)
             (add-hook 'go-mode-hook #'lsp-deferred)
             (add-hook 'go-mode-hook 'aj-go-mode-hook)))
 (use-package ag) ;;  brew install the_silver_searcher
@@ -99,7 +96,7 @@
             (setq company-idle-delay 0.2)
             (setq company-minimum-prefix-length 2)
             (global-set-key (kbd "C-M-j") 'company-complete)
-            
+
             (define-key company-active-map [tab] 'company-complete-selection)
             (define-key company-active-map "\C-w" nil)
             (define-key company-active-map (kbd "TAB") 'company-complete-selection)
@@ -162,7 +159,9 @@
   :config (progn
             (push "/backend/src/telness/vendor" lsp-file-watch-ignored)
             (push "/backend/pkg" lsp-file-watch-ignored)
+            (setq lsp-file-watch-threshold 1500)
             (defun aj-lsp-mode-hook ()
+              (lsp-lens-mode t)
               (local-set-key (kbd "C-<return>") 'lsp-execute-code-action)
               (local-set-key (kbd "C-M-j") 'company-complete))
             (add-hook 'lsp-mode-hook 'aj-lsp-mode-hook)))
@@ -283,7 +282,8 @@
             ))
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init (progn
+          (setq global-flycheck-mode nil)))
 (use-package add-node-modules-path)
 (use-package web-mode
   :config (progn

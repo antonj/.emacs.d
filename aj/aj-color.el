@@ -31,13 +31,15 @@
   (global-hl-line-mode t)
   (setq indicate-empty-lines t)
   (set-frame-height (selected-frame) 60)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp-personal/color-themes")
+  (load-theme 'aj-jsc-light t)
   ;; (require 'color-theme)
   ;; (color-theme-initialize)
   ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/color-themes"))
-  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
-  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light-grey.el")
-  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-tango.el")
-  (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-egoist.el")
+  ;; (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light.el")
+  ;; (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-jsc-light-grey.el")
+  ;; (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-tango.el")
+  ;; (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-egoist.el")
   ;; (load "~/.emacs.d/lisp-personal/color-themes/aj-color-theme-zenbrund.el")
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-cl-frame.el")
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-rlx.el")
@@ -46,11 +48,11 @@
   ;; https://github.com/sellout/solarized/raw/master/emacs-color-theme-solarized/color-theme-solarized.el
   ;; (load "~/.emacs.d/lisp/color-themes/color-theme-solarized.el")
   ;; (autoload 'zenburn "zenburn" "Color-theme-zenburn." t)
-  
-  (aj-color-theme-jsc-light)
+
+  ;;(aj-color-theme-jsc-light)
   (aj-font-mono)
   (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
-  
+
   ;;(color-theme-charcoal-black) ;; grey and blue low sat
   ;; (zenburn)
   ;; (face-spec-reset-face 'highlight)
@@ -59,7 +61,7 @@
   ;;  (progn (color-theme-rlx) ;;dark and fine
   ;;         (set-face-background 'highlight "black"))
   )
-  
+
 (defun aj-color-org-levels()
   (interactive)
   (let ((i 0)
@@ -80,7 +82,7 @@
 (defun aj-code-mode()
   (interactive)
   (aj-font-mono)
-  (color-theme-wombat)
+  ;;(color-theme-wombat)
   (setq truncate-lines t)
   (set-face-background 'highlight "#000"))
 
@@ -88,20 +90,20 @@
   (interactive)
   (aj-font-mono)
   (setq truncate-lines t)
-  (aj-color-theme-jsc-light)
+  ;;(aj-color-theme-jsc-light)
   (setq-default mode-line-buffer-identification
-              (list (propertize "%12b" 'face
-                                (list :weight 'bold
-                                      :foreground "Orchid")))))
+                (list (propertize "%12b" 'face
+                                  (list :weight 'bold
+                                        :foreground "Orchid")))))
 
 (defun aj-text-mode()
   (interactive)
   (aj-font-serif)
   ;; (set-face-background 'highlight "grey88")
-  (progn (color-theme-jsc-light2) ;;dark and fine
-         (face-spec-reset-face 'highlight)
-         (set-face-background 'highlight "grey93"))
-  
+  (progn ;;(color-theme-jsc-light2) ;;dark and fine
+    (face-spec-reset-face 'highlight)
+    (set-face-background 'highlight "grey93"))
+
   (custom-set-faces
    '(minibuffer-prompt ((t (:foreground "black"))))
    '(dired-directory ((t (:inherit font-lock-function-name-face))))
@@ -115,12 +117,12 @@
 
 ;; http://xahlee.org/emacs/emacs_make_modern.html
 (defun toggle-line-spacing ()
-"Toggle line spacing between no extra space to extra half line height."
-(interactive)
-(if (eq line-spacing nil)
-    (setq-default line-spacing 0.2) ; add 0.5 height between lines
-  (setq-default line-spacing nil)   ; no extra heigh between lines
-  ))
+  "Toggle line spacing between no extra space to extra half line height."
+  (interactive)
+  (if (eq line-spacing nil)
+      (setq-default line-spacing 0.2) ; add 0.5 height between lines
+    (setq-default line-spacing nil)   ; no extra heigh between lines
+    ))
 (global-set-key (kbd "<f7>") 'toggle-line-spacing)
 
 ;; From http://sachachua.com/wp/2006/09/15/emacs-changingn-the-font-size-on-the-fly/
@@ -141,7 +143,7 @@
   '(("#[abcdef[:digit:]]\\{3,6\\}"
      (0 (put-text-property (match-beginning 0)
                            (match-end 0)
-                           'face (list :background 
+                           'face (list :background
                                        (match-string-no-properties 0)))))))
 
 (defun hexcolour-add-to-font-lock ()
@@ -149,5 +151,3 @@
   (font-lock-add-keywords nil hexcolour-keywords))
 
 (provide 'aj-color)
-
-

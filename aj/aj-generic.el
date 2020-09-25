@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2020-09-05 16:53:06 antonj"
+;; Time-stamp: "2020-09-25 16:07:32 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -19,9 +19,7 @@
 (setq visible-bell nil) ;; The default
 (setq ring-bell-function 'ignore) ;; Prevent el capitan visible bell bugg
 (setq-default indent-tabs-mode nil)  ;; TAB ger mellanslag
-(setq default-tab-width 3)           ;; Emacs < 23 set tabs to 3 spaces
 (setq tab-width 3)                   ;; Emacs 23: set tabs to 3 spaces
-(setq speedbar-show-unknown-files t) ;;show all files in speedbar
 (set-face-background (quote cursor) "red")
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
