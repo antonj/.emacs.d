@@ -1,8 +1,9 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2020-09-25 16:07:32 antonj"
+;; Time-stamp: "2020-10-01 16:22:44 antonj"
 ;;; Code:
 
+(global-linum-mode)
 (global-subword-mode t)
 (global-auto-revert-mode t)
 (set-variable 'inhibit-startup-message t)

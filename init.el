@@ -14,11 +14,12 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-;;(require 'cl)
 (require 'aj-generic)
 
 ;;(use-package color-theme)
-(use-package git-timemachine)
+(setq use-package-always-ensure t)
+(use-package git-timemachine
+  :ensure t)
 (use-package adaptive-wrap
   :config
   (progn (add-hook
@@ -325,7 +326,8 @@
             ;;                       ad-do-it))
             ))
 (use-package flx) ;; Flex matching fuzzy stuff
-(use-package flx-ido) ;; Flex matching fuzzy stuff
+(use-package flx-ido
+  :ensure t  ) ;; Flex matching fuzzy stuff
 (use-package projectile
   :config (progn
             (projectile-global-mode)
@@ -422,6 +424,7 @@
             (message "magit after")
             (require 'aj-magit)))
 (use-package ido-vertical-mode
+  :ensure t
   :config (progn
             (ido-mode 1)
             (ido-vertical-mode 1)
