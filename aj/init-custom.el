@@ -5,6 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(Man-notify-method 'pushy)
  '(cursor-type 'box)
+ '(custom-safe-themes
+   '("0d144d89d0495f84204e94e1475747e71634e13ba8841ff28a90ad80e164002a" default))
  '(ecb-options-version "2.40")
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)

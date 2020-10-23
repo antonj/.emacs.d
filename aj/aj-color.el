@@ -5,7 +5,7 @@
   ;; (set-frame-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1" nil)
   ;; (set-frame-font "Inconsolata-dz-14")
   ;; (set-frame-font "-*-Inconsolata-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
-  (set-frame-font "-*-Hack-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")
+  (set-frame-font "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
   ;; (set-frame-font "-*-Anonymous Pro-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
   ;; (set-frame-font "Inconsolata")
   ;; (set-frame-font "Inconsolata-g-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")

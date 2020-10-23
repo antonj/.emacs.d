@@ -8,9 +8,11 @@
   (local-set-key (kbd "4") 'magit-section-show-level-4-all)
   (local-set-key "\M-s" 'neotree-project-dir)
   ;;(local-set-key [(c)] 'git-commit)
-)
+  )
 
+(setq magit-diff-refine-hunk (quote all))
 (add-hook 'magit-mode-hook 'aj-magit-mode-hook)
+
 
 (provide 'aj-magit)
 ;;; aj-magit ends here

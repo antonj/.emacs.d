@@ -42,6 +42,11 @@
               ;;(auto-complete-mode 1)
               ;;(setq gofmt-command "goimports")
               ;;(go-eldoc-setup)
+
+
+              ;;https://github.com/emacs-lsp/lsp-mode/issues/2040
+              (setq lsp-diagnostic-clean-after-change nil)
+
               (subword-mode t)
               (add-hook 'before-save-hook #'lsp-format-buffer t t)
               (add-hook 'before-save-hook #'lsp-organize-imports t t)
@@ -55,8 +60,10 @@
             ;; (add-hook 'before-save-hook 'gofmt-before-save)
             (add-hook 'go-mode-hook #'lsp-deferred)
             (add-hook 'go-mode-hook 'aj-go-mode-hook)))
-(use-package ag) ;;  brew install the_silver_searcher
-
+(use-package ag ;;  brew install the_silver_searcher
+  :config (progn
+            (setq ag-project-root-function 'projectile-project-root)
+            (global-set-key (kbd "M-F") 'ag-project-regexp)))
 (use-package wgrep-ag
   :config (progn
             (setq wgrep-enable-key (kbd "C-x C-q"))
@@ -359,6 +366,7 @@
             (global-set-key (kbd "C-S-c C-S-v") 'mc/mark-all-like-this)))
 (use-package markdown-mode
   :config (progn
+            (setq markdown-fontify-code-blocks-natively t)
             (defun aj-markdown-mode-hook ()
               (visual-line-mode t)
               (prettier-js-mode)
@@ -493,6 +501,9 @@
 
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
 ;; (require 'highlight-indentation)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/lsp-errors-list"))
+(require 'lsp-error-list)
 
 ;;;; Flowtype autocomplete
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/auto-complete-flowtype"))

@@ -1,9 +1,8 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2020-10-01 16:22:44 antonj"
+;; Time-stamp: "2020-10-23 11:11:05 antonj"
 ;;; Code:
 
-(global-linum-mode)
 (global-subword-mode t)
 (global-auto-revert-mode t)
 (set-variable 'inhibit-startup-message t)
@@ -39,12 +38,17 @@
 (add-to-list 'same-window-buffer-names "*Apropos*")
 (add-to-list 'same-window-buffer-names "*Summary*")
 (add-to-list 'same-window-buffer-names "*grep*")
-(setq pop-up-windows nil)
+(setq pop-up-windows t)
 (setq pop-up-frames nil)
 ;; (setq split-height-threshold 80)
 ;; (setq split-width-threshold 80)
 (delete-selection-mode t)
 (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
+
+;; perf
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 
 ;; Spelling
 ;; $ brew install aspell --lang=sv,en
@@ -52,6 +56,18 @@
 (setq-default ispell-program-name "aspell")
 (setq ispell-list-command "list")
 (setq ispell-extra-args '("--sug-mode=ultra"))
+
+
+;; LINUM
+(global-linum-mode)
+(defun linum-on ()
+  "* When linum is running globally, disable line number in modes defined in `linum-disabled-modes-list'. Changed by linum-off. Also turns off numbering in starred modes like *scratch*"
+  (unless (or (minibufferp)
+              (member major-mode '(eshell-mode wl-summary-mode compilation-mode org-mode text-mode dired-mode doc-view-mode image-mode))
+              (string-match "*" (buffer-name))
+              (> (buffer-size) 3000000)) ;; disable linum on buffer greater than 3MB, otherwise it's unbearably slow
+    (linum-mode 1)))
+
 
 ;; Coding system
 (setq locale-coding-system 'utf-8)
