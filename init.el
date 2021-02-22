@@ -168,9 +168,12 @@
             (push "/backend/src/telness/vendor" lsp-file-watch-ignored)
             (push "/backend/pkg" lsp-file-watch-ignored)
             (setq lsp-file-watch-threshold 1500)
+            (setenv "TSSERVER_LOG_FILE" "/tmp/tsserver.log")
             (defun aj-lsp-mode-hook ()
               (lsp-lens-mode t)
+              (lsp-headerline-breadcrumb-mode t)
               (local-set-key (kbd "C-<return>") 'lsp-execute-code-action)
+              (local-set-key (kbd "M-®") 'lsp-rename)
               (local-set-key (kbd "C-M-j") 'company-complete))
             (add-hook 'lsp-mode-hook 'aj-lsp-mode-hook)))
 (use-package lsp-treemacs
@@ -312,13 +315,7 @@
               (local-set-key (kbd "C-M-j") 'company-complete)
               ;; (company-mode t)
 
-              ;; npm i -g javascript-typescript-langserver
-              ;; (lsp-javascript-typescript-enable)
-
-
-              ;; https://github.com/theia-ide/typescript-language-server
-              ;; npm install -g typescript-language-server
-              ;; (lsp-typescript-enable)
+              ;; yarn global add typescript-language-server
               (prettier-js-mode t))
 
             (add-hook 'web-mode-hook 'aj-web-mode-hook)
@@ -371,6 +368,8 @@
               (visual-line-mode t)
               (prettier-js-mode)
               (auto-fill-mode -1)
+              (highlight-regexp "DONE" 'hi-green-b)
+              (highlight-regexp "TODO" 'hi-red-b)
               (markdown-toggle-wiki-links t)
               (local-set-key (kbd "TAB") 'markdown-cycle)
               ;;(local-set-key (kbd "S-TAB") 'markdown-outdent-region)
@@ -502,8 +501,8 @@
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/highlight-indentation"))
 ;; (require 'highlight-indentation)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/lsp-errors-list"))
-(require 'lsp-error-list)
+;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/lsp-errors-list"))
+;; (require 'lsp-error-list)
 
 ;;;; Flowtype autocomplete
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp-personal/auto-complete-flowtype"))

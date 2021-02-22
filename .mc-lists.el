@@ -28,6 +28,7 @@
         extend-selection
         fill-paragraph
         forward-sexp
+        ignore
         indent-for-tab-command
         indent-region
         insert-parentheses
@@ -37,6 +38,8 @@
         js2-end-of-line
         kill-region
         kill-visual-line
+        lsp-ui-doc--handle-mouse-movement
+        makefile-next-dependency
         markdown-cycle
         markdown-outdent-or-delete
         nxml-backward-element
@@ -80,6 +83,7 @@
         magit-status
         mouse-set-region
         next-error
+        suspend-frame
         wdired-finish-edit
         wgrep-change-to-wgrep-mode
         wgrep-finish-edit

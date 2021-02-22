@@ -4,8 +4,6 @@
 ;;              '("\\.js" . speedbar-parse-c-or-c++tag))
 
 (setq js2-mirror-mode nil)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-
 (setq sgml-basic-offset 2)
 
 

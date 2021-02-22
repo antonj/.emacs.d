@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2020-10-23 11:11:05 antonj"
+;; Time-stamp: "2021-02-09 12:57:42 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -40,8 +40,8 @@
 (add-to-list 'same-window-buffer-names "*grep*")
 (setq pop-up-windows t)
 (setq pop-up-frames nil)
-;; (setq split-height-threshold 80)
-;; (setq split-width-threshold 80)
+(setq split-height-threshold 1000)
+(setq split-width-threshold 1000)
 (delete-selection-mode t)
 (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
