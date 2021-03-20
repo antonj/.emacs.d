@@ -335,8 +335,9 @@
 (use-package projectile
   :config (progn
             (projectile-global-mode)
-            ;; (define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
-            ;; (define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+            ;;(define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+            ;;(define-key projectile-mode-map (kbd "C-x j") 'projectile-find-dir)
+            (define-key projectile-mode-map (kbd "C-x j") 'projectile-switch-project)
             (define-key projectile-mode-map (kbd "C-x C-j") 'projectile-find-file)
             ;; (define-key projectile-mode-map [?\s-g] 'projectile-grep)
             ))

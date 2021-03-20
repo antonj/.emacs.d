@@ -46,7 +46,7 @@
    `(font-lock-doc-face ((t (:inherit font-lock-comment-face))))
    `(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :bold t :background "#ddddcc"))))
    `(font-lock-constant-face ((t (:foreground "navy"))))
-   `(font-lock-function-name-face ((t (:bold t :foreground "Blue"))))
+   `(font-lock-function-name-face ((t (:bold nil :foreground "Blue"))))
    `(font-lock-keyword-face ((t (:bold t :foreground "Purple"))))
    `(font-lock-string-face ((t (:foreground "Green4"))))
    `(font-lock-type-face ((t (:foreground "Navy"))))

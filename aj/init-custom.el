@@ -6,7 +6,7 @@
  '(Man-notify-method 'pushy)
  '(cursor-type 'box)
  '(custom-safe-themes
-   '("0d144d89d0495f84204e94e1475747e71634e13ba8841ff28a90ad80e164002a" default))
+   '("570c4029ed23e05bb6f04ae28cb9d5cf1922af838ae13ed94e9abfc1d8e8a77d" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "43f03c7bf52ec64cdf9f2c5956852be18c69b41c38ab5525d0bedfbd73619b6a" "0d144d89d0495f84204e94e1475747e71634e13ba8841ff28a90ad80e164002a" default))
  '(ecb-options-version "2.40")
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -20,7 +20,7 @@
  '(ns-alternate-modifier nil)
  '(org-agenda-files '("~/Documents/org/notes.org"))
  '(package-selected-packages
-   '(groovy-mode highlight-indent-guides use-package company gradle-mode swift3-mode adaptive-wrap docker shell-here drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag nil swift-mode slim-mode))
+   '(ample-theme kaolin-themes badger-theme groovy-mode highlight-indent-guides use-package company gradle-mode swift3-mode adaptive-wrap docker shell-here drag-stuff auto-complete php+-mode php-mode add-node-modules-path multiple-cursors prettier-js vue-mode ac-capf neotree ag srefactor ido-completing-read+ ido-ubiquitous js-import dockerfile-mode graphql-mode golint protobuf-mode go-mode browse-kill-ring wgrep wgrep-ag nil swift-mode slim-mode))
  '(paren-match-face 'paren-face-match-light)
  '(paren-sexp-mode t)
  '(safe-local-variable-values

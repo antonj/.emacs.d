@@ -13,6 +13,12 @@
 (setq magit-diff-refine-hunk (quote all))
 (add-hook 'magit-mode-hook 'aj-magit-mode-hook)
 
+(defun aj-git-commit-mode()
+  (auto-fill-mode -1)
+  (flyspell-mode 1)
+  )
+(add-hook 'git-commit-mode-hook 'aj-git-commit-mode)
+
 
 (provide 'aj-magit)
 ;;; aj-magit ends here
