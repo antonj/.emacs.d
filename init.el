@@ -329,9 +329,6 @@
             ;;                           ad-do-it)
             ;;                       ad-do-it))
             ))
-(use-package flx) ;; Flex matching fuzzy stuff
-(use-package flx-ido
-  :ensure t  ) ;; Flex matching fuzzy stuff
 (use-package projectile
   :config (progn
             (projectile-global-mode)
@@ -399,7 +396,6 @@
             ;; (mapc 'yas/load-directory yas/root-directory)
 
             (setq yas/prompt-functions '(yas/dropdown-prompt
-                                         yas/ido-prompt
                                          yas/completing-prompt
                                          yas/x-prompt
                                          yas/no-prompt))
@@ -431,14 +427,36 @@
   :config (progn
             (message "magit after")
             (require 'aj-magit)))
-(use-package ido-vertical-mode
-  :ensure t
+;; (use-package ido-vertical-mode
+;;   :ensure t
+;;   :config (progn
+;;             (ido-mode 1)
+;;             (ido-vertical-mode 1)
+;;             (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
+;; (use-package ido-completing-read+
+;;   :config (progn (ido-ubiquitous-mode 1)))
+(use-package flx) ;; Flex matching fuzzy stuff
+(use-package ivy :ensure t
   :config (progn
-            (ido-mode 1)
-            (ido-vertical-mode 1)
-            (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
-(use-package ido-completing-read+
-  :config (progn (ido-ubiquitous-mode 1)))
+            (ivy-mode t)
+            (setq ivy-use-virtual-buffers nil)
+            (setq enable-recursive-minibuffers nil)
+            (define-key ivy-minibuffer-map "\C-d" 'ivy-immediate-done)
+            (define-key ivy-minibuffer-map "\C-\M-p" 'backward-kill-word) ;; up dir
+            (define-key ivy-minibuffer-map "\C-\M-n" 'ivy-alt-done) ;; down dir
+            ;; (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
+            (setq ivy-re-builders-alist
+                  '((swiper . ivy--regex-plus)
+                    (t      . ivy--regex-fuzzy)))
+
+            ))
+(use-package swiper :ensure t
+  :config (progn
+            (global-set-key "\C-s" 'swiper)
+            (global-set-key "\C-r" 'swiper-isearch-backward)
+            (define-key swiper-map (kbd "C-r") 'ivy-previous-line)
+            ;;ivy-previous-history-element
+            ))
 (use-package auto-complete
   :config (progn
             (eval-after-load "auto-complete"
@@ -564,7 +582,7 @@
 (require 'aj-flymake-js)
 (require 'aj-flymake-java)
 (require 'aj-compilation)
-(require 'aj-ido)
+;;(require 'aj-ido)
 (require 'aj-js)
 (require 'aj-css)
 (require 'aj-dired)

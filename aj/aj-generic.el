@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2021-02-09 12:57:42 antonj"
+;; Time-stamp: "2021-03-20 17:04:19 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -180,16 +180,7 @@
 (global-set-key "\C-c\C-m" 'execute-extended-command) ;; M-x
 (global-set-key "\C-xm" 'magit-status)
 (global-set-key "\C-cm" 'magit-status)
-(global-set-key "\C-xF" 'ido-find-file-other-window)
 (global-set-key (kbd "C-h C-f") 'find-function)
-(global-set-key "\M-x"
-                (lambda ()
-                  (interactive)
-                  (call-interactively
-                   (intern
-                    (ido-completing-read
-                     "M-x "
-                     (all-completions "" obarray 'commandp))))))
 (global-set-key "\C-xO" (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "C-<tab>") 'other-window)
 (global-set-key (kbd "C-S-<tab>") (lambda () (interactive) (other-window -1)))
