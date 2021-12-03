@@ -65,6 +65,7 @@
         sh-assignment
         shell-command
         slim-electric-backspace
+        swiper
         tern-ac-dot-complete
         transpose-words
         typescript-insert-and-indent

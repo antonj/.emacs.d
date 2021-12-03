@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2021-03-20 17:04:19 antonj"
+;; Time-stamp: "2021-09-02 18:34:43 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -46,8 +46,8 @@
 (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
 ;; perf
-(setq gc-cons-threshold 100000000)
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq gc-cons-threshold 150000000)
+(setq read-process-output-max (* 2 1024 1024)) ;; 2mb
 
 
 ;; Spelling

@@ -232,6 +232,8 @@
                  (define-key neotree-mode-map (kbd "C-M-n") 'neotree-select-next-sibling-node)))
 
             (defun aj-neotree-mode-hook ()
+              (make-variable-buffer-local 'neo-show-hidden-files)
+              (setq neo-show-hidden-files t)
               (highlight-indentation-mode t))
             (add-hook 'neotree-mode-hook 'aj-neotree-mode-hook)
 
@@ -313,7 +315,14 @@
               (highlight-indentation-mode t)
               (subword-mode)
               (local-set-key (kbd "C-M-j") 'company-complete)
-              ;; (company-mode t)
+              (setq web-mode-enable-auto-closing nil)
+              (setq web-mode-enable-auto-expanding nil)
+              (setq web-mode-enable-auto-opening nil)
+              (setq web-mode-enable-auto-indentation nil)
+              (setq web-mode-enable-auto-pairing nil)
+              (setq web-mode-enable-auto-quoting nil)
+              (setq web-mode-enable-current-element-highlight nil)
+              (setq web-mode-enable-auto-indentation nil)
 
               ;; yarn global add typescript-language-server
               (prettier-js-mode t))
@@ -368,6 +377,8 @@
               (auto-fill-mode -1)
               (highlight-regexp "DONE" 'hi-green-b)
               (highlight-regexp "TODO" 'hi-red-b)
+              (highlight-regexp "LATER" 'hi-red-b)
+              (highlight-regexp "QUESTION" 'hi-red-b)
               (markdown-toggle-wiki-links t)
               (local-set-key (kbd "TAB") 'markdown-cycle)
               ;;(local-set-key (kbd "S-TAB") 'markdown-outdent-region)
@@ -439,11 +450,12 @@
 (use-package ivy :ensure t
   :config (progn
             (ivy-mode t)
-            (setq ivy-use-virtual-buffers nil)
+            (setq ivy-use-virtual-buffers t)
             (setq enable-recursive-minibuffers nil)
             (define-key ivy-minibuffer-map "\C-d" 'ivy-immediate-done)
             (define-key ivy-minibuffer-map "\C-\M-p" 'backward-kill-word) ;; up dir
             (define-key ivy-minibuffer-map "\C-\M-n" 'ivy-alt-done) ;; down dir
+            (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done)
             ;; (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
             (setq ivy-re-builders-alist
                   '((swiper . ivy--regex-plus)
@@ -455,7 +467,7 @@
             (global-set-key "\C-s" 'swiper)
             (global-set-key "\C-r" 'swiper-isearch-backward)
             (define-key swiper-map (kbd "C-r") 'ivy-previous-line)
-            ;;ivy-previous-history-element
+            (define-key swiper-map (kbd "C-w") 'ivy-yank-word)
             ))
 (use-package auto-complete
   :config (progn
@@ -616,6 +628,7 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 (require 'framemove)
+
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)
 
@@ -627,6 +640,7 @@
 (setq debug-on-error nil)
 ;; Start server
 (server-start)
+
 (message "loaded init.el")
 (provide 'init)
 ;;; init.el ends here
