@@ -23,6 +23,9 @@
    `(hl-line-face ((t (:inherit highlight))))
    `(hl-line ((t (:inherit highlight))))
 
+   ;; Swiper
+   `(swiper-line-face ((t (:background "yellow"))))
+
    ;; Typography
    `(bold ((t (:bold t))))
    `(bold-italic ((t (:italic t :bold t))))

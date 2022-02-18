@@ -28,6 +28,7 @@
         extend-selection
         fill-paragraph
         forward-sexp
+        git-commit-next-message
         ignore
         indent-for-tab-command
         indent-region

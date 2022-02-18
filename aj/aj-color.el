@@ -2,7 +2,8 @@
 
 (defun aj-font-mono ()
   (interactive)
-  (set-frame-font "-apple-monaco-medium-r-normal--14-0-72-72-m-0-iso10646-1" nil)
+  (set-frame-font "-*-iA Writer Mono S-normal-normal-normal-*-14-*-*-*-p-0-iso10646-1" nil)
+  ;;(set-frame-font "-apple-monaco-medium-r-normal--14-0-72-72-m-0-iso10646-1" nil)
   ;; (set-frame-font "Inconsolata-dz-14")
   ;; (set-frame-font "-*-Inconsolata-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
   ;;(set-frame-font "-*-Hack-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")

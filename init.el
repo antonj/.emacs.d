@@ -465,7 +465,7 @@
 (use-package swiper :ensure t
   :config (progn
             (global-set-key "\C-s" 'swiper)
-            (global-set-key "\C-r" 'swiper-isearch-backward)
+            (global-set-key "\C-r" 'swiper-backward)
             (define-key swiper-map (kbd "C-r") 'ivy-previous-line)
             (define-key swiper-map (kbd "C-w") 'ivy-yank-word)
             ))

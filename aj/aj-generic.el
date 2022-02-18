@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2021-09-02 18:34:43 antonj"
+;; Time-stamp: "2022-02-18 09:49:02 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -18,7 +18,7 @@
 (column-number-mode t)
 (setq visible-bell nil) ;; The default
 (setq ring-bell-function 'ignore) ;; Prevent el capitan visible bell bugg
-(setq-default indent-tabs-mode nil)  ;; TAB ger mellanslag
+(setq-default indent-tabs-mode t)  ;; TAB ger mellanslag
 (setq tab-width 3)                   ;; Emacs 23: set tabs to 3 spaces
 (set-face-background (quote cursor) "red")
 (put 'upcase-region 'disabled nil)

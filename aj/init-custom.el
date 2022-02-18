@@ -6,7 +6,7 @@
  '(Man-notify-method 'pushy)
  '(cursor-type 'box)
  '(custom-safe-themes
-   '("570c4029ed23e05bb6f04ae28cb9d5cf1922af838ae13ed94e9abfc1d8e8a77d" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "43f03c7bf52ec64cdf9f2c5956852be18c69b41c38ab5525d0bedfbd73619b6a" "0d144d89d0495f84204e94e1475747e71634e13ba8841ff28a90ad80e164002a" default))
+   '("ea3b0a560fb8dde02f7df21d82ca96e167bc3365ee19bfb5085abbee552d4a03" "547ac98e5e5663e2aa5bf2299192b08c6a250c44a1a5209d7bfe59e6d8ca242f" "570c4029ed23e05bb6f04ae28cb9d5cf1922af838ae13ed94e9abfc1d8e8a77d" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "43f03c7bf52ec64cdf9f2c5956852be18c69b41c38ab5525d0bedfbd73619b6a" "0d144d89d0495f84204e94e1475747e71634e13ba8841ff28a90ad80e164002a" default))
  '(ecb-options-version "2.40")
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
