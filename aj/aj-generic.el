@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2022-02-18 09:49:02 antonj"
+;; Time-stamp: "2023-05-31 15:06:58 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -42,6 +42,7 @@
 (setq pop-up-frames nil)
 (setq split-height-threshold 1000)
 (setq split-width-threshold 1000)
+(set-frame-parameter nil 'unsplittable t) ;; disable auto splitting
 (delete-selection-mode t)
 (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 

@@ -35,6 +35,7 @@
               (highlight-indentation-current-column-mode)
               (local-set-key (kbd "C-M-i") 'aj-toggle-fold))
             (add-hook 'yaml-mode-hook 'aj-yaml-mode-hook)))
+(use-package clojure-mode)
 (use-package go-mode
   :config (progn
             (defun aj-go-mode-hook ()
@@ -263,6 +264,10 @@
               (highlight-indentation-current-column-mode))
             (add-hook 'slim-mode-hook 'aj-slim-mode-hook)))
 (use-package seq)
+(use-package idle-highlight-in-visible-buffers-mode
+  :config (progn
+            (idle-highlight-in-visible-buffers-mode t)
+            (setq idle-highlight-in-visible-buffers-idle-time 0.05)))
 (use-package drag-stuff
   :config (progn
             (drag-stuff-global-mode 1)
@@ -380,7 +385,8 @@
               (highlight-regexp "LATER" 'hi-red-b)
               (highlight-regexp "QUESTION" 'hi-red-b)
               (markdown-toggle-wiki-links t)
-              (local-set-key (kbd "TAB") 'markdown-cycle)
+              (setq-local indent-line-function 'indent-relative)
+              ;;(local-set-key (kbd "TAB") 'markdown-cycle)
               ;;(local-set-key (kbd "S-TAB") 'markdown-outdent-region)
               (local-set-key "\M-n" 'just-one-space))
             (add-hook 'markdown-mode-hook 'aj-markdown-mode-hook)))

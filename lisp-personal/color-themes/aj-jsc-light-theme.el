@@ -26,6 +26,10 @@
    ;; Swiper
    `(swiper-line-face ((t (:background "yellow"))))
 
+   ;; idle-highlight-in-visible-buffers-mode
+   `(idle-highlight-in-visible-buffers ((t (:background "pink" :underline t))))
+
+
    ;; Typography
    `(bold ((t (:bold t))))
    `(bold-italic ((t (:italic t :bold t))))

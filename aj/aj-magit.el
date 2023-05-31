@@ -18,6 +18,8 @@
   (flyspell-mode 1)
   )
 (add-hook 'git-commit-mode-hook 'aj-git-commit-mode)
+(setq magit-commit-show-diff nil)
+
 
 
 (provide 'aj-magit)
