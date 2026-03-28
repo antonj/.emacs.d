@@ -2,6 +2,15 @@
 ;;; Commentary: grejsneo
 ;;; Code:
 
+;; start: fixes for emacs 30
+(setq flymake-allowed-file-name-masks nil)
+(setq flymake-err-line-patterns nil)
+(let ((brew-prefix "/opt/homebrew/bin"))
+  (when (file-directory-p brew-prefix)
+    (setenv "PATH" (concat brew-prefix ":" (getenv "PATH")))
+    (add-to-list 'exec-path brew-prefix)))
+;; end: fixes for emacs 30
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/aj"))
 
 ;; (define-advice make-frame (:around (fn &rest args) suppress)
@@ -27,7 +36,16 @@
          (setq-default adaptive-wrap-extra-indent 1)))
 (use-package json-mode)
 (use-package shell-here
-  :config (progn (global-set-key (kbd "C-t") 'shell-here)))
+  :config (progn
+            (global-set-key (kbd "C-t") 'shell-here)
+            ))
+(use-package vterm
+  :config (progn
+            (global-set-key (kbd "C-M-t") 'projectile-run-vterm)
+            ;;(global-set-key (kbd "C-t") 'projectile-run-vterm)
+            (define-key vterm-mode-map (kbd "C-M-t") #'ignore)
+            )
+  :ensure t)
 (use-package yaml-mode
   :config (progn
             (defun aj-yaml-mode-hook ()
@@ -64,6 +82,12 @@
 (use-package ag ;;  brew install the_silver_searcher
   :config (progn
             (setq ag-project-root-function 'projectile-project-root)
+            (defun ag-project-regexp-in-files (regexp file-pattern)
+              "Search for REGEXP only in files matching FILE-PATTERN. Includes ignored files."
+              (interactive "sSearch regexp: \nsOnly in files matching (regex): ")
+              (let ((ag-arguments (append (list "--unrestricted" "-G" file-pattern) ag-arguments)))
+                (ag-project-regexp regexp)))
+
             (global-set-key (kbd "M-F") 'ag-project-regexp)))
 (use-package wgrep-ag
   :config (progn
@@ -126,6 +150,7 @@
 
 ;;                 (push 'company-lsp company-backends)
 ;;                 ))
+
 (use-package company-emoji
   :config (progn
             (add-to-list 'company-backends 'company-emoji)
@@ -152,17 +177,17 @@
               (define-key rjsx-mode-map "<" nil)
               (define-key rjsx-mode-map (kbd "C-d") nil)
               (define-key rjsx-mode-map (kbd "TAB")
-                '(lambda ()
-                   (interactive "*")
-                   (indent-for-tab-command)
-                   (when (zerop (current-column))
-                     (indent-relative))))
+                          '(lambda ()
+                             (interactive "*")
+                             (indent-for-tab-command)
+                             (when (zerop (current-column))
+                               (indent-relative))))
               (define-key rjsx-mode-map (kbd "C-j")
-                '(lambda ()
-                   (interactive "*")
-                   (electric-newline-and-maybe-indent)
-                   (when (zerop (current-column))
-                     (indent-relative)))))
+                          '(lambda ()
+                             (interactive "*")
+                             (electric-newline-and-maybe-indent)
+                             (when (zerop (current-column))
+                               (indent-relative)))))
             (add-hook 'rjsx-mode-hook 'aj-rjsx-mode-hook)))
 (use-package lsp-mode
   :config (progn
@@ -302,7 +327,9 @@
   :ensure t
   :init (progn
           (setq global-flycheck-mode nil)))
-(use-package add-node-modules-path)
+(use-package add-node-modules-path
+  :custom (add-node-modules-path-command '("pnpm bin" "pnpm bin -w")))
+(use-package biomejs-format)
 (use-package web-mode
   :config (progn
             (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
@@ -329,12 +356,14 @@
               (setq web-mode-enable-current-element-highlight nil)
               (setq web-mode-enable-auto-indentation nil)
 
-              ;; yarn global add typescript-language-server
-              (prettier-js-mode t))
+              ;; npm i -g typescript-language-server
+              ;;(prettier-js-mode t)
+              ;; npm i -g biomejs
+              (biomejs-format-mode t)
+              )
 
             (add-hook 'web-mode-hook 'aj-web-mode-hook)
             (add-hook 'web-mode-hook #'lsp-deferred)
-
             ;; for better jsx syntax-highlighting in web-mode
             ;; - courtesy of Patrick @halbtuerke
             ;;                   (defadvice web-mode-highlight-part (around tweak-jsx activate)
@@ -355,15 +384,15 @@
 (use-package highlight-indentation
   :config (progn
             (setq highlight-indentation-offset 2)))
-(use-package scss-mode
-  :config (progn
-            (setq scss-compile-at-save nil)
-            (setq scss-sass-options ())
-            (defun aj-scss-mode-hook()
-              (setq cssm-indent-function #'cssm-c-style-indenter)
-              ;; (setq scss-sass-options '("--style" "compressed"))
-              (rainbow-mode t))
-            (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
+;; (use-package scss-mode
+;;   :config (progn
+;;             (setq scss-compile-at-save nil)
+;;             (setq scss-sass-options ())
+;;             (defun aj-scss-mode-hook()
+;;               (setq cssm-indent-function #'cssm-c-style-indenter)
+;;               ;; (setq scss-sass-options '("--style" "compressed"))
+;;               (rainbow-mode t))
+;;             (add-hook 'scss-mode-hook 'aj-scss-mode-hook)))
 (use-package highlight-parentheses
   :config (progn
             (highlight-parentheses-mode)))
@@ -634,6 +663,8 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 (require 'framemove)
+(require 'flycheck-biomejs)
+
 
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)

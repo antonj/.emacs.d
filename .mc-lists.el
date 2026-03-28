@@ -72,12 +72,14 @@
 	transpose-words
 	typescript-insert-and-indent
 	undefined
+	wdired--self-insert
 	yaml-electric-dash-and-dot
 	yas-expand
 	))
 
 (setq mc/cmds-to-run-once
       '(
+	dired-previous-line
 	handle-switch-frame
 	ido-find-file
 	ido-switch-buffer
@@ -86,6 +88,8 @@
 	magit-status
 	mouse-set-region
 	next-error
+	projectile-find-file
+	revert-buffer
 	suspend-frame
 	wdired-finish-edit
 	wgrep-change-to-wgrep-mode

@@ -7,6 +7,9 @@
   (local-set-key (kbd "3") 'magit-section-show-level-3-all)
   (local-set-key (kbd "4") 'magit-section-show-level-4-all)
   (local-set-key "\M-s" 'neotree-project-dir)
+
+  ;;(setq magit-diff-options '(""))
+
   ;;(local-set-key [(c)] 'git-commit)
   )
 

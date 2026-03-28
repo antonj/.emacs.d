@@ -36,6 +36,9 @@
   (set-frame-height (selected-frame) 60)
   (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp-personal/color-themes")
   (load-theme 'aj-jsc-light t)
+  (setq ansi-color-names-vector
+        ["#2f343f" "#b84a62" "#2f7d32" "#8a6d1d"
+         "#2c67b1" "#8b4fb0" "#007a7c" "#6f6a5f"])
   ;;(load-theme 'ample t)
   ;; (require 'color-theme)
   ;; (color-theme-initialize)

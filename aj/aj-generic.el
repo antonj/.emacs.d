@@ -1,6 +1,6 @@
 ;;; package -- Generic stuff
 ;;; Commentary:
-;; Time-stamp: "2023-05-31 15:06:58 antonj"
+;; Time-stamp: "2025-09-26 08:44:47 antonj"
 ;;; Code:
 
 (global-subword-mode t)
@@ -42,7 +42,7 @@
 (setq pop-up-frames nil)
 (setq split-height-threshold 1000)
 (setq split-width-threshold 1000)
-(set-frame-parameter nil 'unsplittable t) ;; disable auto splitting
+;;(set-frame-parameter nil 'unsplittable t) ;; disable auto splitting
 (delete-selection-mode t)
 (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
@@ -60,7 +60,7 @@
 
 
 ;; LINUM
-(global-linum-mode)
+(global-display-line-numbers-mode 1)
 (defun linum-on ()
   "* When linum is running globally, disable line number in modes defined in `linum-disabled-modes-list'. Changed by linum-off. Also turns off numbering in starred modes like *scratch*"
   (unless (or (minibufferp)
@@ -204,11 +204,11 @@
 (define-key occur-edit-mode-map (kbd "C-x C-q") 'occur-cease-edit)
 
 (define-key isearch-mode-map (kbd "C-o")
-  (lambda ()
-    (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string
-               (regexp-quote isearch-string))))))
+            (lambda ()
+              (interactive)
+              (let ((case-fold-search isearch-case-fold-search))
+                (occur (if isearch-regexp isearch-string
+                         (regexp-quote isearch-string))))))
 
 (global-set-key (kbd "M-s") 'neotree-project-dir)
 (global-set-key [f5]   'call-last-kbd-macro) ;; bind key for calling last macro
@@ -441,8 +441,8 @@ Angry colors."
          (auto-revert-tail-mode 1)
          (highlight-changes-mode 1)
          (define-key angry-fruit-salad-log-view-mode-map
-           (kbd "C-c C-r")
-           'highlight-changes-rotate-faces)
+                     (kbd "C-c C-r")
+                     'highlight-changes-rotate-faces)
          (if (current-local-map)
              (set-keymap-parent angry-fruit-salad-log-view-mode-map
                                 (current-local-map)))
