@@ -8,6 +8,10 @@
   (local-set-key (kbd "4") 'magit-section-show-level-4-all)
   (local-set-key "\M-s" 'neotree-project-dir)
 
+  (setq magit-list-refs-sortby "-committerdate")
+  (with-eval-after-load 'transient
+    (add-to-list 'transient-values
+                 '(magit-show-refs ("--sort=-committerdate"))))
   ;;(setq magit-diff-options '(""))
 
   ;;(local-set-key [(c)] 'git-commit)
