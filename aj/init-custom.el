@@ -46,10 +46,10 @@
              graphql-mode groovy-mode highlight-indent-guides
              idle-highlight-in-visible-buffers-mode
              ido-completing-read+ ido-ubiquitous ivy js-import
-             kaolin-themes multiple-cursors neotree nil php+-mode
-             php-mode prettier-js protobuf-mode shell-here slim-mode
-             srefactor swift-mode swift3-mode swiper use-package vterm
-             vue-mode wgrep wgrep-ag))
+             kaolin-themes kotlin-mode multiple-cursors neotree nil
+             php+-mode php-mode prettier-js protobuf-mode shell-here
+             slim-mode srefactor swift-mode swift3-mode swiper
+             use-package vterm vue-mode wgrep wgrep-ag))
  '(paren-match-face 'paren-face-match-light)
  '(paren-sexp-mode t)
  '(safe-local-variable-values

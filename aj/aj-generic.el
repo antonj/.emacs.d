@@ -256,8 +256,13 @@
 
 ;; Style ;;;;;;;;;;;;;;;;;;;;;;;;;
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;;(when window-system
-;;  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1)))
+(defun aj-disable-tty-menu-bar (&optional frame)
+  (let ((frame (or frame (selected-frame))))
+    (unless (display-graphic-p frame)
+      (modify-frame-parameters frame '((menu-bar-lines . 0))))))
+
+(aj-disable-tty-menu-bar)
+(add-hook 'after-make-frame-functions #'aj-disable-tty-menu-bar)
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (defun current-line-empty-p ()

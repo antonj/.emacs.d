@@ -6,32 +6,6 @@
 (setq js2-mirror-mode nil)
 (setq sgml-basic-offset 2)
 
-
-;; (defun my-js2-mode-hook ()
-;;   (define-key js2-mode-map [(meta q)] 'c-fill-paragraph)
-;;   (define-key js2-mode-map [(return)] 'newline-and-indent)
-;;   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
-;;   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
-;;   (define-key js2-mode-map [(meta j)] 'hippie-expand)
-
-;;   ;; npm install -g tern
-;;   ;; M-x package-install tern
-;;   ;; M-x package-install tern-auto-complete
-;;   (tern-mode t)
-;;   (eval-after-load 'tern
-;;     '(progn
-;;        (tern-ac-setup)))
-;;   (electric-indent-local-mode -1)
-;;   (highlight-indentation-mode)
-;;   (projectile-mode)
-;;   (highlight-indentation-current-column-mode)
-;;   )
-
-;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
-
-
-
-
 (defun my-js-mode-hook ()
   (define-key js-mode-map [(meta q)] 'c-fill-paragraph)
   (define-key js-mode-map [(return)] 'newline-and-indent)
@@ -41,11 +15,7 @@
   (define-key js-mode-map (kbd "<tab>") 'aj-indent-relative)
   (subword-mode) ;; CamelCase aware kill-word
   (setq js-indent-level 2)
-  (tern-mode t)
-  (eval-after-load 'tern
-    '(progn
-       (require 'tern-auto-complete)
-       (tern-ac-setup)))
+
   ;;(auto-complete-flowtype-setup)
   (auto-complete-mode)
   (electric-indent-local-mode -1)

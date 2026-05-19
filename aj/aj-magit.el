@@ -8,6 +8,7 @@
   (local-set-key (kbd "4") 'magit-section-show-level-4-all)
   (local-set-key "\M-s" 'neotree-project-dir)
 
+
   (setq magit-list-refs-sortby "-committerdate")
   (with-eval-after-load 'transient
     (add-to-list 'transient-values
@@ -18,13 +19,33 @@
   )
 
 (setq magit-diff-refine-hunk (quote all))
+(require 'aj-magit-line-counts)
 (add-hook 'magit-mode-hook 'aj-magit-mode-hook)
+
+(defun aj-magit-tty-faces ()
+  (unless (display-graphic-p)
+    (face-remap-add-relative 'magit-section-highlight 'hl-line)))
+
+(add-hook 'magit-mode-hook 'aj-magit-tty-faces)
 
 (defun aj-git-commit-mode()
   (auto-fill-mode -1)
   (flyspell-mode 1)
   )
 (add-hook 'git-commit-mode-hook 'aj-git-commit-mode)
+
+;; (remove-hook 'magit-status-sections-hook #'magit-insert-worktrees)
+;; (add-hook 'magit-status-sections-hook #'magit-insert-worktrees)
+
+(with-eval-after-load 'magit
+  (remove-hook 'magit-status-sections-hook #'magit-insert-worktrees)
+  (let ((pos (memq #'magit-insert-status-headers
+                   magit-status-sections-hook)))
+    (when pos
+      (setcdr pos
+              (cons #'magit-insert-worktrees
+                    (remove #'magit-insert-worktrees (cdr pos)))))))
+
 (setq magit-commit-show-diff nil)
 
 
